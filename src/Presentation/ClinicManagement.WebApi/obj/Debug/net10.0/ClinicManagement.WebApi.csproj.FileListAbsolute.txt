@@ -167,3 +167,6 @@ E:\.net\Medical\ClinicManagementSystem\src\Presentation\ClinicManagement.WebApi\
 E:\.net\Medical\ClinicManagementSystem\src\Presentation\ClinicManagement.WebApi\obj\Debug\net10.0\ClinicManagement.WebApi.pdb
 E:\.net\Medical\ClinicManagementSystem\src\Presentation\ClinicManagement.WebApi\obj\Debug\net10.0\ClinicManagement.WebApi.genruntimeconfig.cache
 E:\.net\Medical\ClinicManagementSystem\src\Presentation\ClinicManagement.WebApi\obj\Debug\net10.0\ref\ClinicManagement.WebApi.dll
+E:\.net\Medical\ClinicManagementSystem\src\Presentation\ClinicManagement.WebApi\obj\Debug\net10.0\ClinicManagement.WebApi.sourcelink.json
+E:\.net\Medical\ClinicManagementSystem\src\Presentation\ClinicManagement.WebApi\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+E:\.net\Medical\ClinicManagementSystem\src\Presentation\ClinicManagement.WebApi\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt

@@ -12,3 +12,4 @@ E:\.net\Medical\ClinicManagementSystem\src\Core\ClinicManagement.Domain\obj\Debu
 E:\.net\Medical\ClinicManagementSystem\src\Core\ClinicManagement.Domain\obj\Debug\net10.0\ClinicManagement.Domain.pdb
 E:\.net\Medical\ClinicManagementSystem\src\Core\ClinicManagement.Domain\obj\Debug\net10.0\ClinicManagement.Domain.genruntimeconfig.cache
 E:\.net\Medical\ClinicManagementSystem\src\Core\ClinicManagement.Domain\obj\Debug\net10.0\ref\ClinicManagement.Domain.dll
+E:\.net\Medical\ClinicManagementSystem\src\Core\ClinicManagement.Domain\obj\Debug\net10.0\ClinicManagement.Domain.sourcelink.json

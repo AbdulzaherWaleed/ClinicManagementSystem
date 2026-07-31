@@ -5,10 +5,13 @@ using ClinicManagement.Infrastructure.FileStorage;
 using ClinicManagement.Infrastructure.Identity;
 using ClinicManagement.Infrastructure.Persistence;
 using ClinicManagement.Infrastructure.Persistence.Interceptors;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace ClinicManagement.Infrastructure;
 
@@ -39,6 +42,30 @@ public static class DependencyInjection
         services.AddScoped<ICurrentUserService, CurrentUserService>();
         services.AddSingleton<IDateTimeService, DateTimeService>();
         services.AddScoped<IFileStorageService, LocalFileStorageService>();
+
+        services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
+        services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+
+        var jwtSettings = configuration.GetSection("JwtSettings").Get<JwtSettings>()!;
+
+        services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+        .AddJwtBearer(options =>
+        {
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = jwtSettings.Issuer,
+                ValidAudience = jwtSettings.Audience,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Secret))
+            };
+        });
 
         return services;
     }

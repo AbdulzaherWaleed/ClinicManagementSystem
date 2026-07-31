@@ -15,3 +15,4 @@ E:\.net\Medical\ClinicManagementSystem\src\Core\ClinicManagement.Application\obj
 E:\.net\Medical\ClinicManagementSystem\src\Core\ClinicManagement.Application\obj\Debug\net10.0\ClinicManagement.Application.pdb
 E:\.net\Medical\ClinicManagementSystem\src\Core\ClinicManagement.Application\obj\Debug\net10.0\ClinicManagement.Application.genruntimeconfig.cache
 E:\.net\Medical\ClinicManagementSystem\src\Core\ClinicManagement.Application\obj\Debug\net10.0\ref\ClinicManagement.Application.dll
+E:\.net\Medical\ClinicManagementSystem\src\Core\ClinicManagement.Application\obj\Debug\net10.0\ClinicManagement.Application.sourcelink.json
