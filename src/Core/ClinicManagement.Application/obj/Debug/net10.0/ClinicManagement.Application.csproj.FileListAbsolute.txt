@@ -1,0 +1,17 @@
+E:\.net\Medical\ClinicManagementSystem\src\Core\ClinicManagement.Application\bin\Debug\net10.0\ClinicManagement.Application.deps.json
+E:\.net\Medical\ClinicManagementSystem\src\Core\ClinicManagement.Application\bin\Debug\net10.0\ClinicManagement.Application.runtimeconfig.json
+E:\.net\Medical\ClinicManagementSystem\src\Core\ClinicManagement.Application\bin\Debug\net10.0\ClinicManagement.Application.dll
+E:\.net\Medical\ClinicManagementSystem\src\Core\ClinicManagement.Application\bin\Debug\net10.0\ClinicManagement.Application.pdb
+E:\.net\Medical\ClinicManagementSystem\src\Core\ClinicManagement.Application\bin\Debug\net10.0\ClinicManagement.Domain.dll
+E:\.net\Medical\ClinicManagementSystem\src\Core\ClinicManagement.Application\bin\Debug\net10.0\ClinicManagement.Domain.pdb
+E:\.net\Medical\ClinicManagementSystem\src\Core\ClinicManagement.Application\obj\Debug\net10.0\ClinicManagement.Application.csproj.AssemblyReference.cache
+E:\.net\Medical\ClinicManagementSystem\src\Core\ClinicManagement.Application\obj\Debug\net10.0\ClinicManagement.Application.GeneratedMSBuildEditorConfig.editorconfig
+E:\.net\Medical\ClinicManagementSystem\src\Core\ClinicManagement.Application\obj\Debug\net10.0\ClinicManagement.Application.AssemblyInfoInputs.cache
+E:\.net\Medical\ClinicManagementSystem\src\Core\ClinicManagement.Application\obj\Debug\net10.0\ClinicManagement.Application.AssemblyInfo.cs
+E:\.net\Medical\ClinicManagementSystem\src\Core\ClinicManagement.Application\obj\Debug\net10.0\ClinicManagement.Application.csproj.CoreCompileInputs.cache
+E:\.net\Medical\ClinicManagementSystem\src\Core\ClinicManagement.Application\obj\Debug\net10.0\ClinicMa.5CCDC83B.Up2Date
+E:\.net\Medical\ClinicManagementSystem\src\Core\ClinicManagement.Application\obj\Debug\net10.0\ClinicManagement.Application.dll
+E:\.net\Medical\ClinicManagementSystem\src\Core\ClinicManagement.Application\obj\Debug\net10.0\refint\ClinicManagement.Application.dll
+E:\.net\Medical\ClinicManagementSystem\src\Core\ClinicManagement.Application\obj\Debug\net10.0\ClinicManagement.Application.pdb
+E:\.net\Medical\ClinicManagementSystem\src\Core\ClinicManagement.Application\obj\Debug\net10.0\ClinicManagement.Application.genruntimeconfig.cache
+E:\.net\Medical\ClinicManagementSystem\src\Core\ClinicManagement.Application\obj\Debug\net10.0\ref\ClinicManagement.Application.dll

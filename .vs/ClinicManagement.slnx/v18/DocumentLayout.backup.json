@@ -1,0 +1,666 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\.net\\Medical\\ClinicManagementSystem\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{AC288EBE-1997-4CC7-7A34-73E4EEAD53FA}|src\\Presentation\\ClinicManagement.WebApi\\ClinicManagement.WebApi.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\presentation\\clinicmanagement.webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AC288EBE-1997-4CC7-7A34-73E4EEAD53FA}|src\\Presentation\\ClinicManagement.WebApi\\ClinicManagement.WebApi.csproj|solutionrelative:src\\presentation\\clinicmanagement.webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\applicationdbcontextfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\applicationdbcontextfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AC288EBE-1997-4CC7-7A34-73E4EEAD53FA}|src\\Presentation\\ClinicManagement.WebApi\\ClinicManagement.WebApi.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\presentation\\clinicmanagement.webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{AC288EBE-1997-4CC7-7A34-73E4EEAD53FA}|src\\Presentation\\ClinicManagement.WebApi\\ClinicManagement.WebApi.csproj|solutionrelative:src\\presentation\\clinicmanagement.webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\filestorage\\localfilestorageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\filestorage\\localfilestorageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\common\\datetimeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\common\\datetimeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\identity\\currentuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\identity\\currentuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\clinicmanagement.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\clinicmanagement.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\interceptors\\auditableentitysavechangesinterceptor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\interceptors\\auditableentitysavechangesinterceptor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\userrefreshtokenconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\userrefreshtokenconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\applicationuserconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\applicationuserconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\stocktransactionconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\stocktransactionconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\inventoryitemconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\inventoryitemconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\inventorycategoryconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\inventorycategoryconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\doctorcustomizationconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\doctorcustomizationconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\clinicsettingconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\clinicsettingconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\appointmentconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\appointmentconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\patientvisitconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\patientvisitconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\patientconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\patientconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\employeeconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\employeeconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\doctordocumentconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\doctordocumentconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\doctorspecialtyconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\doctorspecialtyconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\doctorconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\doctorconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5121AE50-4156-2082-6EEF-63015202FBB5}|src\\Core\\ClinicManagement.Application\\ClinicManagement.Application.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\core\\clinicmanagement.application\\common\\behaviors\\validationbehavior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5121AE50-4156-2082-6EEF-63015202FBB5}|src\\Core\\ClinicManagement.Application\\ClinicManagement.Application.csproj|solutionrelative:src\\core\\clinicmanagement.application\\common\\behaviors\\validationbehavior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5121AE50-4156-2082-6EEF-63015202FBB5}|src\\Core\\ClinicManagement.Application\\ClinicManagement.Application.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\core\\clinicmanagement.application\\common\\behaviors\\loggingbehavior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5121AE50-4156-2082-6EEF-63015202FBB5}|src\\Core\\ClinicManagement.Application\\ClinicManagement.Application.csproj|solutionrelative:src\\core\\clinicmanagement.application\\common\\behaviors\\loggingbehavior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5121AE50-4156-2082-6EEF-63015202FBB5}|src\\Core\\ClinicManagement.Application\\ClinicManagement.Application.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\core\\clinicmanagement.application\\common\\exceptions\\notfoundexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5121AE50-4156-2082-6EEF-63015202FBB5}|src\\Core\\ClinicManagement.Application\\ClinicManagement.Application.csproj|solutionrelative:src\\core\\clinicmanagement.application\\common\\exceptions\\notfoundexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5121AE50-4156-2082-6EEF-63015202FBB5}|src\\Core\\ClinicManagement.Application\\ClinicManagement.Application.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\core\\clinicmanagement.application\\common\\exceptions\\validationexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5121AE50-4156-2082-6EEF-63015202FBB5}|src\\Core\\ClinicManagement.Application\\ClinicManagement.Application.csproj|solutionrelative:src\\core\\clinicmanagement.application\\common\\exceptions\\validationexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5121AE50-4156-2082-6EEF-63015202FBB5}|src\\Core\\ClinicManagement.Application\\ClinicManagement.Application.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\core\\clinicmanagement.application\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5121AE50-4156-2082-6EEF-63015202FBB5}|src\\Core\\ClinicManagement.Application\\ClinicManagement.Application.csproj|solutionrelative:src\\core\\clinicmanagement.application\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5121AE50-4156-2082-6EEF-63015202FBB5}|src\\Core\\ClinicManagement.Application\\ClinicManagement.Application.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\core\\clinicmanagement.application\\common\\behaviors\\unhandledexceptionbehavior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5121AE50-4156-2082-6EEF-63015202FBB5}|src\\Core\\ClinicManagement.Application\\ClinicManagement.Application.csproj|solutionrelative:src\\core\\clinicmanagement.application\\common\\behaviors\\unhandledexceptionbehavior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5121AE50-4156-2082-6EEF-63015202FBB5}|src\\Core\\ClinicManagement.Application\\ClinicManagement.Application.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\core\\clinicmanagement.application\\common\\exceptions\\forbiddenaccessexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5121AE50-4156-2082-6EEF-63015202FBB5}|src\\Core\\ClinicManagement.Application\\ClinicManagement.Application.csproj|solutionrelative:src\\core\\clinicmanagement.application\\common\\exceptions\\forbiddenaccessexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5121AE50-4156-2082-6EEF-63015202FBB5}|src\\Core\\ClinicManagement.Application\\ClinicManagement.Application.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\core\\clinicmanagement.application\\common\\models\\paginatedlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5121AE50-4156-2082-6EEF-63015202FBB5}|src\\Core\\ClinicManagement.Application\\ClinicManagement.Application.csproj|solutionrelative:src\\core\\clinicmanagement.application\\common\\models\\paginatedlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5121AE50-4156-2082-6EEF-63015202FBB5}|src\\Core\\ClinicManagement.Application\\ClinicManagement.Application.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\core\\clinicmanagement.application\\common\\models\\result.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5121AE50-4156-2082-6EEF-63015202FBB5}|src\\Core\\ClinicManagement.Application\\ClinicManagement.Application.csproj|solutionrelative:src\\core\\clinicmanagement.application\\common\\models\\result.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5121AE50-4156-2082-6EEF-63015202FBB5}|src\\Core\\ClinicManagement.Application\\ClinicManagement.Application.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\core\\clinicmanagement.application\\common\\interfaces\\ifilestorageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5121AE50-4156-2082-6EEF-63015202FBB5}|src\\Core\\ClinicManagement.Application\\ClinicManagement.Application.csproj|solutionrelative:src\\core\\clinicmanagement.application\\common\\interfaces\\ifilestorageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5121AE50-4156-2082-6EEF-63015202FBB5}|src\\Core\\ClinicManagement.Application\\ClinicManagement.Application.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\core\\clinicmanagement.application\\common\\interfaces\\idatetimeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5121AE50-4156-2082-6EEF-63015202FBB5}|src\\Core\\ClinicManagement.Application\\ClinicManagement.Application.csproj|solutionrelative:src\\core\\clinicmanagement.application\\common\\interfaces\\idatetimeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5121AE50-4156-2082-6EEF-63015202FBB5}|src\\Core\\ClinicManagement.Application\\ClinicManagement.Application.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\core\\clinicmanagement.application\\common\\interfaces\\icurrentuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5121AE50-4156-2082-6EEF-63015202FBB5}|src\\Core\\ClinicManagement.Application\\ClinicManagement.Application.csproj|solutionrelative:src\\core\\clinicmanagement.application\\common\\interfaces\\icurrentuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5121AE50-4156-2082-6EEF-63015202FBB5}|src\\Core\\ClinicManagement.Application\\ClinicManagement.Application.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\core\\clinicmanagement.application\\common\\interfaces\\iapplicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5121AE50-4156-2082-6EEF-63015202FBB5}|src\\Core\\ClinicManagement.Application\\ClinicManagement.Application.csproj|solutionrelative:src\\core\\clinicmanagement.application\\common\\interfaces\\iapplicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE8CC00-6B1E-2EED-8389-458C4E7DB2B6}|src\\Core\\ClinicManagement.Domain\\ClinicManagement.Domain.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\core\\clinicmanagement.domain\\entities\\patients\\patient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DE8CC00-6B1E-2EED-8389-458C4E7DB2B6}|src\\Core\\ClinicManagement.Domain\\ClinicManagement.Domain.csproj|solutionrelative:src\\core\\clinicmanagement.domain\\entities\\patients\\patient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Presentation\\ClinicManagement.WebApi\\Program.cs",
+              "RelativeDocumentMoniker": "src\\Presentation\\ClinicManagement.WebApi\\Program.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Presentation\\ClinicManagement.WebApi\\Program.cs",
+              "RelativeToolTip": "src\\Presentation\\ClinicManagement.WebApi\\Program.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAAAwwC4AAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T03:28:00.77Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ApplicationDbContextFactory.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\ApplicationDbContextFactory.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\ApplicationDbContextFactory.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\ApplicationDbContextFactory.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\ApplicationDbContextFactory.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAwwCQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T03:18:24.039Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Presentation\\ClinicManagement.WebApi\\appsettings.json",
+              "RelativeDocumentMoniker": "src\\Presentation\\ClinicManagement.WebApi\\appsettings.json",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Presentation\\ClinicManagement.WebApi\\appsettings.json",
+              "RelativeToolTip": "src\\Presentation\\ClinicManagement.WebApi\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-07-31T02:54:47.92Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DependencyInjection.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\DependencyInjection.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\DependencyInjection.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\DependencyInjection.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\DependencyInjection.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAwwCwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T02:38:19.631Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "LocalFileStorageService.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\FileStorage\\LocalFileStorageService.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\FileStorage\\LocalFileStorageService.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\FileStorage\\LocalFileStorageService.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\FileStorage\\LocalFileStorageService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T02:36:44.483Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DateTimeService.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Common\\DateTimeService.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Common\\DateTimeService.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Common\\DateTimeService.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Common\\DateTimeService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T02:36:06.304Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\ApplicationDbContext.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\ApplicationDbContext.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\ApplicationDbContext.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAUwC0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T02:34:13.585Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CurrentUserService.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Identity\\CurrentUserService.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Identity\\CurrentUserService.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Identity\\CurrentUserService.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Identity\\CurrentUserService.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAuwCUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T02:35:18.755Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ClinicManagement.Infrastructure",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj",
+              "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-07-31T02:34:53.027Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AuditableEntitySaveChangesInterceptor.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Interceptors\\AuditableEntitySaveChangesInterceptor.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Interceptors\\AuditableEntitySaveChangesInterceptor.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Interceptors\\AuditableEntitySaveChangesInterceptor.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Interceptors\\AuditableEntitySaveChangesInterceptor.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAAQwD4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T02:33:41.233Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "UserRefreshTokenConfiguration.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\UserRefreshTokenConfiguration.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\UserRefreshTokenConfiguration.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\UserRefreshTokenConfiguration.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\UserRefreshTokenConfiguration.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T02:30:58.093Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ApplicationUserConfiguration.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\ApplicationUserConfiguration.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\ApplicationUserConfiguration.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\ApplicationUserConfiguration.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\ApplicationUserConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T02:30:37.087Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "StockTransactionConfiguration.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\StockTransactionConfiguration.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\StockTransactionConfiguration.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\StockTransactionConfiguration.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\StockTransactionConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T02:30:00.096Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "InventoryItemConfiguration.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\InventoryItemConfiguration.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\InventoryItemConfiguration.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\InventoryItemConfiguration.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\InventoryItemConfiguration.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAgwBsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T02:29:15.572Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "InventoryCategoryConfiguration.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\InventoryCategoryConfiguration.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\InventoryCategoryConfiguration.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\InventoryCategoryConfiguration.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\InventoryCategoryConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T02:28:57.336Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "DoctorCustomizationConfiguration.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\DoctorCustomizationConfiguration.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\DoctorCustomizationConfiguration.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\DoctorCustomizationConfiguration.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\DoctorCustomizationConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T02:28:27.308Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ClinicSettingConfiguration.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\ClinicSettingConfiguration.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\ClinicSettingConfiguration.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\ClinicSettingConfiguration.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\ClinicSettingConfiguration.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAgwBYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T02:27:33.314Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "AppointmentConfiguration.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\AppointmentConfiguration.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\AppointmentConfiguration.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\AppointmentConfiguration.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\AppointmentConfiguration.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAQwBcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T02:27:11.978Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "PatientVisitConfiguration.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\PatientVisitConfiguration.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\PatientVisitConfiguration.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\PatientVisitConfiguration.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\PatientVisitConfiguration.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAQwBcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T02:26:38.698Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "PatientConfiguration.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\PatientConfiguration.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\PatientConfiguration.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\PatientConfiguration.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\PatientConfiguration.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAYwBYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T02:25:59.401Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "EmployeeConfiguration.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\EmployeeConfiguration.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\EmployeeConfiguration.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\EmployeeConfiguration.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\EmployeeConfiguration.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAQwBgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T02:25:36.509Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "DoctorDocumentConfiguration.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\DoctorDocumentConfiguration.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\DoctorDocumentConfiguration.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\DoctorDocumentConfiguration.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\DoctorDocumentConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T02:25:10.473Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "DoctorSpecialtyConfiguration.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\DoctorSpecialtyConfiguration.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\DoctorSpecialtyConfiguration.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\DoctorSpecialtyConfiguration.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\DoctorSpecialtyConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T02:24:47.994Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "DoctorConfiguration.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\DoctorConfiguration.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\DoctorConfiguration.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\DoctorConfiguration.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\DoctorConfiguration.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAQwDQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T02:24:25.985Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "DependencyInjection.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\DependencyInjection.cs",
+              "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\DependencyInjection.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\DependencyInjection.cs",
+              "RelativeToolTip": "src\\Core\\ClinicManagement.Application\\DependencyInjection.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAiwBoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T01:41:35.199Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "ValidationBehavior.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Behaviors\\ValidationBehavior.cs",
+              "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Common\\Behaviors\\ValidationBehavior.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Behaviors\\ValidationBehavior.cs",
+              "RelativeToolTip": "src\\Core\\ClinicManagement.Application\\Common\\Behaviors\\ValidationBehavior.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T01:38:24.515Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "UnhandledExceptionBehavior.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Behaviors\\UnhandledExceptionBehavior.cs",
+              "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Common\\Behaviors\\UnhandledExceptionBehavior.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Behaviors\\UnhandledExceptionBehavior.cs",
+              "RelativeToolTip": "src\\Core\\ClinicManagement.Application\\Common\\Behaviors\\UnhandledExceptionBehavior.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAmwB0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T01:39:16.494Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "LoggingBehavior.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Behaviors\\LoggingBehavior.cs",
+              "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Common\\Behaviors\\LoggingBehavior.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Behaviors\\LoggingBehavior.cs",
+              "RelativeToolTip": "src\\Core\\ClinicManagement.Application\\Common\\Behaviors\\LoggingBehavior.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAA6wBsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T01:38:54.943Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "ValidationException.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Exceptions\\ValidationException.cs",
+              "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Common\\Exceptions\\ValidationException.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Exceptions\\ValidationException.cs",
+              "RelativeToolTip": "src\\Core\\ClinicManagement.Application\\Common\\Exceptions\\ValidationException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T01:35:55.801Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "NotFoundException.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Exceptions\\NotFoundException.cs",
+              "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Common\\Exceptions\\NotFoundException.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Exceptions\\NotFoundException.cs",
+              "RelativeToolTip": "src\\Core\\ClinicManagement.Application\\Common\\Exceptions\\NotFoundException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T01:36:35.02Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "ForbiddenAccessException.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Exceptions\\ForbiddenAccessException.cs",
+              "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Common\\Exceptions\\ForbiddenAccessException.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Exceptions\\ForbiddenAccessException.cs",
+              "RelativeToolTip": "src\\Core\\ClinicManagement.Application\\Common\\Exceptions\\ForbiddenAccessException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T01:36:59.864Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "PaginatedList.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Models\\PaginatedList.cs",
+              "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Common\\Models\\PaginatedList.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Models\\PaginatedList.cs",
+              "RelativeToolTip": "src\\Core\\ClinicManagement.Application\\Common\\Models\\PaginatedList.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAA6wCEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T01:34:54.51Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "Result.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Models\\Result.cs",
+              "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Common\\Models\\Result.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Models\\Result.cs",
+              "RelativeToolTip": "src\\Core\\ClinicManagement.Application\\Common\\Models\\Result.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T01:33:45.469Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "IFileStorageService.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Interfaces\\IFileStorageService.cs",
+              "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Common\\Interfaces\\IFileStorageService.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Interfaces\\IFileStorageService.cs",
+              "RelativeToolTip": "src\\Core\\ClinicManagement.Application\\Common\\Interfaces\\IFileStorageService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T01:32:39.985Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "IDateTimeService.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Interfaces\\IDateTimeService.cs",
+              "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Common\\Interfaces\\IDateTimeService.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Interfaces\\IDateTimeService.cs",
+              "RelativeToolTip": "src\\Core\\ClinicManagement.Application\\Common\\Interfaces\\IDateTimeService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T01:32:11.751Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "ICurrentUserService.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Interfaces\\ICurrentUserService.cs",
+              "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Common\\Interfaces\\ICurrentUserService.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Interfaces\\ICurrentUserService.cs",
+              "RelativeToolTip": "src\\Core\\ClinicManagement.Application\\Common\\Interfaces\\ICurrentUserService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T01:31:51.069Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "IApplicationDbContext.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Interfaces\\IApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Common\\Interfaces\\IApplicationDbContext.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Interfaces\\IApplicationDbContext.cs",
+              "RelativeToolTip": "src\\Core\\ClinicManagement.Application\\Common\\Interfaces\\IApplicationDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T01:30:59.508Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "Patient.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Domain\\Entities\\Patients\\Patient.cs",
+              "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Domain\\Entities\\Patients\\Patient.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Domain\\Entities\\Patients\\Patient.cs",
+              "RelativeToolTip": "src\\Core\\ClinicManagement.Domain\\Entities\\Patients\\Patient.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAgwBYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T01:25:01.193Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
