@@ -66,7 +66,7 @@ export class EmployeesComponent implements OnInit {
       password: [null, [Validators.required, Validators.minLength(8)]],
       phoneNumber: [null],
       jobTitle: [null],
-      assignedDoctorIds: [[], Validators.required]
+      assignedDoctorIds: [[]]
     });
   }
 
