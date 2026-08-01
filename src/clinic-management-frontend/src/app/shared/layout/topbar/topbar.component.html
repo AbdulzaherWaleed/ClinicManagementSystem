@@ -1,0 +1,36 @@
+<header class="topbar">
+
+  <!-- Page Title -->
+  <div class="topbar-start">
+    <h1 class="page-heading">{{ pageTitle }}</h1>
+    <span class="page-date">{{ getCurrentDate() }}</span>
+  </div>
+
+  <!-- Right Actions -->
+  <div class="topbar-end">
+
+    <!-- Notification Bell -->
+    <button class="icon-btn" title="الإشعارات" id="topbar-notifications-btn">
+      <i class="pi pi-bell"></i>
+      <span class="notif-dot"></span>
+    </button>
+
+    <!-- Divider -->
+    <div class="topbar-divider"></div>
+
+    <!-- User Info -->
+    <div class="user-section" *ngIf="currentUser()">
+      <div class="user-meta">
+        <span class="user-display-name">{{ currentUser()?.fullName }}</span>
+        <span [class]="getRoleBadgeClass(currentUser()?.role ?? null)">
+          {{ getRoleLabel(currentUser()?.role ?? null) }}
+        </span>
+      </div>
+      <div class="user-topbar-avatar">
+        <i class="pi pi-user"></i>
+      </div>
+    </div>
+
+  </div>
+
+</header>

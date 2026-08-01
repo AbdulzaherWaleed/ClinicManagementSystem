@@ -1,4 +1,4 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -30,8 +30,11 @@ public class JwtTokenGenerator : IJwtTokenGenerator
         foreach (var role in roles)
             claims.Add(new Claim(ClaimTypes.Role, role));
 
-        if (user.AssignedDoctorId.HasValue)
-            claims.Add(new Claim("doctorId", user.AssignedDoctorId.Value.ToString()));
+        // v2.1 — Best Practice: encode each assigned doctor as a SEPARATE claim of the same name.
+        // This follows RFC 7519 and is natively supported by .NET's ClaimsPrincipal.FindAll().
+        // On the Angular side, collect all "doctorId" claims into a string[].
+        foreach (var doctorId in user.AssignedDoctorIds)
+            claims.Add(new Claim("doctorId", doctorId.ToString()));
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Secret));
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

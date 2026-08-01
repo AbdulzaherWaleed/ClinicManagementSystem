@@ -1,0 +1,82 @@
+@use '../../../../styles/variables' as *;
+@use '../../../../styles/mixins' as *;
+
+.page-header {
+  margin-bottom: 24px;
+}
+
+.header-content {
+  @include flex-start;
+}
+
+.booking-card {
+  @include card(32px);
+  max-width: 800px;
+}
+
+.form-section-title {
+  font-size: $font-size-md;
+  font-weight: 700;
+  color: $primary-700;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid $border-light;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
+}
+
+.col-12 { grid-column: span 12; }
+
+@include mobile {
+  .md\:col-6 { grid-column: span 12; }
+}
+
+@media (min-width: 769px) {
+  .md\:col-6 { grid-column: span 6; }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  label {
+    font-size: $font-size-sm;
+    font-weight: 600;
+    color: $text-primary;
+  }
+}
+
+.required {
+  color: $danger;
+  margin-right: 2px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid $border-light;
+}
+
+.error-alert {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: $danger-light;
+  border: 1px solid rgba($danger, 0.3);
+  border-radius: $radius-md;
+  padding: 12px 14px;
+  margin-bottom: 24px;
+  // Use CSS color-mix or variables to avoid dart-sass darken deprecation
+  color: #b91c1c; 
+  font-size: $font-size-sm;
+  font-weight: 500;
+
+  i { font-size: 16px; flex-shrink: 0; }
+}

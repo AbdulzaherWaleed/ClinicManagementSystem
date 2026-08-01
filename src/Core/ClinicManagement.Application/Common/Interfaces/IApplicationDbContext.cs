@@ -1,4 +1,4 @@
-﻿using ClinicManagement.Domain.Entities.Appointments;
+using ClinicManagement.Domain.Entities.Appointments;
 using ClinicManagement.Domain.Entities.Doctors;
 using ClinicManagement.Domain.Entities.Inventory;
 using ClinicManagement.Domain.Entities.Patients;
@@ -14,6 +14,7 @@ public interface IApplicationDbContext
     DbSet<DoctorSpecialty> DoctorSpecialties { get; }
     DbSet<DoctorDocument> DoctorDocuments { get; }
     DbSet<Employee> Employees { get; }
+    DbSet<EmployeeDoctorAssignment> EmployeeDoctorAssignments { get; }
     DbSet<Patient> Patients { get; }
     DbSet<PatientVisit> PatientVisits { get; }
     DbSet<Appointment> Appointments { get; }

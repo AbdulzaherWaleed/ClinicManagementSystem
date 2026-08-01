@@ -1,4 +1,4 @@
-﻿using FluentValidation;
+using FluentValidation;
 using ClinicManagement.Domain.Enums;
 
 namespace ClinicManagement.Application.Auth.Commands.Register;
@@ -17,9 +17,10 @@ public class RegisterCommandValidator : AbstractValidator<RegisterCommand>
 
         RuleFor(x => x.Role).IsInEnum();
 
-        RuleFor(x => x.AssignedDoctorId)
+        // v2.1 — Employee must be assigned to at least one doctor (Many-to-Many)
+        RuleFor(x => x.AssignedDoctorIds)
             .NotEmpty()
             .When(x => x.Role == UserRole.Employee)
-            .WithMessage("Employees must be assigned to a doctor.");
+            .WithMessage("Employees must be assigned to at least one doctor.");
     }
 }

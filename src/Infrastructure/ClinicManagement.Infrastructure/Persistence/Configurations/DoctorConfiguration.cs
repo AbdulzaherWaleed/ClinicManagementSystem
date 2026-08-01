@@ -1,4 +1,4 @@
-﻿using ClinicManagement.Domain.Entities.Doctors;
+using ClinicManagement.Domain.Entities.Doctors;
 using ClinicManagement.Domain.Entities.Settings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -31,11 +31,6 @@ public class DoctorConfiguration : IEntityTypeConfiguration<Doctor>
         builder.HasMany(d => d.PatientVisits)
             .WithOne(v => v.Doctor)
             .HasForeignKey(v => v.DoctorId)
-            .OnDelete(DeleteBehavior.Restrict);
-
-        builder.HasMany(d => d.Employees)
-            .WithOne(e => e.AssignedDoctor)
-            .HasForeignKey(e => e.AssignedDoctorId)
             .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasMany(d => d.Documents)

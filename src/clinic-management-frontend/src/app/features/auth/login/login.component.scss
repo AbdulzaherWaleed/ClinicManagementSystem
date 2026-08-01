@@ -1,0 +1,301 @@
+@use '../../../../styles/variables' as *;
+@use '../../../../styles/mixins' as *;
+@use 'sass:color';
+
+// ============================================================
+// LOGIN PAGE — Premium Split-Screen Design
+// Purple gradient left panel + Clean white right panel
+// ============================================================
+
+.login-page {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  direction: rtl;
+}
+
+// ─── LEFT (RTL: RIGHT) — Brand Panel ───────────────────────
+.brand-panel {
+  flex: 1;
+  background: linear-gradient(145deg, $primary-700 0%, $primary-500 50%, $primary-400 100%);
+  position: relative;
+  overflow: hidden;
+  @include flex-center;
+
+  @include mobile { display: none; }
+}
+
+.brand-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 48px 40px;
+  max-width: 420px;
+}
+
+.brand-logo {
+  @include flex-center;
+  width: 72px;
+  height: 72px;
+  background: rgba(255,255,255,0.2);
+  border-radius: $radius-xl;
+  margin: 0 auto 20px;
+  font-size: 32px;
+  color: white;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255,255,255,0.3);
+  animation: pulse-glow 3s infinite;
+}
+
+.brand-title {
+  font-size: 40px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 8px;
+  letter-spacing: -1px;
+}
+
+.brand-subtitle {
+  font-size: $font-size-md;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 40px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.brand-features {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: right;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: $radius-md;
+  padding: 14px 16px;
+  backdrop-filter: blur(8px);
+  transition: background $transition-fast;
+
+  &:hover { background: rgba(255,255,255,0.18); }
+}
+
+.feature-icon {
+  @include flex-center;
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.2);
+  border-radius: $radius-md;
+  color: white;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.feature-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.feature-title {
+  font-size: $font-size-sm;
+  font-weight: 600;
+  color: white;
+}
+
+.feature-desc {
+  font-size: $font-size-xs;
+  color: rgba(255,255,255,0.7);
+}
+
+// Decorative floating circles
+.deco-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  pointer-events: none;
+}
+.deco-1 { width: 320px; height: 320px; top: -80px;  right: -80px; }
+.deco-2 { width: 200px; height: 200px; bottom: 60px; left: -60px;  }
+.deco-3 { width: 100px; height: 100px; bottom: 200px; right: 40px; background: rgba(255,255,255,0.08); }
+
+// ─── RIGHT (RTL: LEFT) — Form Panel ────────────────────────
+.form-panel {
+  width: 480px;
+  background: $bg-main;
+  @include flex-center;
+  padding: 24px;
+  flex-shrink: 0;
+
+  @include mobile {
+    width: 100%;
+    background: linear-gradient(145deg, $primary-700, $primary-500);
+  }
+}
+
+.form-card {
+  width: 100%;
+  max-width: 400px;
+  @include card(36px, $radius-xl);
+  box-shadow: $shadow-lg;
+
+  @include mobile {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(20px);
+  }
+}
+
+.form-header {
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.form-title {
+  font-size: $font-size-2xl;
+  font-weight: 800;
+  color: $text-primary;
+  margin-bottom: 6px;
+}
+
+.form-subtitle {
+  font-size: $font-size-sm;
+  color: $text-secondary;
+  font-weight: 400;
+}
+
+// ─── Error Alert ────────────────────────────────────────────
+.error-alert {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: $danger-light;
+  border: 1px solid rgba($danger, 0.3);
+  border-radius: $radius-md;
+  padding: 12px 14px;
+  margin-bottom: 20px;
+  color: color.adjust($danger, $lightness: -10%);
+  font-size: $font-size-sm;
+  font-weight: 500;
+  animation: fadeIn 250ms ease;
+
+  i { font-size: 16px; flex-shrink: 0; }
+}
+
+// ─── Form Groups ────────────────────────────────────────────
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+
+  label {
+    font-size: $font-size-sm;
+    font-weight: 600;
+    color: $text-primary;
+  }
+
+  .field-error {
+    font-size: $font-size-xs;
+    color: $danger;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+.input-wrapper {
+  position: relative;
+
+  &.has-error .form-input {
+    border-color: $danger;
+    box-shadow: 0 0 0 3px rgba($danger, 0.1);
+  }
+}
+
+.input-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: $text-muted;
+  font-size: 15px;
+  pointer-events: none;
+  transition: color $transition-fast;
+}
+
+.form-input {
+  @include input-base;
+  padding-right: 42px; // room for icon (RTL: icon on right)
+  padding-left: 42px;  // room for password toggle
+
+  &:focus ~ .input-icon,
+  &:focus + .input-icon { color: $primary-500; }
+}
+
+.toggle-password {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: $text-muted;
+  cursor: pointer;
+  padding: 4px;
+  font-size: 15px;
+  transition: color $transition-fast;
+  border-radius: $radius-sm;
+
+  &:hover { color: $primary-500; }
+}
+
+// ─── Submit Button ───────────────────────────────────────────
+.submit-btn {
+  @include btn-primary;
+  @include flex-center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px;
+  font-size: $font-size-md;
+  margin-top: 8px;
+  border-radius: $radius-md;
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+}
+
+// Spinner inside button
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// ─── Footer ─────────────────────────────────────────────────
+.form-footer {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.footer-text {
+  font-size: $font-size-xs;
+  color: $text-muted;
+}

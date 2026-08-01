@@ -1,0 +1,103 @@
+<div class="page-container animate-fade-in">
+  <p-toast></p-toast>
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold text-primary m-0">البحث في الحجوزات</h1>
+    <p-button icon="pi pi-plus" label="حجز جديد" routerLink="/appointments/new"></p-button>
+  </div>
+
+  <div class="card mb-4 filter-card">
+    <form [formGroup]="searchForm" (ngSubmit)="search()" class="filter-form">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="flex flex-col gap-2">
+          <label class="text-sm font-semibold">اسم المريض</label>
+          <input pInputText formControlName="patientName" placeholder="بحث بالاسم..." class="w-full" />
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="text-sm font-semibold">رقم الهاتف</label>
+          <input pInputText formControlName="phone" placeholder="بحث برقم الهاتف..." class="w-full" />
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="text-sm font-semibold">مرحلة الزيارة</label>
+          <p-select [options]="stages" formControlName="visitStage" placeholder="اختر المرحلة" styleClass="w-full"></p-select>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="text-sm font-semibold">حالة الحجز</label>
+          <p-select [options]="statuses" formControlName="status" placeholder="اختر الحالة" styleClass="w-full"></p-select>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="text-sm font-semibold">من تاريخ</label>
+          <p-datepicker formControlName="dateFrom" [showIcon]="true" placeholder="اختر التاريخ" styleClass="w-full" inputStyleClass="w-full"></p-datepicker>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="text-sm font-semibold">إلى تاريخ</label>
+          <p-datepicker formControlName="dateTo" [showIcon]="true" placeholder="اختر التاريخ" styleClass="w-full" inputStyleClass="w-full"></p-datepicker>
+        </div>
+        <div class="col-span-1 md:col-span-2 flex items-end justify-end gap-2 mt-4 md:mt-0">
+          <p-button type="button" icon="pi pi-filter-slash" label="إعادة ضبط" severity="secondary" [outlined]="true" (onClick)="reset()"></p-button>
+          <p-button type="submit" icon="pi pi-search" label="بحث" [loading]="isLoading()"></p-button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="card p-0 table-card">
+    <p-table 
+      [value]="appointments()" 
+      [loading]="isLoading()" 
+      [paginator]="true" 
+      [rows]="10" 
+      [showCurrentPageReport]="true" 
+      currentPageReportTemplate="عرض {first} إلى {last} من أصل {totalRecords} حجز"
+      styleClass="p-datatable-striped"
+      [tableStyle]="{'min-width': '60rem'}">
+      
+      <ng-template #header>
+        <tr>
+          <th>تاريخ الحجز</th>
+          <th>المريض</th>
+          <th>الهاتف</th>
+          <th>الطبيب</th>
+          <th>مرحلة الزيارة</th>
+          <th>الحالة</th>
+          <th style="width: 100px; text-align: center;">إجراءات</th>
+        </tr>
+      </ng-template>
+      
+      <ng-template #body let-appt>
+        <tr>
+          <td>
+            <div class="font-semibold">{{ appt.scheduledStart | date:'yyyy/MM/dd' }}</div>
+            <div class="text-sm text-color-secondary">{{ appt.scheduledStart | date:'hh:mm a' }}</div>
+          </td>
+          <td class="font-semibold">{{ appt.patientName }}</td>
+          <td>{{ appt.patientPhone || '-' }}</td>
+          <td>
+            <div>{{ appt.doctorName }}</div>
+            <div class="text-xs text-color-secondary">{{ appt.doctorSpecialty || '-' }}</div>
+          </td>
+          <td>
+            <span class="visit-stage-badge" [ngClass]="'stage-' + appt.visitStage.toLowerCase()">
+              {{ getStageLabel(appt.visitStage) }}
+            </span>
+          </td>
+          <td>
+            <p-tag [value]="getStatusLabel(appt.status)" [severity]="getSeverity(appt.status)"></p-tag>
+          </td>
+          <td class="text-center">
+            <button pButton icon="pi pi-ellipsis-v" class="p-button-rounded p-button-text p-button-secondary" (click)="openActionsMenu($event, appt, menu)"></button>
+            <p-menu #menu [model]="actionMenuItems()" [popup]="true" appendTo="body"></p-menu>
+          </td>
+        </tr>
+      </ng-template>
+      
+      <ng-template #empty>
+        <tr>
+          <td colspan="7" class="text-center p-4">
+            <i class="pi pi-folder-open text-4xl text-color-secondary mb-3"></i>
+            <div class="text-lg font-semibold text-color-secondary">لا يوجد حجوزات مطابقة للبحث</div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

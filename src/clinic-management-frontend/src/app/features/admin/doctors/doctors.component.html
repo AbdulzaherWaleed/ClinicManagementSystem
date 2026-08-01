@@ -1,0 +1,85 @@
+<div class="card p-4">
+  <p-toast></p-toast>
+  
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="text-2xl font-semibold text-primary">إدارة الأطباء</h2>
+    <p-button label="إضافة طبيب" icon="pi pi-plus" (onClick)="showAddDialog()"></p-button>
+  </div>
+
+  <p-table [value]="doctors()" [loading]="isLoading()" [paginator]="true" [rows]="10" styleClass="p-datatable-sm">
+    <ng-template #header>
+      <tr>
+        <th>الاسم</th>
+        <th>المسمى الوظيفي</th>
+        <th>التخصص</th>
+        <th>رقم الهاتف</th>
+        <th>تاريخ الإضافة</th>
+        <th>الحالة</th>
+        <th>الإجراءات</th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-doctor>
+      <tr>
+        <td class="font-medium">{{ doctor.fullName }}</td>
+        <td>{{ doctor.title || '-' }}</td>
+        <td>{{ doctor.primarySpecialtyName || '-' }}</td>
+        <td>{{ doctor.phoneNumber || '-' }}</td>
+        <td>{{ doctor.createdAt | date:'shortDate' }}</td>
+        <td>
+          <p-tag [severity]="doctor.isActive ? 'success' : 'danger'" [value]="doctor.isActive ? 'نشط' : 'غير نشط'"></p-tag>
+        </td>
+        <td>
+          <p-button 
+            [icon]="doctor.isActive ? 'pi pi-ban' : 'pi pi-check'" 
+            [severity]="doctor.isActive ? 'danger' : 'success'"
+            [label]="doctor.isActive ? 'تعطيل' : 'تفعيل'"
+            size="small" 
+            [outlined]="true"
+            (onClick)="toggleStatus(doctor)">
+          </p-button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template #empty>
+      <tr>
+        <td colspan="7" class="text-center py-6 text-gray-500">لا يوجد أطباء مضافين بعد</td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <!-- Add Doctor Dialog -->
+  <p-dialog header="إضافة طبيب جديد" [visible]="displayAddDialog()" (visibleChange)="displayAddDialog.set($event)" [modal]="true" [style]="{width: '450px'}" [draggable]="false" [resizable]="false">
+    <form [formGroup]="addForm" class="flex flex-col gap-4 mt-4" (ngSubmit)="saveDoctor()">
+      <div class="flex flex-col gap-2">
+        <label for="fullName">الاسم الكامل <span class="text-red-500">*</span></label>
+        <input pInputText id="fullName" formControlName="fullName" />
+        <small class="text-red-500" *ngIf="addForm.get('fullName')?.invalid && addForm.get('fullName')?.touched">
+          الاسم الكامل مطلوب
+        </small>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="title">المسمى الوظيفي</label>
+        <input pInputText id="title" formControlName="title" placeholder="مثال: أخصائي باطنة" />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="phoneNumber">رقم الهاتف</label>
+        <input pInputText id="phoneNumber" formControlName="phoneNumber" />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="email">البريد الإلكتروني</label>
+        <input pInputText id="email" formControlName="email" type="email" />
+        <small class="text-red-500" *ngIf="addForm.get('email')?.invalid && addForm.get('email')?.touched">
+          صيغة البريد الإلكتروني غير صحيحة
+        </small>
+      </div>
+
+      <div class="flex justify-end gap-2 mt-4">
+        <p-button label="إلغاء" severity="secondary" [outlined]="true" (onClick)="displayAddDialog.set(false)"></p-button>
+        <p-button label="حفظ" type="submit" [loading]="isSubmitting()"></p-button>
+      </div>
+    </form>
+  </p-dialog>
+</div>

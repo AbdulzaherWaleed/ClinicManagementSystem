@@ -1,4 +1,4 @@
-﻿using ClinicManagement.Domain.Entities.Appointments;
+using ClinicManagement.Domain.Entities.Appointments;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -12,6 +12,12 @@ public class AppointmentConfiguration : IEntityTypeConfiguration<Appointment>
 
         builder.Property(a => a.Status).HasConversion<string>().HasMaxLength(20);
 
+        // v2.1 — Visit Stage stored as string for readability in DB
+        builder.Property(a => a.VisitStage).HasConversion<string>().HasMaxLength(20);
+
+        // v2.1 — Visit Type / Specialty (free text: Botox, ENT, Ophthalmology, etc.)
+        builder.Property(a => a.VisitType).HasMaxLength(100);
+
         builder.HasOne(a => a.Patient)
             .WithMany(p => p.Appointments)
             .HasForeignKey(a => a.PatientId)
@@ -21,4 +27,4 @@ public class AppointmentConfiguration : IEntityTypeConfiguration<Appointment>
 
         builder.HasQueryFilter(a => !a.IsDeleted);
     }
-}
+}

@@ -1,0 +1,119 @@
+@use 'variables' as *;
+
+// ============================================================
+// MIXINS
+// ============================================================
+
+// Flex shortcuts
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+// Card surface
+@mixin card($padding: 24px, $radius: $radius-lg) {
+  background: $surface;
+  border-radius: $radius;
+  padding: $padding;
+  box-shadow: $shadow-card;
+  border: 1px solid $border-color;
+}
+
+// Premium gradient button
+@mixin btn-primary {
+  background: linear-gradient(135deg, $primary-500, $primary-600);
+  color: $text-inverse;
+  border: none;
+  border-radius: $radius-md;
+  padding: 10px 20px;
+  font-size: $font-size-base;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all $transition-fast;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+
+  &:hover {
+    background: linear-gradient(135deg, $primary-600, $primary-700);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(124, 58, 237, 0.4);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Input field
+@mixin input-base {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid $border-color;
+  border-radius: $radius-md;
+  font-size: $font-size-base;
+  color: $text-primary;
+  background: $surface;
+  transition: border-color $transition-fast, box-shadow $transition-fast;
+  font-family: $font-family;
+  direction: rtl;
+
+  &:focus {
+    outline: none;
+    border-color: $primary-500;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
+  }
+
+  &::placeholder {
+    color: $text-muted;
+  }
+}
+
+// Badge / Chip
+@mixin badge($bg, $color) {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: $radius-full;
+  font-size: $font-size-xs;
+  font-weight: 600;
+  background: $bg;
+  color: $color;
+  white-space: nowrap;
+}
+
+// Responsive breakpoints
+@mixin mobile {
+  @media (max-width: 768px) { @content; }
+}
+
+@mixin tablet {
+  @media (max-width: 1024px) { @content; }
+}
+
+// Smooth hover glow
+@mixin hover-glow($color: $primary-500) {
+  transition: box-shadow $transition-fast, transform $transition-fast;
+  &:hover {
+    box-shadow: 0 0 0 3px rgba($color, 0.2);
+    transform: translateY(-1px);
+  }
+}
+
+// Text truncate
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
