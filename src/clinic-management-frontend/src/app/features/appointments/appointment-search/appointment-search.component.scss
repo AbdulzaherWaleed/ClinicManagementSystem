@@ -1,0 +1,77 @@
+@use '../../../../styles/variables' as *;
+@use '../../../../styles/mixins' as *;
+@use 'sass:color';
+
+.page-header {
+  @include flex-between;
+  margin-bottom: 24px;
+}
+
+.filter-card {
+  @include card(20px);
+  margin-bottom: 24px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
+}
+
+.col-12 { grid-column: span 12; }
+
+@include mobile {
+  .md\:col-3 { grid-column: span 12; }
+  .md\:col-6 { grid-column: span 12; }
+}
+
+@media (min-width: 769px) {
+  .md\:col-3 { grid-column: span 3; }
+  .md\:col-6 { grid-column: span 6; }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  label {
+    font-size: $font-size-sm;
+    font-weight: 600;
+    color: $text-primary;
+  }
+}
+
+.action-group {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.table-card {
+  @include card(0);
+  overflow: hidden;
+}
+
+.visit-stage-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: $radius-full;
+  font-size: $font-size-xs;
+  font-weight: 600;
+  
+  &.stage-checkup { background: $info-light; color: color.adjust($info, $lightness: -10%); }
+  &.stage-consultation { background: $warning-light; color: color.adjust($warning, $lightness: -15%); }
+  &.stage-procedure { background: $primary-100; color: $primary-700; }
+}
+
+::ng-deep {
+  .p-datatable .p-datatable-thead > tr > th {
+    background: $primary-50;
+    color: $primary-700;
+    font-weight: 600;
+    border-bottom: 2px solid $primary-100;
+  }
+}

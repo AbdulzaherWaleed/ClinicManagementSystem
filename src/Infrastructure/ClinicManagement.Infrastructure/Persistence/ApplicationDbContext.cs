@@ -1,4 +1,4 @@
-﻿using ClinicManagement.Application.Common.Interfaces;
+using ClinicManagement.Application.Common.Interfaces;
 using ClinicManagement.Domain.Entities.Appointments;
 using ClinicManagement.Domain.Entities.Doctors;
 using ClinicManagement.Domain.Entities.Identity;
@@ -29,6 +29,7 @@ public class ApplicationDbContext
     public DbSet<DoctorSpecialty> DoctorSpecialties => Set<DoctorSpecialty>();
     public DbSet<DoctorDocument> DoctorDocuments => Set<DoctorDocument>();
     public DbSet<Employee> Employees => Set<Employee>();
+    public DbSet<EmployeeDoctorAssignment> EmployeeDoctorAssignments => Set<EmployeeDoctorAssignment>();
     public DbSet<Patient> Patients => Set<Patient>();
     public DbSet<PatientVisit> PatientVisits => Set<PatientVisit>();
     public DbSet<Appointment> Appointments => Set<Appointment>();

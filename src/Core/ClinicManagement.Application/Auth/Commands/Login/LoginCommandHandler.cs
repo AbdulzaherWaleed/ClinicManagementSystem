@@ -1,4 +1,4 @@
-﻿using ClinicManagement.Application.Auth.DTOs;
+using ClinicManagement.Application.Auth.DTOs;
 using ClinicManagement.Application.Common.Exceptions;
 using ClinicManagement.Application.Common.Interfaces;
 using ClinicManagement.Domain.Entities.Identity;
@@ -38,6 +38,7 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, AuthResponseDto
 
         var roles = await _userManager.GetRolesAsync(user);
 
+        // v2.1 — Generate JWT with multiple "doctorId" claims (one per assigned doctor)
         var (token, expiresAt) = _jwtTokenGenerator.GenerateToken(user, roles);
         var refreshToken = _jwtTokenGenerator.GenerateRefreshToken();
 
@@ -52,7 +53,7 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, AuthResponseDto
                 FullName = user.FullName,
                 Email = user.Email!,
                 Role = roles.FirstOrDefault() ?? "",
-                AssignedDoctorId = user.AssignedDoctorId
+                AssignedDoctorIds = user.AssignedDoctorIds // List<Guid> parsed from AssignedDoctorIdsRaw
             }
         };
     }

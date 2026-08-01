@@ -1,4 +1,4 @@
-﻿using ClinicManagement.Application.Auth.DTOs;
+using ClinicManagement.Application.Auth.DTOs;
 using ClinicManagement.Domain.Enums;
 using MediatR;
 
@@ -10,5 +10,10 @@ public class RegisterCommand : IRequest<AuthResponseDto>
     public string Email { get; set; } = default!;
     public string Password { get; set; } = default!;
     public UserRole Role { get; set; }
-    public Guid? AssignedDoctorId { get; set; }
-}
+
+    /// <summary>
+    /// v2.1 — Set by Admin when creating an Employee account.
+    /// Can be empty for Admin/Doctor roles.
+    /// </summary>
+    public List<Guid> AssignedDoctorIds { get; set; } = new();
+}

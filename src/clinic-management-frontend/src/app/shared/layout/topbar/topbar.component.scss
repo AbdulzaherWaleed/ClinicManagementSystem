@@ -1,0 +1,120 @@
+@use '../../../../styles/variables' as *;
+@use '../../../../styles/mixins' as *;
+
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: $sidebar-width;    // RTL: extends from right sidebar to left edge
+  height: $topbar-height;
+  background: $surface;
+  border-bottom: 1px solid $border-color;
+  box-shadow: 0 1px 8px rgba(124, 58, 237, 0.06);
+  @include flex-between;
+  padding: 0 24px;
+  z-index: $z-topbar;
+  transition: right $transition-normal;
+}
+
+// --- Left side: Page info ---
+.topbar-start {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.page-heading {
+  font-size: $font-size-lg;
+  font-weight: 700;
+  color: $text-primary;
+  line-height: 1.2;
+}
+
+.page-date {
+  font-size: $font-size-xs;
+  color: $text-muted;
+  font-weight: 400;
+}
+
+// --- Right side: Actions ---
+.topbar-end {
+  @include flex-start;
+  gap: 12px;
+}
+
+.topbar-divider {
+  width: 1px;
+  height: 28px;
+  background: $border-color;
+}
+
+// --- Icon Button ---
+.icon-btn {
+  @include flex-center;
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid $border-color;
+  border-radius: $radius-md;
+  background: transparent;
+  color: $text-secondary;
+  cursor: pointer;
+  transition: all $transition-fast;
+  position: relative;
+
+  i { font-size: 16px; }
+
+  &:hover {
+    border-color: $primary-500;
+    color: $primary-500;
+    background: $primary-50;
+  }
+}
+
+.notif-dot {
+  position: absolute;
+  top: 6px;
+  left: 8px;   // RTL-aware dot position
+  width: 8px;
+  height: 8px;
+  background: $danger;
+  border-radius: 50%;
+  border: 2px solid $surface;
+}
+
+// --- User Section ---
+.user-section {
+  @include flex-start;
+  gap: 10px;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: $radius-md;
+  transition: background $transition-fast;
+
+  &:hover { background: $primary-50; }
+}
+
+.user-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+}
+
+.user-display-name {
+  font-size: $font-size-sm;
+  font-weight: 600;
+  color: $text-primary;
+  white-space: nowrap;
+}
+
+.user-topbar-avatar {
+  @include flex-center;
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-full;
+  background: linear-gradient(135deg, $primary-500, $primary-400);
+  color: white;
+  font-size: 15px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.3);
+}

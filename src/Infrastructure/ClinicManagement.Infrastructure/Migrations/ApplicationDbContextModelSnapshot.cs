@@ -75,6 +75,15 @@ namespace ClinicManagement.Infrastructure.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<string>("VisitStage")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("VisitType")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("PatientId");
@@ -254,8 +263,9 @@ namespace ClinicManagement.Infrastructure.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("AssignedDoctorId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("AssignedDoctorIdsRaw")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -318,8 +328,6 @@ namespace ClinicManagement.Infrastructure.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AssignedDoctorId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -783,9 +791,6 @@ namespace ClinicManagement.Infrastructure.Migrations
                     b.Property<Guid>("ApplicationUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("AssignedDoctorId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -810,7 +815,8 @@ namespace ClinicManagement.Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("JobTitle")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime?>("LastModifiedAt")
                         .HasColumnType("datetime2");
@@ -819,16 +825,58 @@ namespace ClinicManagement.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ApplicationUserId")
                         .IsUnique();
 
-                    b.HasIndex("AssignedDoctorId");
-
                     b.ToTable("Employees", (string)null);
+                });
+
+            modelBuilder.Entity("ClinicManagement.Domain.Entities.Staff.EmployeeDoctorAssignment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("DoctorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("EmployeeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("EmployeeId", "DoctorId")
+                        .IsUnique();
+
+                    b.ToTable("EmployeeDoctorAssignments", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -1002,16 +1050,6 @@ namespace ClinicManagement.Infrastructure.Migrations
                     b.Navigation("Doctor");
                 });
 
-            modelBuilder.Entity("ClinicManagement.Domain.Entities.Identity.ApplicationUser", b =>
-                {
-                    b.HasOne("ClinicManagement.Domain.Entities.Doctors.Doctor", "AssignedDoctor")
-                        .WithMany()
-                        .HasForeignKey("AssignedDoctorId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("AssignedDoctor");
-                });
-
             modelBuilder.Entity("ClinicManagement.Domain.Entities.Identity.UserRefreshToken", b =>
                 {
                     b.HasOne("ClinicManagement.Domain.Entities.Identity.ApplicationUser", "User")
@@ -1083,15 +1121,23 @@ namespace ClinicManagement.Infrastructure.Migrations
                     b.Navigation("Doctor");
                 });
 
-            modelBuilder.Entity("ClinicManagement.Domain.Entities.Staff.Employee", b =>
+            modelBuilder.Entity("ClinicManagement.Domain.Entities.Staff.EmployeeDoctorAssignment", b =>
                 {
-                    b.HasOne("ClinicManagement.Domain.Entities.Doctors.Doctor", "AssignedDoctor")
-                        .WithMany("Employees")
-                        .HasForeignKey("AssignedDoctorId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                    b.HasOne("ClinicManagement.Domain.Entities.Doctors.Doctor", "Doctor")
+                        .WithMany("EmployeeAssignments")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AssignedDoctor");
+                    b.HasOne("ClinicManagement.Domain.Entities.Staff.Employee", "Employee")
+                        .WithMany("DoctorAssignments")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -1153,7 +1199,7 @@ namespace ClinicManagement.Infrastructure.Migrations
 
                     b.Navigation("Documents");
 
-                    b.Navigation("Employees");
+                    b.Navigation("EmployeeAssignments");
 
                     b.Navigation("PatientVisits");
                 });
@@ -1183,6 +1229,11 @@ namespace ClinicManagement.Infrastructure.Migrations
                     b.Navigation("Appointments");
 
                     b.Navigation("Visits");
+                });
+
+            modelBuilder.Entity("ClinicManagement.Domain.Entities.Staff.Employee", b =>
+                {
+                    b.Navigation("DoctorAssignments");
                 });
 #pragma warning restore 612, 618
         }

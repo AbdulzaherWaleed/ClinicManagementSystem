@@ -1,4 +1,4 @@
-﻿using ClinicManagement.Application.Auth.DTOs;
+using ClinicManagement.Application.Auth.DTOs;
 using ClinicManagement.Application.Common.Exceptions;
 using ClinicManagement.Application.Common.Interfaces;
 using ClinicManagement.Domain.Entities.Identity;
@@ -32,10 +32,15 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, AuthRespo
                 new("Email", "This email is already registered.")
             });
 
-        var roleName = request.Role.ToString();
+        var roleNameValue = request.Role.ToString();
 
-        if (!await _roleManager.RoleExistsAsync(roleName))
-            await _roleManager.CreateAsync(new IdentityRole<Guid>(roleName));
+        if (!await _roleManager.RoleExistsAsync(roleNameValue))
+            await _roleManager.CreateAsync(new IdentityRole<Guid>(roleNameValue));
+
+        // v2.1 — Store multiple doctor IDs as comma-separated in AssignedDoctorIdsRaw
+        var assignedDoctorIdsRaw = request.AssignedDoctorIds.Count > 0
+            ? string.Join(",", request.AssignedDoctorIds)
+            : null;
 
         var user = new ApplicationUser
         {
@@ -43,7 +48,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, AuthRespo
             Email = request.Email,
             FullName = request.FullName,
             Role = request.Role,
-            AssignedDoctorId = request.AssignedDoctorId,
+            AssignedDoctorIdsRaw = assignedDoctorIdsRaw,
             IsActive = true
         };
 
@@ -53,9 +58,9 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, AuthRespo
             throw new ValidationException(result.Errors.Select(e =>
                 new FluentValidation.Results.ValidationFailure(string.Empty, e.Description)));
 
-        await _userManager.AddToRoleAsync(user, roleName);
+        await _userManager.AddToRoleAsync(user, roleNameValue);
 
-        var (token, expiresAt) = _jwtTokenGenerator.GenerateToken(user, new List<string> { roleName });
+        var (token, expiresAt) = _jwtTokenGenerator.GenerateToken(user, new List<string> { roleNameValue });
         var refreshToken = _jwtTokenGenerator.GenerateRefreshToken();
 
         return new AuthResponseDto
@@ -68,8 +73,8 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, AuthRespo
                 Id = user.Id,
                 FullName = user.FullName,
                 Email = user.Email!,
-                Role = roleName,
-                AssignedDoctorId = user.AssignedDoctorId
+                Role = roleNameValue,
+                AssignedDoctorIds = user.AssignedDoctorIds // parsed from raw string
             }
         };
     }

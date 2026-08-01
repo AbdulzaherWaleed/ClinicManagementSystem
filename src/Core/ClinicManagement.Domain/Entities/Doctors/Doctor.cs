@@ -1,4 +1,4 @@
-﻿using ClinicManagement.Domain.Common;
+using ClinicManagement.Domain.Common;
 using ClinicManagement.Domain.Entities.Appointments;
 using ClinicManagement.Domain.Entities.Patients;
 using ClinicManagement.Domain.Entities.Settings;
@@ -21,7 +21,8 @@ public class Doctor : BaseAuditableEntity
 
     public bool IsActive { get; set; } = true;
 
-    public ICollection<Employee> Employees { get; set; } = new List<Employee>();
+    // Many-to-Many: one doctor can have multiple employees assigned
+    public ICollection<EmployeeDoctorAssignment> EmployeeAssignments { get; set; } = new List<EmployeeDoctorAssignment>();
     public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
     public ICollection<PatientVisit> PatientVisits { get; set; } = new List<PatientVisit>();
     public ICollection<DoctorDocument> Documents { get; set; } = new List<DoctorDocument>();

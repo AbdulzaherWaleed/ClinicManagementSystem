@@ -1,4 +1,4 @@
-﻿using ClinicManagement.Domain.Entities.Staff;
+using ClinicManagement.Domain.Entities.Staff;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,12 +11,11 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
         builder.ToTable("Employees");
 
         builder.Property(e => e.FullName).IsRequired().HasMaxLength(200);
+        builder.Property(e => e.PhoneNumber).HasMaxLength(30);
+        builder.Property(e => e.JobTitle).HasMaxLength(100);
 
-        builder.HasOne(e => e.AssignedDoctor)
-            .WithMany(d => d.Employees)
-            .HasForeignKey(e => e.AssignedDoctorId)
-            .OnDelete(DeleteBehavior.Restrict)
-            .IsRequired();
+        // The M2M relationship is configured in EmployeeDoctorAssignmentConfiguration
+        // No HasOne/HasForeignKey for AssignedDoctorId anymore (v2.1)
 
         builder.HasIndex(e => e.ApplicationUserId).IsUnique();
 
