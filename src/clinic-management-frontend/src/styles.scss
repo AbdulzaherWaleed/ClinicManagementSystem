@@ -260,6 +260,10 @@ a {
   z-index: 1000 !important;
 }
 
+.p-multiselect-panel, .p-dropdown-panel, .p-select-panel, .p-datepicker {
+  z-index: 10000 !important;
+}
+
 // --- Loading Spinner ---
 .loading-overlay {
   @include flex-center;
