@@ -1,11 +1,13 @@
-﻿using ClinicManagement.Application.Common.Interfaces;
+using ClinicManagement.Application.Common.Interfaces;
 using ClinicManagement.Application.Doctors.DTOs;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
+using ClinicManagement.Application.Common.Models;
+
 namespace ClinicManagement.Application.Doctors.Queries.GetAllDoctors;
 
-public class GetAllDoctorsQueryHandler : IRequestHandler<GetAllDoctorsQuery, List<DoctorDto>>
+public class GetAllDoctorsQueryHandler : IRequestHandler<GetAllDoctorsQuery, PaginatedList<DoctorDto>>
 {
     private readonly IApplicationDbContext _context;
 
@@ -14,9 +16,9 @@ public class GetAllDoctorsQueryHandler : IRequestHandler<GetAllDoctorsQuery, Lis
         _context = context;
     }
 
-    public async Task<List<DoctorDto>> Handle(GetAllDoctorsQuery request, CancellationToken cancellationToken)
+    public async Task<PaginatedList<DoctorDto>> Handle(GetAllDoctorsQuery request, CancellationToken cancellationToken)
     {
-        return await _context.Doctors
+        var query = _context.Doctors
             .Select(d => new DoctorDto
             {
                 Id = d.Id,
@@ -28,7 +30,8 @@ public class GetAllDoctorsQueryHandler : IRequestHandler<GetAllDoctorsQuery, Lis
                 PrimarySpecialtyName = d.PrimarySpecialty != null ? d.PrimarySpecialty.Name : null,
                 IsActive = d.IsActive,
                 CreatedAt = d.CreatedAt
-            })
-            .ToListAsync(cancellationToken);
+            });
+
+        return await PaginatedList<DoctorDto>.CreateAsync(query, request.PageNumber, request.PageSize, cancellationToken);
     }
 }

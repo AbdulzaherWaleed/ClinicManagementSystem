@@ -1,5 +1,6 @@
 using ClinicManagement.Application.Appointments.DTOs;
 using MediatR;
+using ClinicManagement.Application.Common.Models;
 
 namespace ClinicManagement.Application.Appointments.Queries.GetAppointments;
 
@@ -7,8 +8,10 @@ namespace ClinicManagement.Application.Appointments.Queries.GetAppointments;
 /// Advanced Search Query — all filters are optional and combinable (AND logic).
 /// Matches Brief §4.1 Advanced Search Bookings exactly.
 /// </summary>
-public class GetAppointmentsQuery : IRequest<List<AppointmentDto>>
+public class GetAppointmentsQuery : IRequest<PaginatedList<AppointmentDto>>
 {
+    public int PageNumber { get; set; } = 1;
+    public int PageSize { get; set; } = 10;
     public string? PatientName { get; set; }
     public string? Phone { get; set; }
     public Guid? DoctorId { get; set; }

@@ -1,8 +1,11 @@
-﻿using ClinicManagement.Application.Doctors.DTOs;
+using ClinicManagement.Application.Doctors.DTOs;
 using MediatR;
+using ClinicManagement.Application.Common.Models;
 
 namespace ClinicManagement.Application.Doctors.Queries.GetAllDoctors;
 
-public class GetAllDoctorsQuery : IRequest<List<DoctorDto>>
+public class GetAllDoctorsQuery : IRequest<PaginatedList<DoctorDto>>
 {
+    public int PageNumber { get; set; } = 1;
+    public int PageSize { get; set; } = 10;
 }

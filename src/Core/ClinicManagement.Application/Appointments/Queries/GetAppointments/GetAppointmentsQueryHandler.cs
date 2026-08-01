@@ -4,9 +4,11 @@ using ClinicManagement.Domain.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
+using ClinicManagement.Application.Common.Models;
+
 namespace ClinicManagement.Application.Appointments.Queries.GetAppointments;
 
-public class GetAppointmentsQueryHandler : IRequestHandler<GetAppointmentsQuery, List<AppointmentDto>>
+public class GetAppointmentsQueryHandler : IRequestHandler<GetAppointmentsQuery, PaginatedList<AppointmentDto>>
 {
     private readonly IApplicationDbContext _context;
 
@@ -15,7 +17,7 @@ public class GetAppointmentsQueryHandler : IRequestHandler<GetAppointmentsQuery,
         _context = context;
     }
 
-    public async Task<List<AppointmentDto>> Handle(GetAppointmentsQuery request, CancellationToken cancellationToken)
+    public async Task<PaginatedList<AppointmentDto>> Handle(GetAppointmentsQuery request, CancellationToken cancellationToken)
     {
         var query = _context.Appointments
             .Include(a => a.Patient)
@@ -56,7 +58,7 @@ public class GetAppointmentsQueryHandler : IRequestHandler<GetAppointmentsQuery,
         if (request.RestrictToDoctorIds is { Count: > 0 })
             query = query.Where(a => request.RestrictToDoctorIds.Contains(a.DoctorId));
 
-        return await query
+        var mappedQuery = query
             .OrderByDescending(a => a.ScheduledStart)
             .Select(a => new AppointmentDto
             {
@@ -76,7 +78,8 @@ public class GetAppointmentsQueryHandler : IRequestHandler<GetAppointmentsQuery,
                 VisitStage = a.VisitStage.ToString(),
                 VisitType = a.VisitType,
                 CreatedAt = a.CreatedAt
-            })
-            .ToListAsync(cancellationToken);
+            });
+
+        return await PaginatedList<AppointmentDto>.CreateAsync(mappedQuery, request.PageNumber, request.PageSize, cancellationToken);
     }
 }
