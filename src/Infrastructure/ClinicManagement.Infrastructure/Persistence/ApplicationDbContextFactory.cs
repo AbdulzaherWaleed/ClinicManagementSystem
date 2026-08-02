@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
 namespace ClinicManagement.Infrastructure.Persistence;
@@ -28,7 +28,7 @@ internal class DesignTimeCurrentUserService : ClinicManagement.Application.Commo
 {
     public Guid? UserId => null;
     public string? Role => null;
-    public Guid? AssignedDoctorId => null;
+    public List<Guid> AssignedDoctorIds => new();
 }
 
 internal class DesignTimeDateTimeService : ClinicManagement.Application.Common.Interfaces.IDateTimeService

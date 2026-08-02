@@ -2,6 +2,7 @@ using ClinicManagement.Application.Doctors.Commands.CreateDoctor;
 using ClinicManagement.Application.Doctors.Queries.GetAllDoctors;
 using ClinicManagement.Application.Doctors.Queries.GetDoctorById;
 using ClinicManagement.Application.Doctors.Commands.ToggleDoctorStatus;
+using ClinicManagement.Application.Doctors.Commands.DeleteDoctor;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,9 +22,25 @@ public class DoctorsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
     {
-        var result = await _mediator.Send(new GetAllDoctorsQuery());
+        List<Guid>? restrictToDoctorIds = null;
+        var userRole = User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value;
+
+        if (userRole == "Employee")
+        {
+            restrictToDoctorIds = User.FindAll("doctorId")
+                .Select(c => Guid.TryParse(c.Value, out var g) ? g : Guid.Empty)
+                .Where(g => g != Guid.Empty)
+                .ToList();
+        }
+
+        var result = await _mediator.Send(new GetAllDoctorsQuery 
+        { 
+            PageNumber = pageNumber, 
+            PageSize = pageSize,
+            RestrictToDoctorIds = restrictToDoctorIds
+        });
         return Ok(result);
     }
 
@@ -48,6 +65,14 @@ public class DoctorsController : ControllerBase
     public async Task<IActionResult> ToggleStatus(Guid id)
     {
         await _mediator.Send(new ToggleDoctorStatusCommand { Id = id });
+        return NoContent();
+    }
+
+    [HttpDelete("{id:guid}")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        await _mediator.Send(new DeleteDoctorCommand { Id = id });
         return NoContent();
     }
 }

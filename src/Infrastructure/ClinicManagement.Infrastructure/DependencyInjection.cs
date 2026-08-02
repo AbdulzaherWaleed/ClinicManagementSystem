@@ -1,4 +1,4 @@
-﻿using ClinicManagement.Application.Common.Interfaces;
+using ClinicManagement.Application.Common.Interfaces;
 using ClinicManagement.Domain.Entities.Identity;
 using ClinicManagement.Infrastructure.Common;
 using ClinicManagement.Infrastructure.FileStorage;
@@ -33,6 +33,9 @@ public static class DependencyInjection
             options.Password.RequiredLength = 8;
             options.Password.RequireNonAlphanumeric = false;
             options.User.RequireUniqueEmail = true;
+            options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+            options.Lockout.MaxFailedAccessAttempts = 5;
+            options.Lockout.AllowedForNewUsers = true;
         })
             .AddRoles<IdentityRole<Guid>>()
             .AddEntityFrameworkStores<ApplicationDbContext>()

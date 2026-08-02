@@ -74,4 +74,13 @@
     font-weight: 600;
     border-bottom: 2px solid $primary-100;
   }
+
+  /* Restore missing horizontal padding stripped by the global * { padding: 0 } reset */
+  .p-datatable-table th,
+  .p-datatable-table td {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
+
+

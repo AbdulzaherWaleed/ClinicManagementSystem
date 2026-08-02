@@ -11,9 +11,10 @@ import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { TagModule } from 'primeng/tag';
-import { MessageService } from 'primeng/api';
+import { MessageService, ConfirmationService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { SharedModule } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @Component({
   selector: 'app-doctors',
@@ -27,9 +28,10 @@ import { SharedModule } from 'primeng/api';
     InputTextModule,
     TagModule,
     ToastModule,
-    SharedModule
+    SharedModule,
+    ConfirmDialogModule
   ],
-  providers: [MessageService],
+  providers: [MessageService, ConfirmationService],
   templateUrl: './doctors.component.html',
   styleUrls: ['./doctors.component.scss']
 })
@@ -37,8 +39,10 @@ export class DoctorsComponent implements OnInit {
   private readonly doctorService = inject(DoctorService);
   private readonly fb = inject(FormBuilder);
   private readonly messageService = inject(MessageService);
+  private readonly confirmationService = inject(ConfirmationService);
 
   doctors = signal<DoctorDto[]>([]);
+  totalRecords = signal<number>(0);
   isLoading = signal<boolean>(false);
   
   displayAddDialog = signal<boolean>(false);
@@ -47,7 +51,8 @@ export class DoctorsComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.loadDoctors();
+    // Intentionally omitting this.loadDoctors() here. 
+    // PrimeNG p-table with [lazy]="true" will trigger onLazyLoad initially.
   }
 
   private initForm(): void {
@@ -60,14 +65,23 @@ export class DoctorsComponent implements OnInit {
     });
   }
 
-  loadDoctors(): void {
+  loadDoctors(pageNumber: number = 1, pageSize: number = 10): void {
     this.isLoading.set(true);
-    this.doctorService.getDoctors()
+    this.doctorService.getDoctors(pageNumber, pageSize)
       .pipe(finalize(() => this.isLoading.set(false)))
       .subscribe({
-        next: (data) => this.doctors.set(data),
+        next: (data) => {
+          this.doctors.set(data.items);
+          this.totalRecords.set(data.totalCount);
+        },
         error: () => this.showError('حدث خطأ أثناء تحميل الأطباء')
       });
+  }
+
+  onLazyLoad(event: any): void {
+    const pageNumber = (event.first / event.rows) + 1;
+    const pageSize = event.rows || 10;
+    this.loadDoctors(pageNumber, pageSize);
   }
 
   showAddDialog(): void {
@@ -88,7 +102,7 @@ export class DoctorsComponent implements OnInit {
         next: () => {
           this.displayAddDialog.set(false);
           this.showSuccess('تمت إضافة الطبيب بنجاح');
-          this.loadDoctors();
+          this.loadDoctors(); // load page 1 after adding
         },
         error: () => this.showError('حدث خطأ أثناء حفظ بيانات الطبيب')
       });
@@ -101,6 +115,25 @@ export class DoctorsComponent implements OnInit {
         this.showSuccess('تم تحديث حالة الطبيب');
       },
       error: () => this.showError('حدث خطأ أثناء تغيير الحالة')
+    });
+  }
+
+  deleteDoctor(doctor: DoctorDto): void {
+    this.confirmationService.confirm({
+      message: `هل أنت متأكد من حذف الطبيب ${doctor.fullName}؟`,
+      header: 'تأكيد الحذف',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'نعم',
+      rejectLabel: 'لا',
+      accept: () => {
+        this.doctorService.deleteDoctor(doctor.id).subscribe({
+          next: () => {
+            this.showSuccess('تم حذف الطبيب بنجاح');
+            this.loadDoctors();
+          },
+          error: () => this.showError('حدث خطأ أثناء الحذف')
+        });
+      }
     });
   }
 

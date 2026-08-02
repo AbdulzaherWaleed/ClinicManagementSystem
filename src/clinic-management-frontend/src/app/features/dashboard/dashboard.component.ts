@@ -109,7 +109,7 @@ export class DashboardComponent implements OnInit {
         dateTo: end.toISOString()
       })
       .subscribe({
-        next: (list) => this.updateStats(list),
+        next: (response) => this.updateStats(response.items),
         error: () => {}
       });
   }

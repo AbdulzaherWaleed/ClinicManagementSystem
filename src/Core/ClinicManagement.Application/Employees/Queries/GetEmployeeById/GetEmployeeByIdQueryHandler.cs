@@ -17,8 +17,7 @@ public class GetEmployeeByIdQueryHandler : IRequestHandler<GetEmployeeByIdQuery,
     public async Task<EmployeeDto?> Handle(GetEmployeeByIdQuery request, CancellationToken cancellationToken)
     {
         return await _context.Employees
-            .Include(e => e.DoctorAssignments)
-                .ThenInclude(da => da.Doctor)
+            .AsNoTracking()
             .Where(e => e.Id == request.Id && !e.IsDeleted)
             .Select(e => new EmployeeDto
             {

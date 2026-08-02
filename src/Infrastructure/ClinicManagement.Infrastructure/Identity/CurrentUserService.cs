@@ -1,4 +1,4 @@
-﻿using System.Security.Claims;
+using System.Security.Claims;
 using ClinicManagement.Application.Common.Interfaces;
 using Microsoft.AspNetCore.Http;
 
@@ -26,13 +26,14 @@ public class CurrentUserService : ICurrentUserService
     public string? Role => _httpContextAccessor.HttpContext?.User?
         .FindFirstValue(ClaimTypes.Role);
 
-    public Guid? AssignedDoctorId
+    public List<Guid> AssignedDoctorIds
     {
         get
         {
-            var id = _httpContextAccessor.HttpContext?.User?
-                .FindFirstValue("doctorId");
-            return Guid.TryParse(id, out var guid) ? guid : null;
+            return _httpContextAccessor.HttpContext?.User?.FindAll("doctorId")
+                .Select(c => Guid.TryParse(c.Value, out var g) ? g : Guid.Empty)
+                .Where(g => g != Guid.Empty)
+                .ToList() ?? new List<Guid>();
         }
     }
 }

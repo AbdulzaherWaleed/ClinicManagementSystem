@@ -13,11 +13,14 @@ import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { TagModule } from 'primeng/tag';
-import { MessageService } from 'primeng/api';
+import { MessageService, ConfirmationService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { PasswordModule } from 'primeng/password';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { SelectModule } from 'primeng/select';
+import { ScrollerModule } from 'primeng/scroller';
+import { SharedModule } from 'primeng/api';
 
 @Component({
   selector: 'app-employees',
@@ -33,9 +36,12 @@ import { SelectModule } from 'primeng/select';
     ToastModule,
     MultiSelectModule,
     PasswordModule,
-    SelectModule
+    SelectModule,
+    ScrollerModule,
+    SharedModule,
+    ConfirmDialogModule
   ],
-  providers: [MessageService],
+  providers: [MessageService, ConfirmationService],
   templateUrl: './employees.component.html',
   styleUrls: ['./employees.component.scss']
 })
@@ -44,6 +50,7 @@ export class EmployeesComponent implements OnInit {
   private readonly doctorService = inject(DoctorService);
   private readonly fb = inject(FormBuilder);
   private readonly messageService = inject(MessageService);
+  private readonly confirmationService = inject(ConfirmationService);
 
   employees = signal<EmployeeDto[]>([]);
   doctors = signal<DoctorDto[]>([]);
@@ -83,7 +90,7 @@ export class EmployeesComponent implements OnInit {
   loadDoctors(): void {
     // Only fetch active doctors for assignment
     this.doctorService.getDoctors().subscribe({
-      next: (data) => this.doctors.set(data.filter(d => d.isActive)),
+      next: (data) => this.doctors.set(data.items.filter(d => d.isActive)),
       error: () => this.showError('تعذر تحميل الأطباء')
     });
   }
@@ -116,6 +123,31 @@ export class EmployeesComponent implements OnInit {
       });
   }
 
+  onDoctorCheckboxChange(event: any, doctorId: string): void {
+    const assignedDocsControl = this.addForm.get('assignedDoctorIds');
+    if (!assignedDocsControl) return;
+    
+    let currentIds = (assignedDocsControl.value as string[]) || [];
+    if (event.target.checked) {
+      if (!currentIds.includes(doctorId)) {
+        currentIds.push(doctorId);
+      }
+    } else {
+      currentIds = currentIds.filter(id => id !== doctorId);
+    }
+    
+    assignedDocsControl.setValue(currentIds);
+    assignedDocsControl.markAsDirty();
+    assignedDocsControl.updateValueAndValidity();
+  }
+
+  isDoctorAssigned(doctorId: string): boolean {
+    const assignedDocsControl = this.addForm.get('assignedDoctorIds');
+    if (!assignedDocsControl) return false;
+    const currentIds = (assignedDocsControl.value as string[]) || [];
+    return currentIds.includes(doctorId);
+  }
+
   toggleStatus(employee: EmployeeDto): void {
     this.employeeService.toggleStatus(employee.id).subscribe({
       next: () => {
@@ -123,6 +155,25 @@ export class EmployeesComponent implements OnInit {
         this.showSuccess('تم تحديث حالة الموظف');
       },
       error: () => this.showError('حدث خطأ أثناء تغيير الحالة')
+    });
+  }
+
+  deleteEmployee(employee: EmployeeDto): void {
+    this.confirmationService.confirm({
+      message: `هل أنت متأكد من حذف الموظف ${employee.fullName}؟`,
+      header: 'تأكيد الحذف',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'نعم',
+      rejectLabel: 'لا',
+      accept: () => {
+        this.employeeService.deleteEmployee(employee.id).subscribe({
+          next: () => {
+            this.showSuccess('تم حذف الموظف بنجاح');
+            this.loadEmployees();
+          },
+          error: () => this.showError('حدث خطأ أثناء الحذف')
+        });
+      }
     });
   }
 

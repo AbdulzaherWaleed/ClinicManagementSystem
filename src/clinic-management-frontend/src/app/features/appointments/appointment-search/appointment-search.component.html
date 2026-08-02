@@ -49,41 +49,41 @@
       [showCurrentPageReport]="true" 
       currentPageReportTemplate="عرض {first} إلى {last} من أصل {totalRecords} حجز"
       styleClass="p-datatable-striped"
-      [tableStyle]="{'min-width': '60rem'}">
+      [tableStyle]="{'min-width': '60rem', 'table-layout': 'fixed'}">
       
       <ng-template #header>
         <tr>
-          <th>تاريخ الحجز</th>
-          <th>المريض</th>
-          <th>الهاتف</th>
-          <th>الطبيب</th>
-          <th>مرحلة الزيارة</th>
-          <th>الحالة</th>
+          <th style="width: 150px;" class="text-center">تاريخ الحجز</th>
+          <th style="width: 180px;">المريض</th>
+          <th style="width: 160px;">الهاتف</th>
+          <th style="width: 220px;">الطبيب</th>
+          <th style="width: 150px;">مرحلة الزيارة</th>
+          <th style="width: 110px;">الحالة</th>
           <th style="width: 100px; text-align: center;">إجراءات</th>
         </tr>
       </ng-template>
       
       <ng-template #body let-appt>
         <tr>
-          <td>
-            <div class="font-semibold">{{ appt.scheduledStart | date:'yyyy/MM/dd' }}</div>
-            <div class="text-sm text-color-secondary">{{ appt.scheduledStart | date:'hh:mm a' }}</div>
+          <td style="width: 150px;" class="text-center">
+            <div class="font-semibold whitespace-nowrap text-center" dir="ltr">{{ appt.scheduledStart | date:'yyyy/MM/dd' }}</div>
+            <div class="text-sm text-gray-500 mt-1 whitespace-nowrap text-center" dir="ltr">{{ appt.scheduledStart | date:'hh:mm a' }}</div>
           </td>
-          <td class="font-semibold">{{ appt.patientName }}</td>
-          <td>{{ appt.patientPhone || '-' }}</td>
-          <td>
+          <td style="width: 180px;" class="font-semibold">{{ appt.patientName }}</td>
+          <td style="width: 160px;">{{ appt.patientPhone || '-' }}</td>
+          <td style="width: 220px;">
             <div>{{ appt.doctorName }}</div>
             <div class="text-xs text-color-secondary">{{ appt.doctorSpecialty || '-' }}</div>
           </td>
-          <td>
+          <td style="width: 150px;">
             <span class="visit-stage-badge" [ngClass]="'stage-' + appt.visitStage.toLowerCase()">
               {{ getStageLabel(appt.visitStage) }}
             </span>
           </td>
-          <td>
+          <td style="width: 110px;">
             <p-tag [value]="getStatusLabel(appt.status)" [severity]="getSeverity(appt.status)"></p-tag>
           </td>
-          <td class="text-center">
+          <td style="width: 100px;" class="text-center">
             <button pButton icon="pi pi-ellipsis-v" class="p-button-rounded p-button-text p-button-secondary" (click)="openActionsMenu($event, appt, menu)"></button>
             <p-menu #menu [model]="actionMenuItems()" [popup]="true" appendTo="body"></p-menu>
           </td>

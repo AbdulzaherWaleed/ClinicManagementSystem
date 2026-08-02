@@ -102,7 +102,7 @@ export class AppointmentSearchComponent implements OnInit {
     this.appointmentService.getAppointments(query)
       .pipe(finalize(() => this.isLoading.set(false)))
       .subscribe({
-        next: (data) => this.appointments.set(data),
+        next: (data) => this.appointments.set(data.items),
         error: (err) => console.error('Error fetching appointments', err)
       });
   }

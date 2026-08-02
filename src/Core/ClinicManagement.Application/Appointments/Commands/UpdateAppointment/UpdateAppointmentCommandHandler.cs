@@ -9,10 +9,12 @@ namespace ClinicManagement.Application.Appointments.Commands.UpdateAppointment;
 public class UpdateAppointmentCommandHandler : IRequestHandler<UpdateAppointmentCommand>
 {
     private readonly IApplicationDbContext _context;
+    private readonly ICurrentUserService _currentUserService;
 
-    public UpdateAppointmentCommandHandler(IApplicationDbContext context)
+    public UpdateAppointmentCommandHandler(IApplicationDbContext context, ICurrentUserService currentUserService)
     {
         _context = context;
+        _currentUserService = currentUserService;
     }
 
     public async Task Handle(UpdateAppointmentCommand request, CancellationToken cancellationToken)
@@ -22,6 +24,11 @@ public class UpdateAppointmentCommandHandler : IRequestHandler<UpdateAppointment
 
         if (appointment == null)
             throw new NotFoundException("Appointment", request.Id);
+
+        if (_currentUserService.Role == "Employee" && !_currentUserService.AssignedDoctorIds.Contains(appointment.DoctorId))
+        {
+            throw new ForbiddenAccessException();
+        }
 
         // Check for conflicting appointments if the time changed
         if (appointment.ScheduledStart != request.ScheduledStart || appointment.ScheduledEnd != request.ScheduledEnd)

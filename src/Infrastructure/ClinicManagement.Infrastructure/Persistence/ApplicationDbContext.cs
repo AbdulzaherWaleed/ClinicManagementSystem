@@ -38,6 +38,7 @@ public class ApplicationDbContext
     public DbSet<InventoryCategory> InventoryCategories => Set<InventoryCategory>();
     public DbSet<InventoryItem> InventoryItems => Set<InventoryItem>();
     public DbSet<StockTransaction> StockTransactions => Set<StockTransaction>();
+    public DbSet<UserRefreshToken> UserRefreshTokens => Set<UserRefreshToken>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

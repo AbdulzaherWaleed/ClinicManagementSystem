@@ -14,6 +14,7 @@ public static class DatabaseSeeder
     public static async Task SeedAsync(IServiceProvider serviceProvider, IConfiguration configuration)
     {
         var logger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(typeof(DatabaseSeeder));
+        logger.LogWarning("STARTING DATABASE SEEDER EXECUTION...");
         var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
         var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
@@ -27,10 +28,33 @@ public static class DatabaseSeeder
         }
 
         var adminEmail = configuration["Seed:AdminEmail"] ?? "admin@clinic.local";
-        var adminPassword = configuration["Seed:AdminPassword"] ?? "Admin@12345";
+        var adminPassword = configuration["Seed:AdminPassword"] ?? "Abdo12345";
 
-        if (await userManager.FindByEmailAsync(adminEmail) is not null)
+        var existingAdmin = await userManager.FindByEmailAsync(adminEmail);
+        if (existingAdmin is not null)
+        {
+            if (!await userManager.CheckPasswordAsync(existingAdmin, adminPassword))
+            {
+                var removeResult = await userManager.RemovePasswordAsync(existingAdmin);
+                if (removeResult.Succeeded)
+                {
+                    var addResult = await userManager.AddPasswordAsync(existingAdmin, adminPassword);
+                    if (addResult.Succeeded)
+                    {
+                        logger.LogInformation("Reset default admin password");
+                    }
+                    else
+                    {
+                        logger.LogError("Failed to add new admin password: {Errors}", string.Join("; ", addResult.Errors.Select(e => e.Description)));
+                    }
+                }
+                else
+                {
+                    logger.LogError("Failed to remove old admin password: {Errors}", string.Join("; ", removeResult.Errors.Select(e => e.Description)));
+                }
+            }
             return;
+        }
 
         var admin = new ApplicationUser
         {

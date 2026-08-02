@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace ClinicManagement.Application.Common.Behaviors;
@@ -23,7 +23,7 @@ public class UnhandledExceptionBehavior<TRequest, TResponse> : IPipelineBehavior
         catch (Exception ex)
         {
             var requestName = typeof(TRequest).Name;
-            _logger.LogError(ex, "Unhandled exception for request {Name} {@Request}", requestName, request);
+            _logger.LogError(ex, "Unhandled exception for request {Name}", requestName);
             throw;
         }
     }

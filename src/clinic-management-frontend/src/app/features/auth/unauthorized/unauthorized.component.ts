@@ -11,7 +11,7 @@ import { RouterLink } from '@angular/router';
       <div style="font-size:64px">🚫</div>
       <h1 style="font-size:24px;font-weight:700;color:#1e1b4b">غير مصرح بالوصول</h1>
       <p style="color:#6b7280;font-size:15px">ليس لديك صلاحية للوصول إلى هذه الصفحة</p>
-      <a routerLink="/dashboard"
+      <a routerLink="/"
          style="background:linear-gradient(135deg,#7c3aed,#6d28d9);color:white;
                 padding:10px 24px;border-radius:10px;font-weight:600;font-size:14px">
         العودة للرئيسية

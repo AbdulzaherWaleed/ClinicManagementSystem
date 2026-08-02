@@ -8,18 +8,18 @@ namespace ClinicManagement.Application.Appointments.Queries.GetAppointmentById;
 public class GetAppointmentByIdQueryHandler : IRequestHandler<GetAppointmentByIdQuery, AppointmentDto?>
 {
     private readonly IApplicationDbContext _context;
+    private readonly ICurrentUserService _currentUserService;
 
-    public GetAppointmentByIdQueryHandler(IApplicationDbContext context)
+    public GetAppointmentByIdQueryHandler(IApplicationDbContext context, ICurrentUserService currentUserService)
     {
         _context = context;
+        _currentUserService = currentUserService;
     }
 
     public async Task<AppointmentDto?> Handle(GetAppointmentByIdQuery request, CancellationToken cancellationToken)
     {
-        return await _context.Appointments
-            .Include(a => a.Patient)
-            .Include(a => a.Doctor)
-                .ThenInclude(d => d.PrimarySpecialty)
+        var appointment = await _context.Appointments
+            .AsNoTracking()
             .Where(a => a.Id == request.Id && !a.IsDeleted)
             .Select(a => new AppointmentDto
             {
@@ -41,5 +41,12 @@ public class GetAppointmentByIdQueryHandler : IRequestHandler<GetAppointmentById
                 CreatedAt = a.CreatedAt
             })
             .FirstOrDefaultAsync(cancellationToken);
+
+        if (appointment != null && _currentUserService.Role == "Employee" && !_currentUserService.AssignedDoctorIds.Contains(appointment.DoctorId))
+        {
+            throw new ClinicManagement.Application.Common.Exceptions.ForbiddenAccessException();
+        }
+
+        return appointment;
     }
 }

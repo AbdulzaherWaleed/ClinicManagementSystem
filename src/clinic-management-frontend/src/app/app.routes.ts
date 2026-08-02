@@ -32,9 +32,11 @@ export const routes: Routes = [
     canActivate: [authGuard],
     children: [
 
-      // Dashboard
+      // Dashboard (Admin only)
       {
         path: 'dashboard',
+        canActivate: [roleGuard],
+        data: { roles: ['Admin'] },
         loadComponent: () =>
           import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent)
       },
@@ -81,13 +83,15 @@ export const routes: Routes = [
         children: [
           {
             path: 'doctors',
-            loadComponent: () =>
-              import('./shared/components/feature-placeholder/feature-placeholder.component')
-                .then(m => m.FeaturePlaceholderComponent),
+            canActivate: [roleGuard],
             data: {
+              roles: ['Admin'],
               title: 'تقرير الأطباء',
               description: 'تقارير أداء الأطباء والحجوزات ستتوفر هنا قريباً.'
-            }
+            },
+            loadComponent: () =>
+              import('./shared/components/feature-placeholder/feature-placeholder.component')
+                .then(m => m.FeaturePlaceholderComponent)
           },
           {
             path: 'employees',
@@ -134,10 +138,10 @@ export const routes: Routes = [
       },
 
       // Default redirect
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
+      { path: '', redirectTo: 'appointments/search', pathMatch: 'full' }
     ]
   },
 
   // Catch-all
-  { path: '**', redirectTo: '/dashboard' }
+  { path: '**', redirectTo: '/appointments/search' }
 ];

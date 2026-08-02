@@ -37,7 +37,8 @@ export class SidebarComponent {
         {
           label: 'لوحة التحكم',
           icon: 'pi pi-home',
-          route: '/dashboard'
+          route: '/dashboard',
+          roles: ['Admin']
         }
       ]
     },
@@ -79,7 +80,8 @@ export class SidebarComponent {
         {
           label: 'تقرير الأطباء',
           icon: 'pi pi-chart-bar',
-          route: '/reports/doctors'
+          route: '/reports/doctors',
+          roles: ['Admin']
         },
         {
           label: 'تقرير الموظفين',

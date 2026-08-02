@@ -1,12 +1,13 @@
 <div class="card p-4">
   <p-toast></p-toast>
+  <p-confirmdialog></p-confirmdialog>
   
   <div class="flex justify-between items-center mb-6">
     <h2 class="text-2xl font-semibold text-primary">إدارة الموظفين (المستخدمين)</h2>
     <p-button label="إضافة موظف" icon="pi pi-plus" (onClick)="showAddDialog()"></p-button>
   </div>
 
-  <p-table [value]="employees()" [loading]="isLoading()" [paginator]="true" [rows]="10" styleClass="p-datatable-sm">
+  <p-table [value]="employees()" [loading]="isLoading()" [paginator]="true" [rows]="10">
     <ng-template #header>
       <tr>
         <th>الاسم</th>
@@ -15,7 +16,7 @@
         <th>الأطباء المعينين</th>
         <th>تاريخ الإضافة</th>
         <th>الحالة</th>
-        <th>الإجراءات</th>
+        <th style="min-width: 200px" class="text-center">الإجراءات</th>
       </tr>
     </ng-template>
     <ng-template #body let-emp>
@@ -24,25 +25,33 @@
         <td>{{ emp.jobTitle || '-' }}</td>
         <td>{{ emp.phoneNumber || '-' }}</td>
         <td>
-          <div class="flex flex-wrap gap-1">
-            <span *ngFor="let docName of emp.assignedDoctorNames" class="bg-gray-100 text-gray-700 px-2 py-1 rounded-md text-xs">
-              {{ docName }}
-            </span>
-          </div>
+          <span *ngIf="emp.assignedDoctorNames?.length">{{ emp.assignedDoctorNames.join(', ') }}</span>
+          <span *ngIf="!emp.assignedDoctorNames?.length" class="text-gray-500">-</span>
         </td>
         <td>{{ emp.createdAt | date:'shortDate' }}</td>
         <td>
           <p-tag [severity]="emp.isActive ? 'success' : 'danger'" [value]="emp.isActive ? 'نشط' : 'غير نشط'"></p-tag>
         </td>
         <td>
-          <p-button 
-            [icon]="emp.isActive ? 'pi pi-ban' : 'pi pi-check'" 
-            [severity]="emp.isActive ? 'danger' : 'success'"
-            [label]="emp.isActive ? 'تعطيل' : 'تفعيل'"
-            size="small" 
-            [outlined]="true"
-            (onClick)="toggleStatus(emp)">
-          </p-button>
+          <div class="flex gap-3 justify-center w-full">
+            <p-button 
+              [icon]="emp.isActive ? 'pi pi-ban' : 'pi pi-check'" 
+              [severity]="emp.isActive ? 'danger' : 'success'"
+              [label]="emp.isActive ? 'تعطيل' : 'تفعيل'"
+              size="small" 
+              [outlined]="true"
+              styleClass="me-3"
+              [style]="{'margin-inline-end': '1rem'}"
+              (onClick)="toggleStatus(emp)">
+            </p-button>
+            <p-button 
+              icon="pi pi-trash" 
+              severity="danger"
+              label="حذف"
+              size="small" 
+              (onClick)="deleteEmployee(emp)">
+            </p-button>
+          </div>
         </td>
       </tr>
     </ng-template>
@@ -79,7 +88,7 @@
 
       <div class="flex flex-col gap-2">
         <label for="password">كلمة المرور <span class="text-red-500">*</span></label>
-        <p-password id="password" formControlName="password" [toggleMask]="true" autocomplete="new-password" styleClass="w-full" inputStyleClass="w-full"></p-password>
+        <p-password inputId="password" formControlName="password" [toggleMask]="true" autocomplete="new-password" styleClass="w-full" inputStyleClass="w-full"></p-password>
         <small class="text-red-500" *ngIf="addForm.get('password')?.invalid && addForm.get('password')?.touched">
           يجب أن تتكون من 8 أحرف على الأقل
         </small>
@@ -87,17 +96,24 @@
 
       <div class="flex flex-col gap-2">
         <label for="assignedDoctorIds">تعيين الأطباء <span class="text-red-500">*</span></label>
-        <p-multiselect 
-          id="assignedDoctorIds" 
-          [options]="doctors()" 
-          formControlName="assignedDoctorIds" 
-          optionLabel="fullName" 
-          optionValue="id"
-          placeholder="اختر طبيباً أو أكثر"
-          appendTo="body"
-          styleClass="w-full"
-          [showToggleAll]="false">
-        </p-multiselect>
+        <div class="border border-gray-300 rounded p-2 max-h-40 overflow-y-auto w-full bg-white">
+          <div *ngFor="let doc of doctors()" class="flex items-center gap-2 py-1">
+            <input 
+              type="checkbox" 
+              [id]="'doc_' + doc.id" 
+              [value]="doc.id" 
+              (change)="onDoctorCheckboxChange($event, doc.id)" 
+              [checked]="isDoctorAssigned(doc.id)" 
+              class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary">
+            <label [for]="'doc_' + doc.id" class="text-sm text-gray-700 cursor-pointer w-full">{{ doc.fullName }}</label>
+          </div>
+          <div *ngIf="doctors().length === 0" class="text-sm text-gray-500 text-center py-2">
+            لا يوجد أطباء متاحين
+          </div>
+        </div>
+        <small class="text-red-500" *ngIf="addForm.get('assignedDoctorIds')?.invalid && addForm.get('assignedDoctorIds')?.touched">
+          يجب اختيار طبيب واحد على الأقل
+        </small>
       </div>
       
       <div class="flex flex-col gap-2">
@@ -106,7 +122,7 @@
       </div>
 
       <div class="flex justify-end gap-2 mt-4">
-        <p-button label="إلغاء" severity="secondary" [outlined]="true" (onClick)="displayAddDialog.set(false)"></p-button>
+        <p-button type="button" label="إلغاء" severity="secondary" [outlined]="true" (onClick)="displayAddDialog.set(false)"></p-button>
         <p-button label="حفظ وإنشاء الحساب" type="submit" [loading]="isSubmitting()"></p-button>
       </div>
     </form>

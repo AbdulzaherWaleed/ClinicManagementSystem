@@ -25,4 +25,8 @@ export class EmployeeService {
   toggleStatus(id: string): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/${id}/toggle-status`, {});
   }
+
+  deleteEmployee(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }

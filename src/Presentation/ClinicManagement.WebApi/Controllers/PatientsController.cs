@@ -1,4 +1,4 @@
-﻿using ClinicManagement.Application.Patients.Commands.CreatePatient;
+using ClinicManagement.Application.Patients.Commands.CreatePatient;
 using ClinicManagement.Application.Patients.Commands.DeletePatient;
 using ClinicManagement.Application.Patients.Queries.GetAllPatients;
 using ClinicManagement.Application.Patients.Queries.GetPatientById;
@@ -23,7 +23,21 @@ public class PatientsController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var result = await _mediator.Send(new GetAllPatientsQuery());
+        List<Guid>? restrictToDoctorIds = null;
+        var userRole = User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value;
+
+        if (userRole == "Employee")
+        {
+            restrictToDoctorIds = User.FindAll("doctorId")
+                .Select(c => Guid.TryParse(c.Value, out var g) ? g : Guid.Empty)
+                .Where(g => g != Guid.Empty)
+                .ToList();
+        }
+
+        var result = await _mediator.Send(new GetAllPatientsQuery 
+        { 
+            RestrictToDoctorIds = restrictToDoctorIds 
+        });
         return Ok(result);
     }
 

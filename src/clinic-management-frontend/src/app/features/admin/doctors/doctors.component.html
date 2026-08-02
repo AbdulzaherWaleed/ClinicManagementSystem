@@ -1,12 +1,20 @@
 <div class="card p-4">
   <p-toast></p-toast>
+  <p-confirmdialog></p-confirmdialog>
   
   <div class="flex justify-between items-center mb-6">
     <h2 class="text-2xl font-semibold text-primary">إدارة الأطباء</h2>
     <p-button label="إضافة طبيب" icon="pi pi-plus" (onClick)="showAddDialog()"></p-button>
   </div>
 
-  <p-table [value]="doctors()" [loading]="isLoading()" [paginator]="true" [rows]="10" styleClass="p-datatable-sm">
+  <p-table 
+    [value]="doctors()" 
+    [loading]="isLoading()" 
+    [paginator]="true" 
+    [lazy]="true" 
+    (onLazyLoad)="onLazyLoad($event)"
+    [totalRecords]="totalRecords()"
+    [rows]="10">
     <ng-template #header>
       <tr>
         <th>الاسم</th>
@@ -15,7 +23,7 @@
         <th>رقم الهاتف</th>
         <th>تاريخ الإضافة</th>
         <th>الحالة</th>
-        <th>الإجراءات</th>
+        <th style="min-width: 200px" class="text-center">الإجراءات</th>
       </tr>
     </ng-template>
     <ng-template #body let-doctor>
@@ -29,14 +37,25 @@
           <p-tag [severity]="doctor.isActive ? 'success' : 'danger'" [value]="doctor.isActive ? 'نشط' : 'غير نشط'"></p-tag>
         </td>
         <td>
-          <p-button 
-            [icon]="doctor.isActive ? 'pi pi-ban' : 'pi pi-check'" 
-            [severity]="doctor.isActive ? 'danger' : 'success'"
-            [label]="doctor.isActive ? 'تعطيل' : 'تفعيل'"
-            size="small" 
-            [outlined]="true"
-            (onClick)="toggleStatus(doctor)">
-          </p-button>
+          <div class="flex gap-3 justify-center w-full">
+            <p-button 
+              [icon]="doctor.isActive ? 'pi pi-ban' : 'pi pi-check'" 
+              [severity]="doctor.isActive ? 'danger' : 'success'"
+              [label]="doctor.isActive ? 'تعطيل' : 'تفعيل'"
+              size="small" 
+              [outlined]="true"
+              styleClass="me-3"
+              [style]="{'margin-inline-end': '1rem'}"
+              (onClick)="toggleStatus(doctor)">
+            </p-button>
+            <p-button 
+              icon="pi pi-trash" 
+              severity="danger"
+              label="حذف"
+              size="small" 
+              (onClick)="deleteDoctor(doctor)">
+            </p-button>
+          </div>
         </td>
       </tr>
     </ng-template>

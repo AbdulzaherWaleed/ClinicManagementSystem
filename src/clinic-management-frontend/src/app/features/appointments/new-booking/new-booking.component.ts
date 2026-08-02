@@ -103,9 +103,7 @@ export class NewBookingComponent implements OnInit {
 
     this.doctorService.getDoctors().subscribe({
       next: (data) => {
-        const scoped = data.filter(
-          (d) => d.isActive && this.authService.canAccessDoctor(d.id)
-        );
+        const scoped = data.items.filter((d) => d.isActive);
         this.allDoctors.set(scoped);
         this.applyDoctorFilters(this.bookingForm.get('specialty')?.value);
 

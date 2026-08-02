@@ -11,12 +11,14 @@ import {
   UpdateAppointmentCommand 
 } from '../models/appointment.models';
 
+import { PaginatedList } from '../../../core/models/pagination.models';
+
 @Injectable({ providedIn: 'root' })
 export class AppointmentService {
   private readonly http = inject(HttpClient);
   private readonly apiUrl = `${environment.apiUrl}/appointments`;
 
-  getAppointments(query: GetAppointmentsQuery): Observable<AppointmentDto[]> {
+  getAppointments(query: GetAppointmentsQuery & { pageNumber?: number, pageSize?: number }): Observable<PaginatedList<AppointmentDto>> {
     let params = new HttpParams();
     
     if (query.patientName) params = params.set('patientName', query.patientName);
@@ -27,8 +29,11 @@ export class AppointmentService {
     if (query.dateFrom) params = params.set('dateFrom', query.dateFrom);
     if (query.dateTo) params = params.set('dateTo', query.dateTo);
     if (query.status) params = params.set('status', query.status);
+    
+    params = params.set('pageNumber', query.pageNumber || 1);
+    params = params.set('pageSize', query.pageSize || 100);
 
-    return this.http.get<AppointmentDto[]>(this.apiUrl, { params });
+    return this.http.get<PaginatedList<AppointmentDto>>(this.apiUrl, { params });
   }
 
   getAppointmentById(id: string): Observable<AppointmentDto> {

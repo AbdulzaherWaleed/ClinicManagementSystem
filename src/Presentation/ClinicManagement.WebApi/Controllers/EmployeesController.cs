@@ -1,4 +1,5 @@
 using ClinicManagement.Application.Employees.Commands.CreateEmployee;
+using ClinicManagement.Application.Employees.Commands.DeleteEmployee;
 using ClinicManagement.Application.Employees.Commands.RegisterEmployee;
 using ClinicManagement.Application.Employees.Commands.ToggleEmployeeStatus;
 using ClinicManagement.Application.Employees.Queries.GetAllEmployees;
@@ -74,6 +75,17 @@ public class EmployeesController : ControllerBase
     public async Task<IActionResult> ToggleStatus(Guid id)
     {
         await _mediator.Send(new ToggleEmployeeStatusCommand { Id = id });
+        return NoContent();
+    }
+
+    /// <summary>
+    /// DELETE /api/employees/{id} — Admin only. Soft deletes employee.
+    /// </summary>
+    [HttpDelete("{id:guid}")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        await _mediator.Send(new DeleteEmployeeCommand { Id = id });
         return NoContent();
     }
 }

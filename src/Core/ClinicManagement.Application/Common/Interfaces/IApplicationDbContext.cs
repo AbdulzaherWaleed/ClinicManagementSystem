@@ -23,6 +23,7 @@ public interface IApplicationDbContext
     DbSet<InventoryCategory> InventoryCategories { get; }
     DbSet<InventoryItem> InventoryItems { get; }
     DbSet<StockTransaction> StockTransactions { get; }
+    DbSet<ClinicManagement.Domain.Entities.Identity.UserRefreshToken> UserRefreshTokens { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

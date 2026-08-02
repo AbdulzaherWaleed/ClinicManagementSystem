@@ -1,8 +1,10 @@
-﻿using ClinicManagement.Application.Auth.Commands.Login;
+using ClinicManagement.Application.Auth.Commands.Login;
+using ClinicManagement.Application.Auth.Commands.RefreshToken;
 using ClinicManagement.Application.Auth.Commands.Register;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace ClinicManagement.WebApi.Controllers;
 
@@ -26,7 +28,15 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("login")]
+    [EnableRateLimiting("LoginPolicy")]
     public async Task<IActionResult> Login([FromBody] LoginCommand command)
+    {
+        var result = await _mediator.Send(command);
+        return Ok(result);
+    }
+
+    [HttpPost("refresh-token")]
+    public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenCommand command)
     {
         var result = await _mediator.Send(command);
         return Ok(result);

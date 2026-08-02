@@ -1,8 +1,8 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, finalize } from 'rxjs';
 import { AuthService } from '../../../core/auth/services/auth.service';
 import { ValidationErrorService } from '../../../core/services/validation-error.service';
 
@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   private readonly router           = inject(Router);
   private readonly route            = inject(ActivatedRoute);
   private readonly validationErrors = inject(ValidationErrorService);
+  private readonly cdr              = inject(ChangeDetectorRef);
 
   loginForm!: FormGroup;
   showPassword  = false;
@@ -37,7 +38,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // Redirect if already logged in
     if (this.authService.isLoggedIn()) {
-      this.router.navigate(['/dashboard']);
+      const role = this.authService.userRole();
+      this.router.navigate([role === 'Admin' ? '/dashboard' : '/appointments/search']);
       return;
     }
 
@@ -48,12 +50,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       password: ['', [Validators.required, Validators.minLength(8)]]
     });
 
-    // Wire FluentValidation server errors from interceptor
-    this.subs.add(
-      this.validationErrors.errors$.subscribe(errors => {
-        this.applyServerErrors(errors);
-      })
-    );
+    // We handle errors directly in onSubmit to use specific Arabic messages
+    // instead of relying on the global ValidationErrorService for this component.
   }
 
   ngOnDestroy(): void {
@@ -71,18 +69,36 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     const { email, password } = this.loginForm.value;
 
-    this.authService.login({ email, password }).subscribe({
-      next: () => {
+    this.authService.login({ email, password }).pipe(
+      finalize(() => {
         this.isLoading = false;
-        this.router.navigateByUrl(this.returnUrl);
+        this.cdr.markForCheck();
+      })
+    ).subscribe({
+      next: () => {
+        let finalUrl = this.returnUrl;
+        if (finalUrl === '/dashboard' && this.authService.userRole() !== 'Admin') {
+          finalUrl = '/appointments/search';
+        }
+        this.router.navigateByUrl(finalUrl);
       },
       error: (err) => {
-        this.isLoading = false;
-        // Generic error if interceptor didn't handle it via validationErrors$
-        if (err.status === 400 && !err.error?.errors) {
-          this.serverError = 'البريد الإلكتروني أو كلمة المرور غير صحيحة';
+        if (err.status === 429) {
+          this.serverError = 'عدد كبير من المحاولات، برجاء الانتظار قليلاً';
+        } else if (err.status === 400 && err.error?.errors) {
+          const emailErrors = err.error.errors['Email'] || [];
+          const passwordErrors = err.error.errors['Password'] || [];
+          const hasLockout = emailErrors.some((e: string) => e.includes('locked'));
+          
+          if (hasLockout) {
+            this.serverError = 'تم قفل الحساب مؤقتاً بسبب محاولات دخول خاطئة متكررة، حاول مرة أخرى بعد 5 دقائق';
+          } else {
+            this.serverError = 'البريد الإلكتروني أو كلمة المرور غير صحيحة';
+          }
         } else if (err.status === 0) {
           this.serverError = 'تعذر الاتصال بالخادم، يرجى التحقق من الاتصال بالإنترنت';
+        } else {
+          this.serverError = 'البريد الإلكتروني أو كلمة المرور غير صحيحة';
         }
       }
     });
@@ -112,14 +128,4 @@ export class LoginComponent implements OnInit, OnDestroy {
     return '';
   }
 
-  private applyServerErrors(errors: Record<string, string[]>): void {
-    Object.entries(errors).forEach(([field, messages]) => {
-      const control = this.loginForm.get(field.toLowerCase());
-      if (control) {
-        control.setErrors({ serverError: messages[0] });
-      } else {
-        this.serverError = messages[0] ?? 'حدث خطأ غير متوقع';
-      }
-    });
-  }
 }

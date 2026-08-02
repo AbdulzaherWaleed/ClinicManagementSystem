@@ -1,4 +1,4 @@
-﻿using ClinicManagement.Application.Common.Interfaces;
+using ClinicManagement.Application.Common.Interfaces;
 using ClinicManagement.Application.Doctors.DTOs;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +17,7 @@ public class GetDoctorByIdQueryHandler : IRequestHandler<GetDoctorByIdQuery, Doc
     public async Task<DoctorDto?> Handle(GetDoctorByIdQuery request, CancellationToken cancellationToken)
     {
         return await _context.Doctors
+            .AsNoTracking()
             .Where(d => d.Id == request.Id)
             .Select(d => new DoctorDto
             {

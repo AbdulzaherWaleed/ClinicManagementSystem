@@ -11,18 +11,18 @@ namespace ClinicManagement.Application.Appointments.Queries.GetAppointments;
 public class GetAppointmentsQueryHandler : IRequestHandler<GetAppointmentsQuery, PaginatedList<AppointmentDto>>
 {
     private readonly IApplicationDbContext _context;
+    private readonly ICurrentUserService _currentUserService;
 
-    public GetAppointmentsQueryHandler(IApplicationDbContext context)
+    public GetAppointmentsQueryHandler(IApplicationDbContext context, ICurrentUserService currentUserService)
     {
         _context = context;
+        _currentUserService = currentUserService;
     }
 
     public async Task<PaginatedList<AppointmentDto>> Handle(GetAppointmentsQuery request, CancellationToken cancellationToken)
     {
         var query = _context.Appointments
-            .Include(a => a.Patient)
-            .Include(a => a.Doctor)
-                .ThenInclude(d => d.PrimarySpecialty)
+            .AsNoTracking()
             .Where(a => !a.IsDeleted)
             .AsQueryable();
 
@@ -54,9 +54,12 @@ public class GetAppointmentsQueryHandler : IRequestHandler<GetAppointmentsQuery,
             Enum.TryParse<AppointmentStatus>(request.Status, out var status))
             query = query.Where(a => a.Status == status);
 
-        // Employee scoping — security boundary enforced server-side (Brief §2.1)
-        if (request.RestrictToDoctorIds is { Count: > 0 })
-            query = query.Where(a => request.RestrictToDoctorIds.Contains(a.DoctorId));
+        // Employee scoping — security boundary enforced server-side
+        if (_currentUserService.Role == "Employee")
+        {
+            var allowedDoctorIds = _currentUserService.AssignedDoctorIds;
+            query = query.Where(a => allowedDoctorIds.Contains(a.DoctorId));
+        }
 
         var mappedQuery = query
             .OrderByDescending(a => a.ScheduledStart)
