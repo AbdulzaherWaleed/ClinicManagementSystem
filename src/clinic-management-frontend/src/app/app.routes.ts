@@ -99,20 +99,6 @@ export const routes: Routes = [
         ]
       },
 
-      // Licenses (Admin + Doctor)
-      {
-        path: 'licenses',
-        canActivate: [roleGuard],
-        data: {
-          roles: ['Admin', 'Doctor'],
-          title: 'قسم التراخيص',
-          description: 'إدارة تراخيص الأطباء والمستندات ستتوفر هنا قريباً.'
-        },
-        loadComponent: () =>
-          import('./shared/components/feature-placeholder/feature-placeholder.component')
-            .then(m => m.FeaturePlaceholderComponent)
-      },
-
       // Settings (Admin only)
       {
         path: 'settings',

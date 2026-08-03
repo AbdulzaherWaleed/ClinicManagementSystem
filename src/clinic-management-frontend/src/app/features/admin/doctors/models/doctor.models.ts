@@ -18,3 +18,14 @@ export interface CreateDoctorCommand {
   email?: string;
   primarySpecialtyId?: string;
 }
+
+export interface DoctorLicenseDto {
+  id: string;
+  doctorId: string;
+  licenseNumber?: string;
+  filePath: string;
+  originalFileName: string;
+  fileType: string;
+  expiryDate?: string;
+  isActive: boolean;
+}

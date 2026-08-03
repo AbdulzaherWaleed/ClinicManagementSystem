@@ -5,6 +5,8 @@ import { finalize } from 'rxjs';
 
 import { DoctorService } from './services/doctor.service';
 import { DoctorDto } from './models/doctor.models';
+import { environment } from '../../../../environments/environment';
+import { ConfigService } from '../../../core/services/config.service';
 
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -40,10 +42,12 @@ export class DoctorsComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly messageService = inject(MessageService);
   private readonly confirmationService = inject(ConfirmationService);
+  readonly configService = inject(ConfigService);
 
   doctors = signal<DoctorDto[]>([]);
   totalRecords = signal<number>(0);
   isLoading = signal<boolean>(false);
+
   
   displayAddDialog = signal<boolean>(false);
   isSubmitting = signal<boolean>(false);
@@ -143,5 +147,101 @@ export class DoctorsComponent implements OnInit {
 
   private showError(msg: string): void {
     this.messageService.add({ severity: 'error', summary: 'خطأ', detail: msg });
+  }
+
+  // License Management
+  displayLicensesDialog = signal<boolean>(false);
+  displayUploadLicenseDialog = signal<boolean>(false);
+  selectedDoctorForLicense = signal<DoctorDto | null>(null);
+  doctorLicenses = signal<any[]>([]);
+  uploadLicenseForm!: FormGroup;
+  selectedFile: File | null = null;
+  isUploadingLicense = signal<boolean>(false);
+
+  private initLicenseForm(): void {
+    this.uploadLicenseForm = this.fb.group({
+      licenseNumber: [null],
+      expiryDate: [null, Validators.required]
+    });
+  }
+
+  showLicenses(doctor: DoctorDto): void {
+    this.selectedDoctorForLicense.set(doctor);
+    this.loadDoctorLicenses(doctor.id);
+    this.displayLicensesDialog.set(true);
+  }
+
+  loadDoctorLicenses(doctorId: string): void {
+    this.doctorService.getLicenses(doctorId).subscribe({
+      next: (data) => this.doctorLicenses.set(data),
+      error: () => this.showError('تعذر تحميل تراخيص الطبيب')
+    });
+  }
+
+  showUploadLicense(doctor: DoctorDto): void {
+    if (!this.uploadLicenseForm) this.initLicenseForm();
+    this.uploadLicenseForm.reset();
+    this.selectedFile = null;
+    this.selectedDoctorForLicense.set(doctor);
+    this.displayUploadLicenseDialog.set(true);
+  }
+
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        this.showError('حجم الملف يجب ألا يتجاوز 5 ميجابايت');
+        this.selectedFile = null;
+        event.target.value = ''; // Reset input
+        return;
+      }
+      this.selectedFile = file;
+    }
+  }
+
+  uploadLicense(): void {
+    if (this.uploadLicenseForm.invalid) {
+      this.uploadLicenseForm.markAllAsTouched();
+      this.showError('يرجى تعبئة جميع الحقول المطلوبة');
+      return;
+    }
+    if (!this.selectedFile) {
+      this.showError('يجب اختيار ملف الترخيص');
+      return;
+    }
+    const doc = this.selectedDoctorForLicense();
+    if (!doc) return;
+
+    this.isUploadingLicense.set(true);
+    const formVals = this.uploadLicenseForm.value;
+    
+    this.doctorService.uploadLicense(doc.id, this.selectedFile, formVals.licenseNumber, formVals.expiryDate)
+      .pipe(finalize(() => this.isUploadingLicense.set(false)))
+      .subscribe({
+        next: () => {
+          this.showSuccess('تم رفع الترخيص بنجاح');
+          this.displayUploadLicenseDialog.set(false);
+          if (this.displayLicensesDialog()) {
+            this.loadDoctorLicenses(doc.id);
+          }
+        },
+        error: (err) => {
+          const msg = err.error?.detail || err.error?.message || err.error || 'حدث خطأ أثناء رفع الترخيص';
+          this.showError(typeof msg === 'string' ? msg : 'خطأ غير معروف');
+        }
+      });
+  }
+
+  viewLicenseFile(license: any): void {
+    const doc = this.selectedDoctorForLicense();
+    if (!doc) return;
+
+    this.doctorService.downloadLicense(doc.id, license.id).subscribe({
+      next: (blob) => {
+        const url = window.URL.createObjectURL(blob);
+        window.open(url, '_blank');
+      },
+      error: () => this.showError('حدث خطأ أثناء تحميل الملف')
+    });
   }
 }

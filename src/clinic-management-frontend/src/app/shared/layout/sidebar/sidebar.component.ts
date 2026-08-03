@@ -95,12 +95,6 @@ export class SidebarComponent {
       label: 'الإعدادات',
       items: [
         {
-          label: 'قسم التراخيص',
-          icon: 'pi pi-file-pdf',
-          route: '/licenses',
-          roles: ['Admin', 'Doctor']
-        },
-        {
           label: 'تخصيص العيادة',
           icon: 'pi pi-cog',
           route: '/settings',

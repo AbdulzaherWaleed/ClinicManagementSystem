@@ -15,10 +15,17 @@ namespace ClinicManagement.WebApi.Controllers;
 public class DoctorsController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly IConfiguration _configuration;
 
-    public DoctorsController(IMediator mediator)
+    public DoctorsController(IMediator mediator, IConfiguration configuration)
     {
         _mediator = mediator;
+        _configuration = configuration;
+    }
+
+    private bool IsDoctorLicensesEnabled()
+    {
+        return _configuration.GetValue<bool>("Features:DoctorLicenses", true);
     }
 
     [HttpGet]
@@ -74,5 +81,47 @@ public class DoctorsController : ControllerBase
     {
         await _mediator.Send(new DeleteDoctorCommand { Id = id });
         return NoContent();
+    }
+
+    [HttpGet("{id:guid}/licenses")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> GetLicenses(Guid id)
+    {
+        if (!IsDoctorLicensesEnabled()) return NotFound("Feature is disabled.");
+        var result = await _mediator.Send(new ClinicManagement.Application.Doctors.Queries.GetDoctorLicenses.GetDoctorLicensesQuery(id));
+        return Ok(result);
+    }
+
+    [HttpPost("{id:guid}/licenses")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> UploadLicense(Guid id, [FromForm] string? licenseNumber, [FromForm] DateTime expiryDate, [FromForm] IFormFile file)
+    {
+        if (!IsDoctorLicensesEnabled()) return NotFound("Feature is disabled.");
+        if (file == null || file.Length == 0) return BadRequest("File is required");
+
+        using var stream = file.OpenReadStream();
+        var command = new ClinicManagement.Application.Doctors.Commands.UploadDoctorLicense.UploadDoctorLicenseCommand(
+            id, licenseNumber, expiryDate, file.FileName, stream);
+        
+        var licenseId = await _mediator.Send(command);
+        return Ok(new { LicenseId = licenseId });
+    }
+
+    [HttpGet("{id:guid}/licenses/{licenseId:guid}/download")]
+    [Authorize(Roles = "Admin,Employee")]
+    public async Task<IActionResult> DownloadLicense(Guid id, Guid licenseId)
+    {
+        if (!IsDoctorLicensesEnabled()) return NotFound("Feature is disabled.");
+        var result = await _mediator.Send(new ClinicManagement.Application.Doctors.Queries.GetDoctorLicenseFile.GetDoctorLicenseFileQuery(id, licenseId));
+        return File(result.FileStream, result.ContentType, result.FileName);
+    }
+
+    [HttpGet("licenses/expiring")]
+    [Authorize(Roles = "Admin,Employee")]
+    public async Task<ActionResult<List<ClinicManagement.Application.Doctors.Queries.GetExpiringLicenses.ExpiringLicenseDto>>> GetExpiringLicenses([FromQuery] int days = 30)
+    {
+        if (!IsDoctorLicensesEnabled()) return NotFound("Feature is disabled.");
+        var result = await _mediator.Send(new ClinicManagement.Application.Doctors.Queries.GetExpiringLicenses.GetExpiringLicensesQuery(days));
+        return Ok(result);
     }
 }

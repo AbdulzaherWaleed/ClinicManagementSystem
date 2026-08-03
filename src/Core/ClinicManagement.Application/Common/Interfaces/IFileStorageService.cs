@@ -1,4 +1,8 @@
-﻿namespace ClinicManagement.Application.Common.Interfaces;
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace ClinicManagement.Application.Common.Interfaces;
 
 public interface IFileStorageService
 {

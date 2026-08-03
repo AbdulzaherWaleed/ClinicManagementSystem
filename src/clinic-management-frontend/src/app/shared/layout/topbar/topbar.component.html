@@ -15,10 +15,31 @@
     </button>
 
     <!-- Notification Bell -->
-    <button class="icon-btn" title="الإشعارات" id="topbar-notifications-btn">
+    <button *ngIf="configService.doctorLicensesEnabled()" class="icon-btn" title="الإشعارات" id="topbar-notifications-btn" (click)="op.toggle($event)">
       <i class="pi pi-bell"></i>
-      <span class="notif-dot"></span>
+      <span class="notif-dot" *ngIf="expiringLicenses().length > 0"></span>
     </button>
+    <p-popover #op [style]="{'width': '350px'}">
+      <ng-template pTemplate="content">
+        <div class="p-3">
+          <h4 class="text-lg font-bold mb-3">الإشعارات</h4>
+          <div *ngIf="expiringLicenses().length === 0" class="text-gray-500 text-sm">
+            لا توجد إشعارات حالياً.
+          </div>
+          <div *ngIf="expiringLicenses().length > 0" class="flex flex-col gap-3">
+            <div *ngFor="let lic of expiringLicenses()" class="p-3 bg-red-50 border-r-4 border-red-500 rounded shadow-sm">
+              <div class="flex justify-between items-start mb-1">
+                <span class="font-bold text-gray-800">{{ lic.doctorName }}</span>
+                <span class="text-xs text-red-600 font-bold">ينتهي في: {{ lic.expiryDate | date:'shortDate' }}</span>
+              </div>
+              <p class="text-sm text-gray-600 m-0">
+                ترخيص رقم: <span dir="ltr">{{ lic.licenseNumber || 'بدون رقم' }}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </p-popover>
 
     <!-- Divider -->
     <div class="topbar-divider"></div>

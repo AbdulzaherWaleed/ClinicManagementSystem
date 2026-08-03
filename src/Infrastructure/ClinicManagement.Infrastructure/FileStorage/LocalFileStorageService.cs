@@ -1,4 +1,4 @@
-﻿using ClinicManagement.Application.Common.Interfaces;
+using ClinicManagement.Application.Common.Interfaces;
 using Microsoft.Extensions.Configuration;
 
 
@@ -10,7 +10,7 @@ public class LocalFileStorageService : IFileStorageService
 
     public LocalFileStorageService(IConfiguration configuration)
     {
-        _rootPath = configuration["FileStorage:LocalRootPath"] ?? "wwwroot/uploads";
+        _rootPath = configuration["FileStorage:LocalRootPath"] ?? "App_Data/Uploads";
         Directory.CreateDirectory(_rootPath);
     }
 

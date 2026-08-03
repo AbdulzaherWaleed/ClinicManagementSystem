@@ -87,6 +87,7 @@ public class AppointmentsController : ControllerBase
     /// POST /api/appointments
     /// </summary>
     [HttpPost]
+    [Authorize(Roles = "Admin,Employee")]
     public async Task<IActionResult> Create([FromBody] ClinicManagement.Application.Appointments.Commands.CreateAppointment.CreateAppointmentCommand command)
     {
         // Extract the user ID from JWT if it's an employee
@@ -104,6 +105,7 @@ public class AppointmentsController : ControllerBase
     /// PUT /api/appointments/{id}
     /// </summary>
     [HttpPut("{id:guid}")]
+    [Authorize(Roles = "Admin,Employee")]
     public async Task<IActionResult> Update(Guid id, [FromBody] ClinicManagement.Application.Appointments.Commands.UpdateAppointment.UpdateAppointmentCommand command)
     {
         if (id != command.Id) return BadRequest();
@@ -115,6 +117,7 @@ public class AppointmentsController : ControllerBase
     /// PATCH /api/appointments/{id}/cancel
     /// </summary>
     [HttpPatch("{id:guid}/cancel")]
+    [Authorize(Roles = "Admin,Employee")]
     public async Task<IActionResult> Cancel(Guid id, [FromBody] ClinicManagement.Application.Appointments.Commands.CancelAppointment.CancelAppointmentCommand command)
     {
         if (id != command.Id) return BadRequest();

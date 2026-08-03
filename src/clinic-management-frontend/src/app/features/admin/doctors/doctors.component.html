@@ -23,7 +23,7 @@
         <th>رقم الهاتف</th>
         <th>تاريخ الإضافة</th>
         <th>الحالة</th>
-        <th style="min-width: 200px" class="text-center">الإجراءات</th>
+        <th style="min-width: 300px" class="text-center">الإجراءات</th>
       </tr>
     </ng-template>
     <ng-template #body let-doctor>
@@ -37,16 +37,32 @@
           <p-tag [severity]="doctor.isActive ? 'success' : 'danger'" [value]="doctor.isActive ? 'نشط' : 'غير نشط'"></p-tag>
         </td>
         <td>
-          <div class="flex gap-3 justify-center w-full">
+          <div class="flex gap-2 justify-center w-full flex-wrap">
             <p-button 
               [icon]="doctor.isActive ? 'pi pi-ban' : 'pi pi-check'" 
               [severity]="doctor.isActive ? 'danger' : 'success'"
               [label]="doctor.isActive ? 'تعطيل' : 'تفعيل'"
               size="small" 
               [outlined]="true"
-              styleClass="me-3"
-              [style]="{'margin-inline-end': '1rem'}"
               (onClick)="toggleStatus(doctor)">
+            </p-button>
+            <p-button 
+              *ngIf="configService.doctorLicensesEnabled()"
+              icon="pi pi-file-arrow-up" 
+              label="رفع"
+              severity="info"
+              size="small" 
+              [outlined]="true"
+              (onClick)="showUploadLicense(doctor)">
+            </p-button>
+            <p-button 
+              *ngIf="configService.doctorLicensesEnabled()"
+              icon="pi pi-id-card" 
+              label="التراخيص"
+              severity="help"
+              size="small" 
+              [outlined]="true"
+              (onClick)="showLicenses(doctor)">
             </p-button>
             <p-button 
               icon="pi pi-trash" 
@@ -65,6 +81,68 @@
       </tr>
     </ng-template>
   </p-table>
+
+  <!-- Licenses List Dialog -->
+  <p-dialog [header]="'تراخيص الطبيب: ' + (selectedDoctorForLicense()?.fullName || '')" [visible]="displayLicensesDialog()" (visibleChange)="displayLicensesDialog.set($event)" [modal]="true" [style]="{width: '600px'}" [draggable]="false" [resizable]="false">
+    <div class="mt-4">
+      <p-table [value]="doctorLicenses()" [rows]="5" [paginator]="true">
+        <ng-template #header>
+          <tr>
+            <th>رقم الترخيص</th>
+            <th>تاريخ الانتهاء</th>
+            <th>نوع الملف</th>
+            <th>الإجراءات</th>
+          </tr>
+        </ng-template>
+        <ng-template #body let-license>
+          <tr>
+            <td>{{ license.licenseNumber || '-' }}</td>
+            <td>{{ license.expiryDate ? (license.expiryDate | date:'shortDate') : '-' }}</td>
+            <td>
+              <p-tag [severity]="license.fileType === 'PDF' ? 'danger' : 'info'" [value]="license.fileType"></p-tag>
+            </td>
+            <td>
+              <p-button icon="pi pi-eye" size="small" label="عرض" [outlined]="true" (onClick)="viewLicenseFile(license)"></p-button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template #empty>
+          <tr>
+            <td colspan="4" class="text-center py-4 text-gray-500">لا يوجد تراخيص مسجلة لهذا الطبيب.</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </p-dialog>
+
+  <!-- Upload License Dialog -->
+  <p-dialog [header]="'رفع ترخيص جديد لـ: ' + (selectedDoctorForLicense()?.fullName || '')" [visible]="displayUploadLicenseDialog()" (visibleChange)="displayUploadLicenseDialog.set($event)" [modal]="true" [style]="{width: '450px'}" [draggable]="false" [resizable]="false">
+    <form *ngIf="uploadLicenseForm" [formGroup]="uploadLicenseForm" class="flex flex-col gap-4 mt-4" (ngSubmit)="uploadLicense()">
+      
+      <div class="flex flex-col gap-2">
+        <label>ملف الترخيص (صورة أو PDF) <span class="text-red-500">*</span></label>
+        <input type="file" class="p-inputtext p-component w-full" (change)="onFileSelected($event)" accept="image/*,.pdf" />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="licenseNumber">رقم الترخيص (اختياري)</label>
+        <input pInputText id="licenseNumber" formControlName="licenseNumber" />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="expiryDate">تاريخ الانتهاء <span class="text-red-500">*</span></label>
+        <input pInputText type="date" id="expiryDate" formControlName="expiryDate" />
+        <small class="text-red-500" *ngIf="uploadLicenseForm.get('expiryDate')?.invalid && uploadLicenseForm.get('expiryDate')?.touched">
+          تاريخ الانتهاء مطلوب
+        </small>
+      </div>
+
+      <div class="flex justify-end gap-2 mt-4">
+        <p-button label="إلغاء" severity="secondary" [outlined]="true" (onClick)="displayUploadLicenseDialog.set(false)"></p-button>
+        <p-button label="رفع وحفظ" type="submit" [loading]="isUploadingLicense()"></p-button>
+      </div>
+    </form>
+  </p-dialog>
 
   <!-- Add Doctor Dialog -->
   <p-dialog header="إضافة طبيب جديد" [visible]="displayAddDialog()" (visibleChange)="displayAddDialog.set($event)" [modal]="true" [style]="{width: '450px'}" [draggable]="false" [resizable]="false">

@@ -26,5 +26,6 @@ public class Doctor : BaseAuditableEntity
     public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
     public ICollection<PatientVisit> PatientVisits { get; set; } = new List<PatientVisit>();
     public ICollection<DoctorDocument> Documents { get; set; } = new List<DoctorDocument>();
+    public ICollection<DoctorLicense> Licenses { get; set; } = new List<DoctorLicense>();
     public DoctorCustomization? Customization { get; set; }
 }

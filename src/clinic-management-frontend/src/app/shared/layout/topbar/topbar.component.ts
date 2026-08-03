@@ -1,25 +1,45 @@
-import { Component, inject, signal, Input } from '@angular/core';
+import { Component, inject, signal, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/auth/services/auth.service';
+import { DoctorService } from '../../../features/admin/doctors/services/doctor.service';
+import { PopoverModule } from 'primeng/popover';
+import { ConfigService } from '../../../core/services/config.service';
 
 @Component({
   selector: 'app-topbar',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, PopoverModule],
   templateUrl: './topbar.component.html',
   styleUrls: ['./topbar.component.scss']
 })
-export class TopbarComponent {
+export class TopbarComponent implements OnInit {
   @Input() pageTitle: string = 'لوحة التحكم';
 
   private readonly authService = inject(AuthService);
+  private readonly doctorService = inject(DoctorService);
+  readonly configService = inject(ConfigService);
 
   readonly currentUser = this.authService.currentUser;
   readonly userRole    = this.authService.userRole;
 
   readonly showNotifications = signal<boolean>(false);
   readonly isDarkMode = signal<boolean>(false);
+  
+  readonly expiringLicenses = signal<any[]>([]);
+
+  ngOnInit(): void {
+    if (this.userRole() === 'Admin' || this.userRole() === 'Employee') {
+      if (this.configService.doctorLicensesEnabled()) {
+        this.doctorService.getExpiringLicenses(30).subscribe({
+          next: (licenses) => {
+            this.expiringLicenses.set(licenses);
+          },
+          error: (err) => console.error('Error fetching expiring licenses', err)
+        });
+      }
+    }
+  }
 
   getRoleBadgeClass(role: string | null): string {
     const classes: Record<string, string> = {

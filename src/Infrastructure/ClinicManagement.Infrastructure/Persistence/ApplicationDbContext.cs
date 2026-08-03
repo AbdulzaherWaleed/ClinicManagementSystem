@@ -28,6 +28,7 @@ public class ApplicationDbContext
     public DbSet<Doctor> Doctors => Set<Doctor>();
     public DbSet<DoctorSpecialty> DoctorSpecialties => Set<DoctorSpecialty>();
     public DbSet<DoctorDocument> DoctorDocuments => Set<DoctorDocument>();
+    public DbSet<DoctorLicense> DoctorLicenses => Set<DoctorLicense>();
     public DbSet<Employee> Employees => Set<Employee>();
     public DbSet<EmployeeDoctorAssignment> EmployeeDoctorAssignments => Set<EmployeeDoctorAssignment>();
     public DbSet<Patient> Patients => Set<Patient>();
