@@ -1,5 +1,6 @@
 using ClinicManagement.Application.Common.Interfaces;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Hosting;
 
 
 namespace ClinicManagement.Infrastructure.FileStorage;
@@ -8,9 +9,10 @@ public class LocalFileStorageService : IFileStorageService
 {
     private readonly string _rootPath;
 
-    public LocalFileStorageService(IConfiguration configuration)
+    public LocalFileStorageService(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
     {
-        _rootPath = configuration["FileStorage:LocalRootPath"] ?? "App_Data/Uploads";
+        var configuredPath = configuration["FileStorage:LocalRootPath"] ?? "App_Data/Uploads";
+        _rootPath = Path.IsPathRooted(configuredPath) ? configuredPath : Path.Combine(webHostEnvironment.ContentRootPath, configuredPath);
         Directory.CreateDirectory(_rootPath);
     }
 
