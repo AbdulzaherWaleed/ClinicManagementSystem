@@ -79,8 +79,8 @@ export class DoctorsComponent implements OnInit {
   }
 
   onLazyLoad(event: any): void {
-    const pageNumber = (event.first / event.rows) + 1;
-    const pageSize = event.rows || 10;
+    const pageNumber = (event.first ?? 0) / (event.rows ?? 10) + 1;
+    const pageSize = event.rows ?? 10;
     this.loadDoctors(pageNumber, pageSize);
   }
 

@@ -60,7 +60,20 @@ export class AppointmentService {
     });
   }
 
-  exportAppointmentsToExcel(): Observable<Blob> {
-    return this.http.get(`${this.apiUrl}/export`, { responseType: 'blob' });
+  exportAppointmentsToExcel(query?: GetAppointmentsQuery): Observable<Blob> {
+    let params = new HttpParams();
+    
+    if (query) {
+      if (query.patientName) params = params.set('patientName', query.patientName);
+      if (query.phone) params = params.set('phone', query.phone);
+      if (query.doctorId) params = params.set('doctorId', query.doctorId);
+      if (query.visitType) params = params.set('visitType', query.visitType);
+      if (query.visitStage) params = params.set('visitStage', query.visitStage);
+      if (query.dateFrom) params = params.set('dateFrom', query.dateFrom);
+      if (query.dateTo) params = params.set('dateTo', query.dateTo);
+      if (query.status) params = params.set('status', query.status);
+    }
+    
+    return this.http.get(`${this.apiUrl}/export`, { params, responseType: 'blob' });
   }
 }

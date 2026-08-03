@@ -10,7 +10,7 @@ import { DoctorService } from '../../admin/doctors/services/doctor.service';
 import { DoctorDto } from '../../admin/doctors/models/doctor.models';
 
 // PrimeNG Modules
-import { TableModule } from 'primeng/table';
+import { TableModule, TableLazyLoadEvent } from 'primeng/table';
 import { SelectModule } from 'primeng/select';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
@@ -60,6 +60,7 @@ export class AppointmentSearchComponent implements OnInit {
   appointments = signal<AppointmentDto[]>([]);
   doctors = signal<DoctorDto[]>([]);
   isLoading = signal<boolean>(false);
+  totalRecords = signal<number>(0);
 
   readonly statuses = [
     { label: 'الكل', value: null },
@@ -108,24 +109,38 @@ export class AppointmentSearchComponent implements OnInit {
     });
   }
 
-  search(): void {
+  onLazyLoad(event: TableLazyLoadEvent): void {
+    const first = event.first ?? 0;
+    const rows = event.rows ?? 10;
+    const pageNumber = Math.floor(first / rows) + 1;
+    const pageSize = rows;
+    
+    this.search(pageNumber, pageSize);
+  }
+
+  search(pageNumber: number = 1, pageSize: number = 10): void {
     this.isLoading.set(true);
     const formVal = this.searchForm.value;
     
-    const query: GetAppointmentsQuery = {
+    const query: GetAppointmentsQuery & { pageNumber?: number, pageSize?: number } = {
       patientName: formVal.patientName || undefined,
       phone: formVal.phone || undefined,
       doctorId: formVal.doctorId || undefined,
       visitStage: formVal.visitStage || undefined,
       status: formVal.status || undefined,
       dateFrom: formVal.dateFrom ? new Date(formVal.dateFrom).toISOString() : undefined,
-      dateTo: formVal.dateTo ? new Date(formVal.dateTo).toISOString() : undefined
+      dateTo: formVal.dateTo ? new Date(formVal.dateTo).toISOString() : undefined,
+      pageNumber: pageNumber,
+      pageSize: pageSize
     };
 
     this.appointmentService.getAppointments(query)
       .pipe(finalize(() => this.isLoading.set(false)))
       .subscribe({
-        next: (data) => this.appointments.set(data.items),
+        next: (data) => {
+          this.appointments.set(data.items);
+          this.totalRecords.set(data.totalCount);
+        },
         error: (err) => console.error('Error fetching appointments', err)
       });
   }
@@ -189,7 +204,19 @@ export class AppointmentSearchComponent implements OnInit {
   }
 
   exportToExcel(): void {
-    this.appointmentService.exportAppointmentsToExcel().subscribe({
+    const formVal = this.searchForm.value;
+    
+    const query: GetAppointmentsQuery = {
+      patientName: formVal.patientName || undefined,
+      phone: formVal.phone || undefined,
+      doctorId: formVal.doctorId || undefined,
+      visitStage: formVal.visitStage || undefined,
+      status: formVal.status || undefined,
+      dateFrom: formVal.dateFrom ? new Date(formVal.dateFrom).toISOString() : undefined,
+      dateTo: formVal.dateTo ? new Date(formVal.dateTo).toISOString() : undefined
+    };
+
+    this.appointmentService.exportAppointmentsToExcel(query).subscribe({
       next: (blob) => {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');

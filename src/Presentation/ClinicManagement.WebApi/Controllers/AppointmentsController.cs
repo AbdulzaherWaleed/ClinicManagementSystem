@@ -34,7 +34,9 @@ public class AppointmentsController : ControllerBase
         [FromQuery] string? visitStage,
         [FromQuery] DateTime? dateFrom,
         [FromQuery] DateTime? dateTo,
-        [FromQuery] string? status)
+        [FromQuery] string? status,
+        [FromQuery] int pageNumber = 1,
+        [FromQuery] int pageSize = 10)
     {
         // v2.1 — Extract Employee's assigned doctor IDs from JWT claims for server-side scoping
         List<Guid>? restrictToDoctorIds = null;
@@ -61,6 +63,8 @@ public class AppointmentsController : ControllerBase
             DateFrom = dateFrom,
             DateTo = dateTo,
             Status = status,
+            PageNumber = pageNumber,
+            PageSize = pageSize,
             RestrictToDoctorIds = restrictToDoctorIds
         };
 
@@ -147,9 +151,43 @@ public class AppointmentsController : ControllerBase
     /// </summary>
     [HttpGet("export")]
     [Authorize(Roles = "Admin,Employee")]
-    public async Task<IActionResult> Export()
+    public async Task<IActionResult> Export(
+        [FromQuery] string? patientName,
+        [FromQuery] string? phone,
+        [FromQuery] Guid? doctorId,
+        [FromQuery] string? visitType,
+        [FromQuery] string? visitStage,
+        [FromQuery] DateTime? dateFrom,
+        [FromQuery] DateTime? dateTo,
+        [FromQuery] string? status)
     {
-        var fileData = await _mediator.Send(new ClinicManagement.Application.Appointments.Queries.ExportAppointments.ExportAppointmentsQuery());
+        List<Guid>? restrictToDoctorIds = null;
+        var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+
+        if (userRole == "Employee")
+        {
+            var doctorClaims = User.FindAll("doctorId")
+                .Select(c => Guid.TryParse(c.Value, out var g) ? g : Guid.Empty)
+                .Where(g => g != Guid.Empty)
+                .ToList();
+
+            restrictToDoctorIds = doctorClaims;
+        }
+
+        var query = new ClinicManagement.Application.Appointments.Queries.ExportAppointments.ExportAppointmentsQuery
+        {
+            PatientName = patientName,
+            Phone = phone,
+            DoctorId = doctorId,
+            VisitType = visitType,
+            VisitStage = visitStage,
+            DateFrom = dateFrom,
+            DateTo = dateTo,
+            Status = status,
+            RestrictToDoctorIds = restrictToDoctorIds
+        };
+
+        var fileData = await _mediator.Send(query);
         return File(fileData, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"Appointments_Export_{DateTime.UtcNow:yyyyMMddHHmm}.xlsx");
     }
 }

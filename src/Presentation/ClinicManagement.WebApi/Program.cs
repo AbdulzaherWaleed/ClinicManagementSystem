@@ -43,7 +43,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngular", policy =>
     {
-        policy.WithOrigins("http://localhost:4200", "http://localhost:4201")
+        var corsOrigins = builder.Configuration.GetSection("CorsOrigins").Get<string[]>() ?? new[] { "http://localhost:4200" }; policy.WithOrigins(corsOrigins)
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials();
@@ -57,7 +57,11 @@ using (var scope = app.Services.CreateScope())
     try 
     {
         var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        await db.Database.MigrateAsync();
+        // IMPORTANT: Do NOT run migrations automatically in production to save memory.
+        if (app.Environment.IsDevelopment())
+        {
+            await db.Database.MigrateAsync();
+        }
         await DatabaseSeeder.SeedAsync(scope.ServiceProvider, builder.Configuration);
     }
     catch (Exception ex)
