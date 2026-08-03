@@ -84,26 +84,16 @@ export const routes: Routes = [
           {
             path: 'doctors',
             canActivate: [roleGuard],
-            data: {
-              roles: ['Admin'],
-              title: 'تقرير الأطباء',
-              description: 'تقارير أداء الأطباء والحجوزات ستتوفر هنا قريباً.'
-            },
+            data: { roles: ['Admin'] },
             loadComponent: () =>
-              import('./shared/components/feature-placeholder/feature-placeholder.component')
-                .then(m => m.FeaturePlaceholderComponent)
+              import('./features/admin/reports/doctor-report/doctor-report').then(m => m.DoctorReport)
           },
           {
             path: 'employees',
             canActivate: [roleGuard],
-            data: {
-              roles: ['Admin'],
-              title: 'تقرير الموظفين',
-              description: 'تقارير نشاط الموظفين ستتوفر هنا قريباً.'
-            },
+            data: { roles: ['Admin'] },
             loadComponent: () =>
-              import('./shared/components/feature-placeholder/feature-placeholder.component')
-                .then(m => m.FeaturePlaceholderComponent)
+              import('./features/admin/reports/staff-report/staff-report').then(m => m.StaffReport)
           },
           { path: '', redirectTo: 'doctors', pathMatch: 'full' }
         ]

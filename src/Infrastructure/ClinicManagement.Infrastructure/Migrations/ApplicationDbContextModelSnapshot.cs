@@ -86,11 +86,68 @@ namespace ClinicManagement.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedByEmployeeId");
+
                     b.HasIndex("PatientId");
+
+                    b.HasIndex("ScheduledStart");
+
+                    b.HasIndex("Status");
 
                     b.HasIndex("DoctorId", "ScheduledStart");
 
                     b.ToTable("Appointments", (string)null);
+                });
+
+            modelBuilder.Entity("ClinicManagement.Domain.Entities.Appointments.AppointmentStatusHistory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AppointmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ChangedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("ChangedByEmployeeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NewStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OldStatus")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppointmentId");
+
+                    b.HasIndex("ChangedByEmployeeId");
+
+                    b.ToTable("AppointmentStatusHistories");
                 });
 
             modelBuilder.Entity("ClinicManagement.Domain.Entities.Doctors.Doctor", b =>
@@ -1027,6 +1084,25 @@ namespace ClinicManagement.Infrastructure.Migrations
                     b.Navigation("Doctor");
 
                     b.Navigation("Patient");
+                });
+
+            modelBuilder.Entity("ClinicManagement.Domain.Entities.Appointments.AppointmentStatusHistory", b =>
+                {
+                    b.HasOne("ClinicManagement.Domain.Entities.Appointments.Appointment", "Appointment")
+                        .WithMany()
+                        .HasForeignKey("AppointmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ClinicManagement.Domain.Entities.Staff.Employee", "ChangedByEmployee")
+                        .WithMany()
+                        .HasForeignKey("ChangedByEmployeeId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Appointment");
+
+                    b.Navigation("ChangedByEmployee");
                 });
 
             modelBuilder.Entity("ClinicManagement.Domain.Entities.Doctors.Doctor", b =>

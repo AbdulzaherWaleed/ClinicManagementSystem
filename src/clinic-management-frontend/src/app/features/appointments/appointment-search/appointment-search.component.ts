@@ -1,11 +1,13 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule, FormBuilder, FormGroup } from '@angular/forms';
 import { AppointmentService } from '../services/appointment.service';
 import { AppointmentDto, CancelAppointmentCommand, GetAppointmentsQuery } from '../models/appointment.models';
 import { finalize } from 'rxjs';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/auth/services/auth.service';
+import { DoctorService } from '../../admin/doctors/services/doctor.service';
+import { DoctorDto } from '../../admin/doctors/models/doctor.models';
 
 // PrimeNG Modules
 import { TableModule } from 'primeng/table';
@@ -19,6 +21,8 @@ import { MenuItem, SharedModule } from 'primeng/api';
 import { Menu } from 'primeng/menu';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { ViewChild } from '@angular/core';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-appointment-search',
@@ -26,6 +30,7 @@ import { MessageService } from 'primeng/api';
   imports: [
     CommonModule, 
     ReactiveFormsModule, 
+    FormsModule,
     RouterModule,
     TableModule, 
     SelectModule, 
@@ -35,7 +40,8 @@ import { MessageService } from 'primeng/api';
     TagModule,
     MenuModule,
     SharedModule,
-    ToastModule
+    ToastModule,
+    TooltipModule
   ],
   providers: [MessageService],
   templateUrl: './appointment-search.component.html',
@@ -46,23 +52,30 @@ export class AppointmentSearchComponent implements OnInit {
   private readonly appointmentService = inject(AppointmentService);
   private readonly authService = inject(AuthService);
   private readonly messageService = inject(MessageService);
+  private readonly doctorService = inject(DoctorService);
 
   readonly isAdmin = this.authService.isAdmin;
 
   searchForm!: FormGroup;
   appointments = signal<AppointmentDto[]>([]);
+  doctors = signal<DoctorDto[]>([]);
   isLoading = signal<boolean>(false);
-  actionMenuItems = signal<MenuItem[]>([]);
 
   readonly statuses = [
     { label: 'الكل', value: null },
     { label: 'مجدول', value: 'Scheduled' },
-    { label: 'مؤكد', value: 'Confirmed' },
-    { label: 'في الانتظار', value: 'CheckedIn' },
-    { label: 'قيد الكشف', value: 'InProgress' },
-    { label: 'مكتمل', value: 'Completed' },
-    { label: 'ملغي', value: 'Cancelled' },
-    { label: 'لم يحضر', value: 'NoShow' }
+    { label: 'مكتمل (Done)', value: 'Completed' },
+    { label: 'لم يحضر', value: 'NoShow' },
+    { label: 'مؤجل', value: 'Postponed' },
+    { label: 'ملغي', value: 'Cancelled' }
+  ];
+
+  readonly actionStatuses = [
+    { label: 'مجدول', value: 'Scheduled' },
+    { label: 'مكتمل (Done)', value: 'Completed' },
+    { label: 'لم يحضر', value: 'NoShow' },
+    { label: 'مؤجل', value: 'Postponed' },
+    { label: 'ملغي', value: 'Cancelled' }
   ];
 
   readonly stages = [
@@ -76,14 +89,23 @@ export class AppointmentSearchComponent implements OnInit {
     this.searchForm = this.fb.group({
       patientName: [null],
       phone: [null],
+      doctorId: [null],
       visitStage: [null],
       status: [null],
       dateFrom: [null],
       dateTo: [null]
     });
 
+    this.loadDoctors();
     // Load initial data (today's appointments for example, but here we just load all to show data)
     this.search();
+  }
+
+  loadDoctors(): void {
+    this.doctorService.getDoctors().subscribe({
+      next: (data) => this.doctors.set(data.items.filter(d => d.isActive)),
+      error: (err) => console.error('Error fetching doctors', err)
+    });
   }
 
   search(): void {
@@ -93,6 +115,7 @@ export class AppointmentSearchComponent implements OnInit {
     const query: GetAppointmentsQuery = {
       patientName: formVal.patientName || undefined,
       phone: formVal.phone || undefined,
+      doctorId: formVal.doctorId || undefined,
       visitStage: formVal.visitStage || undefined,
       status: formVal.status || undefined,
       dateFrom: formVal.dateFrom ? new Date(formVal.dateFrom).toISOString() : undefined,
@@ -115,12 +138,10 @@ export class AppointmentSearchComponent implements OnInit {
   getSeverity(status: string): 'success' | 'info' | 'warn' | 'danger' | 'secondary' {
     switch (status) {
       case 'Scheduled': return 'info';
-      case 'Confirmed': return 'success';
-      case 'CheckedIn': return 'warn';
-      case 'InProgress': return 'warn';
       case 'Completed': return 'success';
-      case 'Cancelled': return 'danger';
       case 'NoShow': return 'secondary';
+      case 'Postponed': return 'warn';
+      case 'Cancelled': return 'danger';
       default: return 'info';
     }
   }
@@ -135,37 +156,56 @@ export class AppointmentSearchComponent implements OnInit {
     return s ? s.label : stage;
   }
 
-  getMenuItems(appt: AppointmentDto): MenuItem[] {
-    const items: MenuItem[] = [
-      {
-        label: 'عرض التفاصيل',
-        icon: 'pi pi-eye',
-        command: () => this.messageService.add({
-          severity: 'info',
-          summary: 'تفاصيل الحجز',
-          detail: `${appt.patientName} — ${appt.doctorName}`
-        })
-      }
-    ];
+  viewDetails(appt: AppointmentDto): void {
+    this.messageService.add({
+      severity: 'info',
+      summary: 'تفاصيل الحجز',
+      detail: `${appt.patientName} — ${appt.doctorName}`
+    });
+  }
 
-    if (appt.status !== 'Cancelled' && appt.status !== 'Completed') {
-      items.push({
-        label: 'إلغاء الحجز',
-        icon: 'pi pi-times',
-        styleClass: 'text-red-500',
-        command: () => this.cancelAppointment(appt)
-      });
+  onStatusChange(appt: AppointmentDto, newStatus: string): void {
+    if (newStatus === 'Cancelled') {
+      // Revert the model temporarily until cancel finishes successfully
+      appt.status = 'Scheduled'; // or we could keep the old status before the change, but let's just use Scheduled as placeholder, the server will update it.
+      // A better way is to reload if cancelled, but cancelAppointment will call search().
+      this.cancelAppointment(appt);
+      return;
     }
-
-    return items;
+    
+    this.changeStatus(appt, newStatus);
   }
 
-  openActionsMenu(event: Event, appt: AppointmentDto, menu: Menu): void {
-    this.actionMenuItems.set(this.getMenuItems(appt));
-    menu.toggle(event);
+  changeStatus(appt: AppointmentDto, newStatus: string): void {
+    this.appointmentService.changeAppointmentStatus(appt.id, newStatus).subscribe({
+      next: () => {
+        this.messageService.add({ severity: 'success', summary: 'تم', detail: 'تم تحديث الحالة بنجاح' });
+        this.search();
+      },
+      error: () => {
+        this.messageService.add({ severity: 'error', summary: 'خطأ', detail: 'حدث خطأ أثناء تحديث الحالة' });
+      }
+    });
   }
 
-  private cancelAppointment(appt: AppointmentDto): void {
+  exportToExcel(): void {
+    this.appointmentService.exportAppointmentsToExcel().subscribe({
+      next: (blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `Appointments_${new Date().getTime()}.xlsx`;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error: () => {
+        this.messageService.add({ severity: 'error', summary: 'خطأ', detail: 'فشل التصدير' });
+      }
+    });
+  }
+
+
+  cancelAppointment(appt: AppointmentDto): void {
     const reason = window.prompt('سبب الإلغاء (اختياري):') ?? undefined;
     if (reason === null) return;
 

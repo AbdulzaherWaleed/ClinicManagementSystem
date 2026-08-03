@@ -361,3 +361,101 @@ a {
   border-color: #d1d5db !important;
 }
 
+
+/* --- Dark Mode Enhancements (Softer Slate Palette) --- */
+html.dark {
+  --p-surface-0: #1e293b;
+  --p-surface-50: #0f172a;
+  --p-surface-100: #1e293b;
+  --p-surface-200: #334155;
+  --p-surface-300: #475569;
+  --p-surface-400: #64748b;
+  --p-surface-500: #94a3b8;
+  --p-surface-600: #cbd5e1;
+  --p-surface-700: #e2e8f0;
+  --p-surface-800: #f1f5f9;
+  --p-surface-900: #f8fafc;
+  --p-surface-950: #ffffff;
+  
+  --p-content-background: #1e293b;
+  --p-content-hover-background: #334155;
+  --p-content-border-color: #334155;
+
+  body {
+    background-color: #0f172a !important;
+    color: #f8fafc !important;
+  }
+
+  .card, .topbar, .sidebar {
+    background-color: #1e293b !important;
+    border-color: #334155 !important;
+    color: #f8fafc !important;
+  }
+
+  .sidebar .nav-item {
+    color: #cbd5e1 !important;
+  }
+
+  .sidebar .nav-item:hover {
+    background-color: #334155 !important;
+    color: #f8fafc !important;
+  }
+
+  .sidebar .nav-item.active {
+    background-color: #334155 !important;
+    color: #a78bfa !important;
+    border-color: #7c3aed !important;
+  }
+
+  .sidebar-header, .sidebar-footer {
+    border-color: #334155 !important;
+  }
+
+  .logo-title, .user-name {
+    color: #f8fafc !important;
+  }
+
+  .page-heading, h1, h2, h3, h4, h5, h6 {
+    color: #f8fafc !important;
+  }
+
+  .text-muted, .text-secondary {
+    color: #94a3b8 !important;
+  }
+
+  /* Override PrimeNG DataTables and Paginator for dark mode */
+  .p-datatable-header,
+  .p-datatable-thead > tr > th,
+  .p-datatable-tbody > tr > td,
+  .p-datatable-tfoot > tr > td,
+  .p-paginator {
+    background-color: #1e293b !important;
+    border-color: #334155 !important;
+    color: #f8fafc !important;
+  }
+
+  .p-datatable-striped .p-datatable-tbody > tr:nth-child(even) {
+    background-color: #0f172a !important;
+  }
+
+  /* Forms / Inputs */
+  input.p-inputtext, .p-select, .p-datepicker {
+    background-color: #0f172a !important;
+    border-color: #334155 !important;
+    color: #f8fafc !important;
+  }
+
+  input.p-inputtext:focus, .p-select:not(.p-disabled).p-focus {
+    border-color: #7c3aed !important;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2) !important;
+  }
+
+  /* Specific overrides for user card and buttons */
+  .user-card {
+    background-color: #334155 !important;
+    border-color: #475569 !important;
+  }
+  .logout-btn:hover {
+    background-color: #450a0a !important;
+  }
+}

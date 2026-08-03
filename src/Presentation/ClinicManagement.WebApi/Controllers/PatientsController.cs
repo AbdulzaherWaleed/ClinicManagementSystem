@@ -21,7 +21,7 @@ public class PatientsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
     {
         List<Guid>? restrictToDoctorIds = null;
         var userRole = User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value;
@@ -36,7 +36,9 @@ public class PatientsController : ControllerBase
 
         var result = await _mediator.Send(new GetAllPatientsQuery 
         { 
-            RestrictToDoctorIds = restrictToDoctorIds 
+            RestrictToDoctorIds = restrictToDoctorIds,
+            PageNumber = pageNumber,
+            PageSize = pageSize
         });
         return Ok(result);
     }

@@ -17,12 +17,16 @@
           <input pInputText formControlName="phone" placeholder="بحث برقم الهاتف..." class="w-full" />
         </div>
         <div class="flex flex-col gap-2">
+          <label class="text-sm font-semibold">الطبيب</label>
+          <p-select [options]="doctors()" formControlName="doctorId" optionLabel="fullName" optionValue="id" placeholder="اختر الطبيب" styleClass="w-full" [showClear]="true" [filter]="true" filterBy="fullName" appendTo="body"></p-select>
+        </div>
+        <div class="flex flex-col gap-2">
           <label class="text-sm font-semibold">مرحلة الزيارة</label>
-          <p-select [options]="stages" formControlName="visitStage" placeholder="اختر المرحلة" styleClass="w-full"></p-select>
+          <p-select [options]="stages" formControlName="visitStage" placeholder="اختر المرحلة" styleClass="w-full" [showClear]="true"></p-select>
         </div>
         <div class="flex flex-col gap-2">
           <label class="text-sm font-semibold">حالة الحجز</label>
-          <p-select [options]="statuses" formControlName="status" placeholder="اختر الحالة" styleClass="w-full"></p-select>
+          <p-select [options]="statuses" formControlName="status" placeholder="اختر الحالة" styleClass="w-full" [showClear]="true"></p-select>
         </div>
         <div class="flex flex-col gap-2">
           <label class="text-sm font-semibold">من تاريخ</label>
@@ -32,13 +36,36 @@
           <label class="text-sm font-semibold">إلى تاريخ</label>
           <p-datepicker formControlName="dateTo" [showIcon]="true" placeholder="اختر التاريخ" styleClass="w-full" inputStyleClass="w-full"></p-datepicker>
         </div>
-        <div class="col-span-1 md:col-span-2 flex items-end justify-end gap-2 mt-4 md:mt-0">
-          <p-button type="button" icon="pi pi-filter-slash" label="إعادة ضبط" severity="secondary" [outlined]="true" (onClick)="reset()"></p-button>
-          <p-button type="submit" icon="pi pi-search" label="بحث" [loading]="isLoading()"></p-button>
+        <!-- Buttons -->
+        <div class="col-span-1 md:col-span-3 flex justify-end gap-3 mt-4">
+          <p-button 
+            label="مسح الفلاتر" 
+            icon="pi pi-filter-slash" 
+            styleClass="p-button-outlined p-button-secondary me-3"
+            [style]="{'margin-inline-end': '0.75rem'}"
+            (onClick)="reset()">
+          </p-button>
+          
+          <p-button 
+            label="تصدير (Excel)" 
+            icon="pi pi-file-excel" 
+            styleClass="p-button-outlined p-button-success me-3"
+            [style]="{'margin-inline-end': '0.75rem'}"
+            (onClick)="exportToExcel()">
+          </p-button>
+
+          <p-button 
+            label="بحث" 
+            icon="pi pi-search" 
+            [loading]="isLoading()"
+            (onClick)="search()">
+          </p-button>
         </div>
       </div>
     </form>
   </div>
+
+
 
   <div class="card p-0 table-card">
     <p-table 
@@ -57,9 +84,9 @@
           <th style="width: 180px;">المريض</th>
           <th style="width: 160px;">الهاتف</th>
           <th style="width: 220px;">الطبيب</th>
-          <th style="width: 150px;">مرحلة الزيارة</th>
-          <th style="width: 110px;">الحالة</th>
-          <th style="width: 100px; text-align: center;">إجراءات</th>
+          <th style="width: 150px;" class="text-center">مرحلة الزيارة</th>
+          <th style="width: 150px;" class="text-center">نوع الكشف</th>
+          <th style="width: 150px;" class="text-center">الحالة</th>
         </tr>
       </ng-template>
       
@@ -72,20 +99,19 @@
           <td style="width: 180px;" class="font-semibold">{{ appt.patientName }}</td>
           <td style="width: 160px;">{{ appt.patientPhone || '-' }}</td>
           <td style="width: 220px;">
-            <div>{{ appt.doctorName }}</div>
-            <div class="text-xs text-color-secondary">{{ appt.doctorSpecialty || '-' }}</div>
+            <div>
+              {{ appt.doctorName }}
+              <div class="text-xs text-gray-400 mt-1" *ngIf="appt.doctorSpecialty">{{ appt.doctorSpecialty }}</div>
+            </div>
           </td>
-          <td style="width: 150px;">
-            <span class="visit-stage-badge" [ngClass]="'stage-' + appt.visitStage.toLowerCase()">
-              {{ getStageLabel(appt.visitStage) }}
-            </span>
+          <td class="text-center">
+            <p-tag [value]="getStageLabel(appt.visitStage)" [severity]="'secondary'" [rounded]="true"></p-tag>
           </td>
-          <td style="width: 110px;">
-            <p-tag [value]="getStatusLabel(appt.status)" [severity]="getSeverity(appt.status)"></p-tag>
+          <td class="text-center font-medium">
+            {{ appt.visitType || '-' }}
           </td>
-          <td style="width: 100px;" class="text-center">
-            <button pButton icon="pi pi-ellipsis-v" class="p-button-rounded p-button-text p-button-secondary" (click)="openActionsMenu($event, appt, menu)"></button>
-            <p-menu #menu [model]="actionMenuItems()" [popup]="true" appendTo="body"></p-menu>
+          <td class="text-center">
+            <p-select [options]="actionStatuses" [(ngModel)]="appt.status" (onChange)="onStatusChange(appt, $event.value)" optionLabel="label" optionValue="value" appendTo="body" styleClass="w-full"></p-select>
           </td>
         </tr>
       </ng-template>

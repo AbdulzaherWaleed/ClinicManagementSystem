@@ -53,6 +53,7 @@ export class EmployeesComponent implements OnInit {
   private readonly confirmationService = inject(ConfirmationService);
 
   employees = signal<EmployeeDto[]>([]);
+  totalRecords = signal<number>(0);
   doctors = signal<DoctorDto[]>([]);
   
   isLoading = signal<boolean>(false);
@@ -62,7 +63,7 @@ export class EmployeesComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.loadEmployees();
+    // Initial load will be triggered by onLazyLoad event of p-table
     this.loadDoctors();
   }
 
@@ -77,14 +78,23 @@ export class EmployeesComponent implements OnInit {
     });
   }
 
-  loadEmployees(): void {
+  loadEmployees(pageNumber: number = 1, pageSize: number = 10): void {
     this.isLoading.set(true);
-    this.employeeService.getEmployees()
+    this.employeeService.getEmployees(pageNumber, pageSize)
       .pipe(finalize(() => this.isLoading.set(false)))
       .subscribe({
-        next: (data) => this.employees.set(data),
+        next: (data) => {
+          this.employees.set(data.items);
+          this.totalRecords.set(data.totalCount);
+        },
         error: () => this.showError('حدث خطأ أثناء تحميل الموظفين')
       });
+  }
+
+  onLazyLoad(event: any): void {
+    const pageNumber = (event.first ?? 0) / (event.rows ?? 10) + 1;
+    const pageSize = event.rows ?? 10;
+    this.loadEmployees(pageNumber, pageSize);
   }
 
   loadDoctors(): void {

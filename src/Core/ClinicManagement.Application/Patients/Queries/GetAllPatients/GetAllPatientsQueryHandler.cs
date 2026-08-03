@@ -3,9 +3,11 @@ using ClinicManagement.Application.Patients.DTOs;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
+using ClinicManagement.Application.Common.Models;
+
 namespace ClinicManagement.Application.Patients.Queries.GetAllPatients;
 
-public class GetAllPatientsQueryHandler : IRequestHandler<GetAllPatientsQuery, List<PatientDto>>
+public class GetAllPatientsQueryHandler : IRequestHandler<GetAllPatientsQuery, PaginatedList<PatientDto>>
 {
     private readonly IApplicationDbContext _context;
 
@@ -14,7 +16,7 @@ public class GetAllPatientsQueryHandler : IRequestHandler<GetAllPatientsQuery, L
         _context = context;
     }
 
-    public async Task<List<PatientDto>> Handle(GetAllPatientsQuery request, CancellationToken cancellationToken)
+    public async Task<PaginatedList<PatientDto>> Handle(GetAllPatientsQuery request, CancellationToken cancellationToken)
     {
         var queryable = _context.Patients.AsNoTracking().Where(p => !p.IsDeleted).AsQueryable();
 
@@ -25,7 +27,7 @@ public class GetAllPatientsQueryHandler : IRequestHandler<GetAllPatientsQuery, L
             queryable = queryable.Where(p => p.Appointments.Any(a => !a.IsDeleted && request.RestrictToDoctorIds.Contains(a.DoctorId)));
         }
 
-        var patients = await queryable
+        var patientsQuery = queryable
             .OrderByDescending(p => p.CreatedAt)
             .Select(p => new PatientDto
             {
@@ -39,9 +41,8 @@ public class GetAllPatientsQueryHandler : IRequestHandler<GetAllPatientsQuery, L
                 NationalId = p.NationalId,
                 MedicalNotes = p.MedicalNotes,
                 CreatedAt = p.CreatedAt
-            })
-            .ToListAsync(cancellationToken);
+            });
             
-        return patients;
+        return await PaginatedList<PatientDto>.CreateAsync(patientsQuery, request.PageNumber, request.PageSize, cancellationToken);
     }
 }

@@ -1,12 +1,10 @@
-﻿namespace ClinicManagement.Domain.Enums;
+namespace ClinicManagement.Domain.Enums;
 
 public enum AppointmentStatus
 {
     Scheduled = 1,
-    Confirmed = 2,
-    CheckedIn = 3,
-    InProgress = 4,
-    Completed = 5,
-    Cancelled = 6,
-    NoShow = 7
+    Completed = 2,
+    NoShow = 3,
+    Postponed = 4,
+    Cancelled = 5
 }

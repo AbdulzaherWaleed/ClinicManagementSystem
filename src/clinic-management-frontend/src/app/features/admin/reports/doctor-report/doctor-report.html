@@ -1,0 +1,77 @@
+<div class="page-container animate-fade-in">
+  <p-toast></p-toast>
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold text-primary m-0">تقرير أداء الطبيب</h1>
+  </div>
+
+  <div class="card mb-6 filter-card">
+    <form [formGroup]="filterForm" (ngSubmit)="generateReport()" class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+      <div class="flex flex-col gap-2">
+        <label class="font-semibold text-sm">الطبيب <span class="text-red-500">*</span></label>
+        <p-select [options]="doctors()" formControlName="doctorId" placeholder="اختر الطبيب" styleClass="w-full"></p-select>
+      </div>
+      <div class="flex flex-col gap-2">
+        <label class="font-semibold text-sm">من تاريخ <span class="text-red-500">*</span></label>
+        <p-datepicker formControlName="startDate" [showIcon]="true" styleClass="w-full" inputStyleClass="w-full"></p-datepicker>
+      </div>
+      <div class="flex flex-col gap-2">
+        <label class="font-semibold text-sm">إلى تاريخ <span class="text-red-500">*</span></label>
+        <p-datepicker formControlName="endDate" [showIcon]="true" styleClass="w-full" inputStyleClass="w-full"></p-datepicker>
+      </div>
+      <div class="flex justify-end gap-2">
+        <p-button type="submit" label="توليد التقرير" icon="pi pi-chart-bar" [loading]="isLoading()"></p-button>
+      </div>
+    </form>
+  </div>
+
+  @if (reportData(); as data) {
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+      <p-card styleClass="text-center bg-blue-50 border-blue-200 border">
+        <h3 class="text-blue-700 m-0 mb-2">إجمالي الحجوزات</h3>
+        <p class="text-4xl font-bold text-blue-900 m-0">{{ data.totalBookings }}</p>
+      </p-card>
+      
+      <p-card styleClass="text-center bg-green-50 border-green-200 border">
+        <h3 class="text-green-700 m-0 mb-2">الحجوزات المكتملة</h3>
+        <p class="text-4xl font-bold text-green-900 m-0">{{ data.completedBookings }}</p>
+      </p-card>
+
+      <p-card styleClass="text-center bg-red-50 border-red-200 border">
+        <h3 class="text-red-700 m-0 mb-2">ملغي / لم يحضر</h3>
+        <p class="text-4xl font-bold text-red-900 m-0">{{ data.cancelledOrNoShowBookings }}</p>
+      </p-card>
+
+      <p-card styleClass="text-center bg-purple-50 border-purple-200 border">
+        <h3 class="text-purple-700 m-0 mb-2">معدل الإنجاز</h3>
+        <p class="text-4xl font-bold text-purple-900 m-0">{{ data.completionRate }}%</p>
+      </p-card>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <p-card header="توزيع الحجوزات حسب مرحلة الزيارة">
+        <div class="flex flex-col items-center">
+          <p-chart type="pie" [data]="chartData" [options]="chartOptions" [style]="{'width': '50%'}"></p-chart>
+          
+          <table class="w-full mt-6 border-collapse">
+            <thead>
+              <tr class="border-b bg-gray-50">
+                <th class="py-3 px-4 text-color-secondary font-medium text-right">نوع الزيارة</th>
+                <th class="py-3 px-4 text-color-secondary font-medium text-center">العدد</th>
+                <th class="py-3 px-4 text-color-secondary font-medium text-center">النسبة</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (item of chartData?.labels; track item; let i = $index) {
+                <tr class="border-b hover:bg-gray-50">
+                  <td class="py-3 px-4 font-semibold text-right">{{ item }}</td>
+                  <td class="py-3 px-4 text-center">{{ chartData.datasets[0].data[i] }}</td>
+                  <td class="py-3 px-4 text-center">{{ data.totalBookings > 0 ? ((chartData.datasets[0].data[i] / data.totalBookings * 100) | number:'1.0-1') : 0 }}%</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </p-card>
+    </div>
+  }
+</div>

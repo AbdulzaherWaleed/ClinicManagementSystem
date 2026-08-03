@@ -21,7 +21,7 @@ public class CreateAppointmentCommandValidator : AbstractValidator<CreateAppoint
             
         RuleFor(x => x.VisitStage).IsInEnum();
         
-        RuleFor(x => x.VisitType).MaximumLength(100);
+        RuleFor(x => x.VisitType).NotEmpty().WithMessage("نوع الكشف مطلوب").MaximumLength(100);
         RuleFor(x => x.Reason).MaximumLength(500);
     }
 }

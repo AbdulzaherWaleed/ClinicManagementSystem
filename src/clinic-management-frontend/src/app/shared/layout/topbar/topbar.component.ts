@@ -19,6 +19,7 @@ export class TopbarComponent {
   readonly userRole    = this.authService.userRole;
 
   readonly showNotifications = signal<boolean>(false);
+  readonly isDarkMode = signal<boolean>(false);
 
   getRoleBadgeClass(role: string | null): string {
     const classes: Record<string, string> = {
@@ -45,5 +46,15 @@ export class TopbarComponent {
       month: 'long',
       day: 'numeric'
     });
+  }
+
+  toggleDarkMode(): void {
+    this.isDarkMode.update(prev => !prev);
+    const element = document.querySelector('html');
+    if (this.isDarkMode()) {
+      element?.classList.add('dark');
+    } else {
+      element?.classList.remove('dark');
+    }
   }
 }

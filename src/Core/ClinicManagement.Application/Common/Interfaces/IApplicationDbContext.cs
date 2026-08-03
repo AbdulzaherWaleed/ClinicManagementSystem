@@ -18,6 +18,7 @@ public interface IApplicationDbContext
     DbSet<Patient> Patients { get; }
     DbSet<PatientVisit> PatientVisits { get; }
     DbSet<Appointment> Appointments { get; }
+    DbSet<AppointmentStatusHistory> AppointmentStatusHistories { get; }
     DbSet<ClinicSetting> ClinicSettings { get; }
     DbSet<DoctorCustomization> DoctorCustomizations { get; }
     DbSet<InventoryCategory> InventoryCategories { get; }

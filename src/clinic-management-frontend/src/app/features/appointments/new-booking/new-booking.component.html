@@ -51,8 +51,9 @@
         </div>
 
         <div class="flex flex-col gap-2">
-          <label>نوع الكشف (اختياري)</label>
+          <label>نوع الكشف <span class="text-red-500">*</span></label>
           <input pInputText formControlName="visitType" placeholder="مثال: ليزر، تنظيف أسنان..." class="w-full" />
+          <small class="text-red-500" *ngIf="bookingForm.get('visitType')?.invalid && bookingForm.get('visitType')?.touched">نوع الكشف مطلوب</small>
         </div>
 
         <div class="flex flex-col gap-2">

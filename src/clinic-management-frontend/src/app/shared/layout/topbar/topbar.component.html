@@ -9,6 +9,11 @@
   <!-- Right Actions -->
   <div class="topbar-end">
 
+    <!-- Dark Mode Toggle -->
+    <button class="icon-btn" title="تغيير المظهر" (click)="toggleDarkMode()">
+      <i [class]="isDarkMode() ? 'pi pi-sun' : 'pi pi-moon'"></i>
+    </button>
+
     <!-- Notification Bell -->
     <button class="icon-btn" title="الإشعارات" id="topbar-notifications-btn">
       <i class="pi pi-bell"></i>

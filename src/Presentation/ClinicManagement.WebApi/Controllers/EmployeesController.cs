@@ -27,9 +27,9 @@ public class EmployeesController : ControllerBase
     /// </summary>
     [HttpGet]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
     {
-        var result = await _mediator.Send(new GetAllEmployeesQuery());
+        var result = await _mediator.Send(new GetAllEmployeesQuery { PageNumber = pageNumber, PageSize = pageSize });
         return Ok(result);
     }
 

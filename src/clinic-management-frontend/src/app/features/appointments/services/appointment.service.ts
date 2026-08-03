@@ -53,4 +53,14 @@ export class AppointmentService {
   cancelAppointment(id: string, command: CancelAppointmentCommand): Observable<void> {
     return this.http.patch<void>(`${this.apiUrl}/${id}/cancel`, command);
   }
+
+  changeAppointmentStatus(id: string, newStatus: string): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/${id}/status`, `"${newStatus}"`, {
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+
+  exportAppointmentsToExcel(): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/export`, { responseType: 'blob' });
+  }
 }

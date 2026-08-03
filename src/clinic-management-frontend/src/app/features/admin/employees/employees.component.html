@@ -7,7 +7,7 @@
     <p-button label="إضافة موظف" icon="pi pi-plus" (onClick)="showAddDialog()"></p-button>
   </div>
 
-  <p-table [value]="employees()" [loading]="isLoading()" [paginator]="true" [rows]="10">
+  <p-table [value]="employees()" [loading]="isLoading()" [paginator]="true" [rows]="10" [lazy]="true" [totalRecords]="totalRecords()" (onLazyLoad)="onLazyLoad($event)">
     <ng-template #header>
       <tr>
         <th>الاسم</th>

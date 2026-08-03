@@ -3,9 +3,11 @@ using ClinicManagement.Application.Employees.DTOs;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
+using ClinicManagement.Application.Common.Models;
+
 namespace ClinicManagement.Application.Employees.Queries.GetAllEmployees;
 
-public class GetAllEmployeesQueryHandler : IRequestHandler<GetAllEmployeesQuery, List<EmployeeDto>>
+public class GetAllEmployeesQueryHandler : IRequestHandler<GetAllEmployeesQuery, PaginatedList<EmployeeDto>>
 {
     private readonly IApplicationDbContext _context;
 
@@ -14,9 +16,9 @@ public class GetAllEmployeesQueryHandler : IRequestHandler<GetAllEmployeesQuery,
         _context = context;
     }
 
-    public async Task<List<EmployeeDto>> Handle(GetAllEmployeesQuery request, CancellationToken cancellationToken)
+    public async Task<PaginatedList<EmployeeDto>> Handle(GetAllEmployeesQuery request, CancellationToken cancellationToken)
     {
-        return await _context.Employees
+        var query = _context.Employees
             .AsNoTracking()
             .Where(e => !e.IsDeleted)
             .OrderBy(e => e.FullName)
@@ -36,7 +38,8 @@ public class GetAllEmployeesQueryHandler : IRequestHandler<GetAllEmployeesQuery,
                     .Where(da => !da.IsDeleted)
                     .Select(da => da.Doctor.FullName)
                     .ToList()
-            })
-            .ToListAsync(cancellationToken);
+            });
+
+        return await PaginatedList<EmployeeDto>.CreateAsync(query, request.PageNumber, request.PageSize, cancellationToken);
     }
 }

@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.DataProtection;
 using ClinicManagement.Application;
 using ClinicManagement.Infrastructure;
 using ClinicManagement.Infrastructure.Persistence;
@@ -53,9 +54,17 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    await db.Database.MigrateAsync();
-    await DatabaseSeeder.SeedAsync(scope.ServiceProvider, builder.Configuration);
+    try 
+    {
+        var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        await db.Database.MigrateAsync();
+        await DatabaseSeeder.SeedAsync(scope.ServiceProvider, builder.Configuration);
+    }
+    catch (Exception ex)
+    {
+        var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while migrating or seeding the database.");
+    }
 }
 
 if (app.Environment.IsDevelopment())
@@ -63,11 +72,14 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+app.UseDefaultFiles();
+app.UseStaticFiles();
 app.UseCors("AllowAngular");
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseRateLimiter();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+app.MapFallbackToFile("index.html");
 
 app.Run();

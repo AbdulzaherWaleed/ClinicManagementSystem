@@ -72,7 +72,7 @@ export class NewBookingComponent implements OnInit {
       specialty: [null],
       doctorId: [null, Validators.required],
       visitStage: ['Checkup', Validators.required],
-      visitType: [null],
+      visitType: [null, Validators.required],
       scheduledStart: [null, Validators.required],
       reason: [null]
     });
@@ -97,7 +97,7 @@ export class NewBookingComponent implements OnInit {
     this.patientService.getPatients()
       .pipe(finalize(() => this.isLoadingLookups.set(false)))
       .subscribe({
-        next: (data) => this.patients.set(data),
+        next: (data) => this.patients.set(data.items),
         error: () => this.serverError.set('تعذر تحميل قائمة المرضى')
       });
 

@@ -45,6 +45,7 @@ public static class DependencyInjection
         services.AddScoped<ICurrentUserService, CurrentUserService>();
         services.AddSingleton<IDateTimeService, DateTimeService>();
         services.AddScoped<IFileStorageService, LocalFileStorageService>();
+        services.AddScoped<IExcelService, ClinicManagement.Infrastructure.Services.ExcelService>();
 
         services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
         services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();

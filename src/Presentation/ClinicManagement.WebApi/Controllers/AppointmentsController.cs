@@ -117,5 +117,40 @@ public class AppointmentsController : ControllerBase
         await _mediator.Send(command);
         return NoContent();
     }
+
+    /// <summary>
+    /// POST /api/appointments/{id}/status
+    /// </summary>
+    [HttpPost("{id:guid}/status")]
+    [Authorize(Roles = "Admin,Employee")]
+    public async Task<IActionResult> ChangeStatus(Guid id, [FromBody] ClinicManagement.Domain.Enums.AppointmentStatus newStatus)
+    {
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (!Guid.TryParse(userId, out var employeeId))
+        {
+            return Unauthorized();
+        }
+
+        var command = new ClinicManagement.Application.Appointments.Commands.ChangeAppointmentStatus.ChangeAppointmentStatusCommand
+        {
+            AppointmentId = id,
+            NewStatus = newStatus,
+            ChangedByEmployeeId = employeeId
+        };
+
+        await _mediator.Send(command);
+        return NoContent();
+    }
+
+    /// <summary>
+    /// GET /api/appointments/export
+    /// </summary>
+    [HttpGet("export")]
+    [Authorize(Roles = "Admin,Employee")]
+    public async Task<IActionResult> Export()
+    {
+        var fileData = await _mediator.Send(new ClinicManagement.Application.Appointments.Queries.ExportAppointments.ExportAppointmentsQuery());
+        return File(fileData, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"Appointments_Export_{DateTime.UtcNow:yyyyMMddHHmm}.xlsx");
+    }
 }
 
