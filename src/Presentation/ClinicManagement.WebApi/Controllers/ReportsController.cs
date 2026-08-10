@@ -8,7 +8,7 @@ namespace ClinicManagement.WebApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize(Roles = "Admin")]
+[Authorize(Policy = ClinicManagement.Domain.Constants.AppPermissions.Reports_List)]
 public class ReportsController : ControllerBase
 {
     private readonly IMediator _mediator;

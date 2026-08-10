@@ -88,13 +88,13 @@ namespace ClinicManagement.Infrastructure.Migrations
 
                     b.HasIndex("CreatedByEmployeeId");
 
-                    b.HasIndex("PatientId");
-
                     b.HasIndex("ScheduledStart");
 
                     b.HasIndex("Status");
 
                     b.HasIndex("DoctorId", "ScheduledStart");
+
+                    b.HasIndex("PatientId", "ScheduledStart");
 
                     b.ToTable("Appointments", (string)null);
                 });
@@ -106,6 +106,9 @@ namespace ClinicManagement.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("AppointmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("AppointmentId1")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("ChangedAt")
@@ -143,9 +146,11 @@ namespace ClinicManagement.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppointmentId");
+                    b.HasIndex("AppointmentId1");
 
                     b.HasIndex("ChangedByEmployeeId");
+
+                    b.HasIndex("AppointmentId", "ChangedAt");
 
                     b.ToTable("AppointmentStatusHistories");
                 });
@@ -718,6 +723,67 @@ namespace ClinicManagement.Infrastructure.Migrations
                     b.ToTable("Patients", (string)null);
                 });
 
+            modelBuilder.Entity("ClinicManagement.Domain.Entities.Patients.PatientDocument", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DocumentType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("FileType")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("OriginalFileName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<Guid>("PatientId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PatientId", "CreatedAt");
+
+                    b.ToTable("PatientDocuments");
+                });
+
             modelBuilder.Entity("ClinicManagement.Domain.Entities.Patients.PatientVisit", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1156,6 +1222,10 @@ namespace ClinicManagement.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ClinicManagement.Domain.Entities.Appointments.Appointment", null)
+                        .WithMany("StatusHistories")
+                        .HasForeignKey("AppointmentId1");
+
                     b.HasOne("ClinicManagement.Domain.Entities.Staff.Employee", "ChangedByEmployee")
                         .WithMany()
                         .HasForeignKey("ChangedByEmployeeId")
@@ -1230,6 +1300,17 @@ namespace ClinicManagement.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("InventoryItem");
+                });
+
+            modelBuilder.Entity("ClinicManagement.Domain.Entities.Patients.PatientDocument", b =>
+                {
+                    b.HasOne("ClinicManagement.Domain.Entities.Patients.Patient", "Patient")
+                        .WithMany("Documents")
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Patient");
                 });
 
             modelBuilder.Entity("ClinicManagement.Domain.Entities.Patients.PatientVisit", b =>
@@ -1340,6 +1421,11 @@ namespace ClinicManagement.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ClinicManagement.Domain.Entities.Appointments.Appointment", b =>
+                {
+                    b.Navigation("StatusHistories");
+                });
+
             modelBuilder.Entity("ClinicManagement.Domain.Entities.Doctors.Doctor", b =>
                 {
                     b.Navigation("Appointments");
@@ -1378,6 +1464,8 @@ namespace ClinicManagement.Infrastructure.Migrations
             modelBuilder.Entity("ClinicManagement.Domain.Entities.Patients.Patient", b =>
                 {
                     b.Navigation("Appointments");
+
+                    b.Navigation("Documents");
 
                     b.Navigation("Visits");
                 });

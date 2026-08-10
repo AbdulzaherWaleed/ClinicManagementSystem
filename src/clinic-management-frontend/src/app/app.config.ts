@@ -1,5 +1,5 @@
 import { ApplicationConfig, provideZonelessChangeDetection, APP_INITIALIZER } from '@angular/core';
-import { provideRouter, withViewTransitions } from '@angular/router';
+import { provideRouter } from '@angular/router';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { routes } from './app.routes';
@@ -23,8 +23,8 @@ export const appConfig: ApplicationConfig = {
       multi: true
     },
 
-    // Router with smooth view transitions
-    provideRouter(routes, withViewTransitions()),
+    // Router
+    provideRouter(routes),
 
     // HttpClient with functional interceptors (JWT + Error handling)
     provideHttpClient(

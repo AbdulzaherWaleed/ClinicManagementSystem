@@ -1,4 +1,4 @@
-﻿using ClinicManagement.Domain.Common;
+using ClinicManagement.Domain.Common;
 using ClinicManagement.Domain.Entities.Appointments;
 
 namespace ClinicManagement.Domain.Entities.Patients;
@@ -20,4 +20,5 @@ public class Patient : BaseAuditableEntity
 
     public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
     public ICollection<PatientVisit> Visits { get; set; } = new List<PatientVisit>();
+    public ICollection<PatientDocument> Documents { get; set; } = new List<PatientDocument>();
 }

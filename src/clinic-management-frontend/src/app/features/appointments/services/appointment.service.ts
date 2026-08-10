@@ -47,7 +47,7 @@ export class AppointmentService {
   }
 
   updateAppointment(id: string, command: UpdateAppointmentCommand): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/${id}`, command);
+    return this.http.patch<void>(`${this.apiUrl}/${id}`, command);
   }
 
   cancelAppointment(id: string, command: CancelAppointmentCommand): Observable<void> {

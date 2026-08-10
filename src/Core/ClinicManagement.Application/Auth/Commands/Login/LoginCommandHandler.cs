@@ -53,9 +53,10 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, AuthResponseDto
         await _userManager.ResetAccessFailedCountAsync(user);
 
         var roles = await _userManager.GetRolesAsync(user);
+        var userClaims = await _userManager.GetClaimsAsync(user);
 
         // v2.1 — Generate JWT with multiple "doctorId" claims (one per assigned doctor)
-        var (token, expiresAt) = _jwtTokenGenerator.GenerateToken(user, roles);
+        var (token, expiresAt) = _jwtTokenGenerator.GenerateToken(user, roles, userClaims);
         var refreshToken = _jwtTokenGenerator.GenerateRefreshToken();
 
         var userRefreshToken = new UserRefreshToken

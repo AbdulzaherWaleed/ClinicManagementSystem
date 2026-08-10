@@ -15,6 +15,18 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddDataProtection();
 builder.Services.AddMemoryCache();
 
+// Response compression — Brotli preferred, Gzip fallback
+builder.Services.AddResponseCompression(options =>
+{
+    options.EnableForHttps = true;
+    options.Providers.Add<Microsoft.AspNetCore.ResponseCompression.BrotliCompressionProvider>();
+    options.Providers.Add<Microsoft.AspNetCore.ResponseCompression.GzipCompressionProvider>();
+    options.MimeTypes = Microsoft.AspNetCore.ResponseCompression.ResponseCompressionDefaults.MimeTypes.Concat(
+        new[] { "application/json", "application/json; charset=utf-8" });
+});
+builder.Services.Configure<Microsoft.AspNetCore.ResponseCompression.BrotliCompressionProviderOptions>(o => o.Level = System.IO.Compression.CompressionLevel.Fastest);
+builder.Services.Configure<Microsoft.AspNetCore.ResponseCompression.GzipCompressionProviderOptions>(o => o.Level = System.IO.Compression.CompressionLevel.Fastest);
+
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
@@ -76,6 +88,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+app.UseResponseCompression();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 app.UseCors("AllowAngular");

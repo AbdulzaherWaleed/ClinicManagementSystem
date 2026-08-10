@@ -33,6 +33,7 @@ public class ApplicationDbContext
     public DbSet<EmployeeDoctorAssignment> EmployeeDoctorAssignments => Set<EmployeeDoctorAssignment>();
     public DbSet<Patient> Patients => Set<Patient>();
     public DbSet<PatientVisit> PatientVisits => Set<PatientVisit>();
+    public DbSet<PatientDocument> PatientDocuments => Set<PatientDocument>();
     public DbSet<Appointment> Appointments => Set<Appointment>();
     public DbSet<AppointmentStatusHistory> AppointmentStatusHistories => Set<AppointmentStatusHistory>();
     public DbSet<ClinicSetting> ClinicSettings => Set<ClinicSetting>();

@@ -4,63 +4,110 @@
   
   <div class="flex justify-between items-center mb-6">
     <h2 class="text-2xl font-semibold text-primary">إدارة الموظفين (المستخدمين)</h2>
-    <p-button label="إضافة موظف" icon="pi pi-plus" (onClick)="showAddDialog()"></p-button>
+    <p-button *appHasPermission="'Employees.Create'" label="إضافة موظف" icon="pi pi-plus" (onClick)="showAddDialog()"></p-button>
   </div>
 
-  <p-table [value]="employees()" [loading]="isLoading()" [paginator]="true" [rows]="10" [lazy]="true" [totalRecords]="totalRecords()" (onLazyLoad)="onLazyLoad($event)">
-    <ng-template #header>
-      <tr>
-        <th>الاسم</th>
-        <th>المسمى الوظيفي</th>
-        <th>رقم الهاتف</th>
-        <th>الأطباء المعينين</th>
-        <th>تاريخ الإضافة</th>
-        <th>الحالة</th>
-        <th style="min-width: 200px" class="text-center">الإجراءات</th>
-      </tr>
-    </ng-template>
-    <ng-template #body let-emp>
-      <tr>
-        <td class="font-medium">{{ emp.fullName }}</td>
-        <td>{{ emp.jobTitle || '-' }}</td>
-        <td>{{ emp.phoneNumber || '-' }}</td>
-        <td>
-          <span *ngIf="emp.assignedDoctorNames?.length">{{ emp.assignedDoctorNames.join(', ') }}</span>
-          <span *ngIf="!emp.assignedDoctorNames?.length" class="text-gray-500">-</span>
-        </td>
-        <td>{{ emp.createdAt | date:'shortDate' }}</td>
-        <td>
-          <p-tag [severity]="emp.isActive ? 'success' : 'danger'" [value]="emp.isActive ? 'نشط' : 'غير نشط'"></p-tag>
-        </td>
-        <td>
-          <div class="flex gap-3 justify-center w-full">
-            <p-button 
-              [icon]="emp.isActive ? 'pi pi-ban' : 'pi pi-check'" 
-              [severity]="emp.isActive ? 'danger' : 'success'"
-              [label]="emp.isActive ? 'تعطيل' : 'تفعيل'"
-              size="small" 
-              [outlined]="true"
-              styleClass="me-3"
-              [style]="{'margin-inline-end': '1rem'}"
-              (onClick)="toggleStatus(emp)">
-            </p-button>
-            <p-button 
-              icon="pi pi-trash" 
-              severity="danger"
-              label="حذف"
-              size="small" 
-              (onClick)="deleteEmployee(emp)">
-            </p-button>
-          </div>
-        </td>
-      </tr>
-    </ng-template>
-    <ng-template #empty>
-      <tr>
-        <td colspan="7" class="text-center py-6 text-gray-500">لا يوجد موظفين مضافين بعد</td>
-      </tr>
-    </ng-template>
-  </p-table>
+  <div *appHasPermission="'Employees.List'">
+    <p-table [value]="employees()" [loading]="isLoading()" [paginator]="true" [rows]="10" [lazy]="true" [totalRecords]="totalRecords()" (onLazyLoad)="onLazyLoad($event)">
+      <ng-template #header>
+        <tr>
+          <th>الاسم</th>
+          <th>المسمى الوظيفي</th>
+          <th>رقم الهاتف</th>
+          <th>الأطباء المعينين</th>
+          <th>تاريخ الإضافة</th>
+          <th>الحالة</th>
+          <th style="min-width: 200px" class="text-center">الإجراءات</th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-emp>
+        <tr>
+          <td class="font-medium">{{ emp.fullName }}</td>
+          <td>{{ emp.jobTitle || '-' }}</td>
+          <td>{{ emp.phoneNumber || '-' }}</td>
+          <td>
+            <span *ngIf="emp.assignedDoctorNames?.length">{{ emp.assignedDoctorNames.join(', ') }}</span>
+            <span *ngIf="!emp.assignedDoctorNames?.length" class="text-gray-500">-</span>
+          </td>
+          <td>{{ emp.createdAt | date:'shortDate' }}</td>
+          <td>
+            <p-tag [severity]="emp.isActive ? 'success' : 'danger'" [value]="emp.isActive ? 'نشط' : 'غير نشط'"></p-tag>
+          </td>
+          <td>
+            <div class="flex gap-2 justify-center w-full">
+              <p-button *appHasPermission="'Employees.Edit'"
+                severity="secondary"
+                size="small"
+                (onClick)="showEditEmployee(emp)">
+                <i class="pi pi-pencil me-1"></i>
+                تعديل
+              </p-button>
+              <p-button *appHasPermission="'Employees.Edit'"
+                [severity]="emp.isActive ? 'danger' : 'success'"
+                size="small" 
+                (onClick)="toggleStatus(emp)">
+                <i [class]="emp.isActive ? 'pi pi-ban me-1' : 'pi pi-check me-1'"></i>
+                {{ emp.isActive ? 'تعطيل' : 'تفعيل' }}
+              </p-button>
+              <p-button *appHasPermission="'Employees.Edit'"
+                severity="info"
+                size="small" 
+                (onClick)="showPermissionsDialog(emp)">
+                <i class="pi pi-shield me-1"></i>
+                الصلاحيات
+              </p-button>
+              <p-button *appHasPermission="'Employees.Delete'"
+                severity="danger"
+                size="small" 
+                (onClick)="deleteEmployee(emp)">
+                <i class="pi pi-trash me-1"></i>
+                حذف
+              </p-button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template #empty>
+        <tr>
+          <td colspan="7" class="text-center py-6 text-gray-500">لا يوجد موظفين مضافين بعد</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <div *ngIf="!permissionService.hasPermission('Employees.List')" class="card p-6 text-center text-gray-500">
+    <i class="pi pi-lock text-4xl mb-3 text-gray-400 block mx-auto"></i>
+    <p class="text-lg font-medium text-color-secondary">ليس لديك صلاحية لعرض قائمة الموظفين.</p>
+  </div>
+
+  <!-- Edit Employee Dialog -->
+  <p-dialog
+    [header]="'تعديل بيانات الموظف: ' + (editingEmployee()?.fullName || '')"
+    [visible]="displayEditDialog()"
+    (visibleChange)="displayEditDialog.set($event)"
+    [modal]="true"
+    [style]="{width: '440px'}"
+    [draggable]="false"
+    [resizable]="false">
+    <form *ngIf="editForm" [formGroup]="editForm" class="flex flex-col gap-4 mt-4" (ngSubmit)="saveEditEmployee()">
+      <div class="flex flex-col gap-2">
+        <label>الاسم الكامل <span class="text-red-500">*</span></label>
+        <input pInputText formControlName="fullName" class="w-full" />
+        <small class="text-red-500" *ngIf="editForm.get('fullName')?.invalid && editForm.get('fullName')?.touched">الاسم مطلوب</small>
+      </div>
+      <div class="flex flex-col gap-2">
+        <label>رقم الهاتف</label>
+        <input pInputText formControlName="phoneNumber" class="w-full" />
+      </div>
+      <div class="flex flex-col gap-2">
+        <label>المسمى الوظيفي</label>
+        <input pInputText formControlName="jobTitle" class="w-full" />
+      </div>
+      <div class="flex justify-end gap-2">
+        <p-button type="button" label="إلغاء" severity="secondary" [outlined]="true" (onClick)="displayEditDialog.set(false)"></p-button>
+        <p-button type="submit" label="حفظ التعديلات" icon="pi pi-save" [loading]="isUpdating()"></p-button>
+      </div>
+    </form>
+  </p-dialog>
 
   <!-- Add Employee Dialog -->
   <p-dialog header="إضافة موظف جديد" [visible]="displayAddDialog()" (visibleChange)="displayAddDialog.set($event)" [modal]="true" [style]="{width: '500px'}" [draggable]="false" [resizable]="false">
@@ -126,5 +173,34 @@
         <p-button label="حفظ وإنشاء الحساب" type="submit" [loading]="isSubmitting()"></p-button>
       </div>
     </form>
+  </p-dialog>
+  <!-- Permissions Dialog -->
+  <p-dialog [header]="'صلاحيات الموظف: ' + selectedEmployeeName()" [visible]="displayPermissionsDialog()" (visibleChange)="displayPermissionsDialog.set($event)" [modal]="true" [style]="{width: '600px'}" [draggable]="false" [resizable]="false">
+    <div class="flex flex-col gap-6 mt-4">
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div *ngFor="let module of availablePermissions" class="border border-gray-200 rounded-lg p-3 bg-gray-50">
+          <h4 class="font-semibold text-primary border-b border-gray-300 pb-2 mb-3">{{ module.module }}</h4>
+          
+          <div class="flex flex-col gap-2">
+            <div *ngFor="let item of module.items" class="flex items-center gap-2">
+              <input 
+                type="checkbox" 
+                [id]="'perm_' + item.value" 
+                [value]="item.value" 
+                (change)="onPermissionCheckboxChange($event, item.value)" 
+                [checked]="selectedPermissions().includes(item.value)" 
+                class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary">
+              <label [for]="'perm_' + item.value" class="text-sm text-gray-700 cursor-pointer w-full">{{ item.label }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-2 mt-4 pt-4 border-t border-gray-200">
+        <p-button type="button" label="إلغاء" severity="secondary" [outlined]="true" (onClick)="displayPermissionsDialog.set(false)"></p-button>
+        <p-button label="حفظ الصلاحيات" (onClick)="savePermissions()" [loading]="isSavingPermissions()"></p-button>
+      </div>
+    </div>
   </p-dialog>
 </div>

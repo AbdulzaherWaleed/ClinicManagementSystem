@@ -71,6 +71,17 @@ public static class DependencyInjection
             };
         });
 
+        services.AddSingleton<Microsoft.AspNetCore.Authorization.IAuthorizationHandler, PermissionAuthorizationHandler>();
+        
+        services.AddAuthorization(options =>
+        {
+            foreach (var permission in ClinicManagement.Domain.Constants.AppPermissions.GetAll())
+            {
+                options.AddPolicy(permission, policy => 
+                    policy.Requirements.Add(new PermissionRequirement(permission)));
+            }
+        });
+
         return services;
     }
 }

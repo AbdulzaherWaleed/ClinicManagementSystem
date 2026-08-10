@@ -25,21 +25,25 @@ public class UpdateAppointmentCommandHandler : IRequestHandler<UpdateAppointment
         if (appointment == null)
             throw new NotFoundException("Appointment", request.Id);
 
+        // Row-level security: Employee may only edit appointments for their assigned doctors
         if (_currentUserService.Role == "Employee" && !_currentUserService.AssignedDoctorIds.Contains(appointment.DoctorId))
-        {
             throw new ForbiddenAccessException();
-        }
 
-        // Check for conflicting appointments if the time changed
-        if (appointment.ScheduledStart != request.ScheduledStart || appointment.ScheduledEnd != request.ScheduledEnd)
+        // Resolve effective values (new value ?? existing value) for conflict check
+        var newStart = request.ScheduledStart ?? appointment.ScheduledStart;
+        var newEnd   = request.ScheduledEnd   ?? appointment.ScheduledEnd;
+
+        // Check for conflicting appointments only if the time actually changed
+        bool timeChanged = request.ScheduledStart.HasValue || request.ScheduledEnd.HasValue;
+        if (timeChanged)
         {
             var hasConflict = await _context.Appointments
                 .AnyAsync(a => a.Id != request.Id &&
                                a.DoctorId == appointment.DoctorId &&
                                !a.IsDeleted &&
                                a.Status != AppointmentStatus.Cancelled &&
-                               request.ScheduledStart < a.ScheduledEnd &&
-                               request.ScheduledEnd > a.ScheduledStart,
+                               newStart < a.ScheduledEnd &&
+                               newEnd > a.ScheduledStart,
                           cancellationToken);
 
             if (hasConflict)
@@ -49,12 +53,13 @@ public class UpdateAppointmentCommandHandler : IRequestHandler<UpdateAppointment
                 });
         }
 
-        appointment.ScheduledStart = request.ScheduledStart;
-        appointment.ScheduledEnd = request.ScheduledEnd;
-        appointment.Status = request.Status;
-        appointment.VisitStage = request.VisitStage;
-        appointment.VisitType = request.VisitType;
-        appointment.Reason = request.Reason;
+        // Apply only the fields that were explicitly provided (PATCH semantics)
+        if (request.ScheduledStart.HasValue) appointment.ScheduledStart = request.ScheduledStart.Value;
+        if (request.ScheduledEnd.HasValue)   appointment.ScheduledEnd   = request.ScheduledEnd.Value;
+        if (request.Status.HasValue)         appointment.Status         = request.Status.Value;
+        if (request.VisitStage.HasValue)     appointment.VisitStage     = request.VisitStage.Value;
+        if (request.VisitType != null)       appointment.VisitType      = request.VisitType;
+        if (request.Reason != null)          appointment.Reason         = request.Reason;
 
         await _context.SaveChangesAsync(cancellationToken);
     }

@@ -5,6 +5,7 @@ import { AuthService } from '../../../core/auth/services/auth.service';
 import { DoctorService } from '../../../features/admin/doctors/services/doctor.service';
 import { PopoverModule } from 'primeng/popover';
 import { ConfigService } from '../../../core/services/config.service';
+import { PermissionService } from '../../../core/auth/services/permission.service';
 
 @Component({
   selector: 'app-topbar',
@@ -28,8 +29,10 @@ export class TopbarComponent implements OnInit {
   
   readonly expiringLicenses = signal<any[]>([]);
 
+  private readonly permissionService = inject(PermissionService);
+
   ngOnInit(): void {
-    if (this.userRole() === 'Admin' || this.userRole() === 'Employee') {
+    if (this.userRole() === 'Admin' || (this.userRole() === 'Employee' && this.permissionService.hasPermission('Licenses.List'))) {
       if (this.configService.doctorLicensesEnabled()) {
         this.doctorService.getExpiringLicenses(30).subscribe({
           next: (licenses) => {

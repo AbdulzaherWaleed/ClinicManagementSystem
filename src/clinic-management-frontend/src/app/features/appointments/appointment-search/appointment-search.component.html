@@ -2,7 +2,7 @@
   <p-toast></p-toast>
   <div class="flex justify-between items-center mb-6">
     <h1 class="text-2xl font-bold text-primary m-0">البحث في الحجوزات</h1>
-    <p-button icon="pi pi-plus" label="حجز جديد" routerLink="/appointments/new"></p-button>
+    <p-button *appHasPermission="'Bookings.Create'" icon="pi pi-plus" label="حجز جديد" routerLink="/appointments/new"></p-button>
   </div>
 
   <div class="card mb-4 filter-card">
@@ -46,7 +46,7 @@
             (onClick)="reset()">
           </p-button>
           
-          <p-button 
+          <p-button *appHasPermission="'Bookings.List'"
             label="تصدير (Excel)" 
             icon="pi pi-file-excel" 
             styleClass="p-button-outlined p-button-success me-3"
@@ -65,10 +65,9 @@
     </form>
   </div>
 
-
-
-  <div class="card p-0 table-card">
+  <div *appHasPermission="'Bookings.List'" class="card p-0 table-card">
     <p-table 
+      #dt
       [value]="appointments()" 
       [loading]="isLoading()" 
       [paginator]="true" 
@@ -108,13 +107,14 @@
             </div>
           </td>
           <td class="text-center">
-            <p-tag [value]="getStageLabel(appt.visitStage)" [severity]="'secondary'" [rounded]="true"></p-tag>
+            <p-tag [value]="getStageLabel(appt.visitStage)" [severity]="getStageSeverity(appt.visitStage)" [rounded]="true"></p-tag>
           </td>
           <td class="text-center font-medium">
             {{ appt.visitType || '-' }}
           </td>
           <td class="text-center">
-            <p-select [options]="actionStatuses" [(ngModel)]="appt.status" (onChange)="onStatusChange(appt, $event.value)" optionLabel="label" optionValue="value" appendTo="body" styleClass="w-full"></p-select>
+            <p-select *appHasPermission="'Bookings.Edit'" [options]="actionStatuses" [(ngModel)]="appt.status" (onChange)="onStatusChange(appt, $event.value)" optionLabel="label" optionValue="value" appendTo="body" styleClass="w-full"></p-select>
+            <span *ngIf="!permissionService.hasPermission('Bookings.Edit')">{{ getStatusLabel(appt.status) }}</span>
           </td>
         </tr>
       </ng-template>
@@ -128,5 +128,9 @@
         </tr>
       </ng-template>
     </p-table>
+  </div>
+  <div *ngIf="!permissionService.hasPermission('Bookings.List')" class="card p-6 text-center text-gray-500 mt-4">
+    <i class="pi pi-lock text-4xl mb-3 text-gray-400 block mx-auto"></i>
+    <p class="text-lg font-medium text-color-secondary">ليس لديك صلاحية لعرض قائمة الحجوزات.</p>
   </div>
 </div>

@@ -1,0 +1,460 @@
+<p-toast></p-toast>
+<p-confirmdialog></p-confirmdialog>
+
+<!-- ─── LOADING STATE ─── -->
+<div class="page-container animate-fade-in" *ngIf="isLoading">
+  <div class="card profile-skeleton">
+    <div class="flex items-center gap-4 mb-5">
+      <div class="skeleton-avatar"></div>
+      <div class="flex flex-col gap-2 flex-1">
+        <div class="skeleton-line w-48"></div>
+        <div class="skeleton-line w-32"></div>
+      </div>
+    </div>
+    <div class="flex gap-4">
+      <div class="skeleton-stat"></div>
+      <div class="skeleton-stat"></div>
+      <div class="skeleton-stat"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── PROFILE CONTENT ─── -->
+<div class="page-container animate-fade-in" *ngIf="!isLoading && profile">
+
+  <!-- ─── HEADER CARD ─── -->
+  <div class="card bg-white shadow-sm rounded-xl p-5 mb-6 border border-gray-100">
+    <div class="flex items-center justify-between flex-wrap gap-4">
+
+      <!-- Avatar + Name -->
+      <div class="flex items-center gap-4">
+        <div class="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0 text-gray-400">
+          <i class="pi pi-user text-2xl"></i>
+        </div>
+        <div>
+          <h1 class="text-2xl font-bold text-gray-900 m-0">{{ profile.demographics.fullName }}</h1>
+          <div class="flex items-center flex-wrap mt-2 text-sm">
+            <span class="flex items-center gap-2 text-gray-700 font-medium">
+              <i class="pi pi-phone text-gray-400"></i>
+              {{ profile.demographics.phoneNumber || 'غير مسجل' }}
+            </span>
+            <span class="header-separator">|</span>
+            <span [ngClass]="profile.demographics.gender === 'Male' ? 'bg-blue-50 text-blue-700 border-blue-200' : 'bg-pink-50 text-pink-700 border-pink-200'" 
+                  class="px-3 py-1 rounded-full border text-xs font-bold">
+              {{ profile.demographics.gender === 'Male' ? 'ذكر' : 'أنثى' }}
+            </span>
+            <span class="header-separator">|</span>
+            <span class="text-gray-500 font-medium">{{ ageLabel }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex gap-2">
+        <p-button
+          *appHasPermission="'Patients.Edit'"
+          icon="pi pi-pencil"
+          label="تعديل"
+          styleClass="p-button-outlined"
+          (onClick)="openEditDialog()">
+        </p-button>
+        <p-button
+          *appHasPermission="'Patients.Delete'"
+          icon="pi pi-trash"
+          label="حذف"
+          styleClass="p-button-outlined p-button-danger"
+          (onClick)="confirmDelete()">
+        </p-button>
+      </div>
+    </div>
+
+    <!-- ─── STAT CARDS ─── -->
+    <div class="stat-cards-grid">
+      <div class="stat-card-custom">
+        <div class="stat-icon-circle icon-indigo">
+          <i class="pi pi-calendar-check"></i>
+        </div>
+        <div class="stat-text-container">
+          <span class="stat-label">إجمالي الزيارات</span>
+          <span class="stat-value">{{ profile.totalVisits }}</span>
+        </div>
+      </div>
+
+      <div class="stat-card-custom">
+        <div class="stat-icon-circle icon-green">
+          <i class="pi pi-history"></i>
+        </div>
+        <div class="stat-text-container">
+          <span class="stat-label">آخر زيارة</span>
+          <span class="stat-value">
+            {{ profile.lastVisitDate ? (profile.lastVisitDate | date:'yyyy/MM/dd') : 'لا يوجد' }}
+          </span>
+        </div>
+      </div>
+
+      <div class="stat-card-custom">
+        <div class="stat-icon-circle icon-amber">
+          <i class="pi pi-clock"></i>
+        </div>
+        <div class="stat-text-container">
+          <span class="stat-label">الموعد القادم</span>
+          <span class="stat-value">
+            {{ profile.nextAppointmentDate ? (profile.nextAppointmentDate | date:'yyyy/MM/dd') : 'لا يوجد' }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── TABS ─── -->
+  <div class="bg-white shadow-sm rounded-xl border border-gray-100 overflow-hidden custom-tabs-container">
+    <p-tabs value="0" (valueChange)="onTabChange($event)" styleClass="w-full">
+      <p-tablist>
+        <p-tab value="0">
+          <div class="flex items-center gap-2">
+            <i class="pi pi-id-card"></i>
+            <span>المعلومات الأساسية</span>
+          </div>
+        </p-tab>
+        <p-tab value="1">
+          <div class="flex items-center gap-2">
+            <i class="pi pi-calendar"></i>
+            <span>سجل الزيارات والمواعيد</span>
+            <span *ngIf="appointmentsState.totalCount > 0" class="bg-gray-100 text-gray-600 text-xs px-2 py-0.5 rounded-full ml-1">
+              {{appointmentsState.totalCount}}
+            </span>
+          </div>
+        </p-tab>
+        <p-tab value="2">
+          <div class="flex items-center gap-2">
+            <i class="pi pi-file"></i>
+            <span>الملفات والتقارير</span>
+            <span *ngIf="documentsState.totalCount > 0" class="bg-gray-100 text-gray-600 text-xs px-2 py-0.5 rounded-full ml-1">
+              {{documentsState.totalCount}}
+            </span>
+          </div>
+        </p-tab>
+      </p-tablist>
+
+      <p-tabpanels>
+
+        <!-- ══ TAB 1: Demographics ══ -->
+        <p-tabpanel value="0">
+          <div class="p-6">
+
+            <div class="basic-info-grid">
+              <!-- Full Name -->
+              <div class="info-field">
+                <span class="text-xs text-gray-500 font-semibold uppercase tracking-wider flex items-center gap-1">
+                  <i class="pi pi-user opacity-70"></i>الاسم الكامل
+                </span>
+                <span class="text-gray-900 font-medium">{{ profile.demographics.fullName }}</span>
+              </div>
+              <!-- Date of Birth -->
+              <div class="info-field">
+                <span class="text-xs text-gray-500 font-semibold uppercase tracking-wider flex items-center gap-1">
+                  <i class="pi pi-gift opacity-70"></i>تاريخ الميلاد
+                </span>
+                <span class="text-gray-900 font-medium">
+                  {{ profile.demographics.dateOfBirth ? (profile.demographics.dateOfBirth | date:'yyyy/MM/dd') : '' }}
+                  <span class="text-gray-400 italic text-sm" *ngIf="!profile.demographics.dateOfBirth">غير مسجل</span>
+                </span>
+              </div>
+              <!-- Gender -->
+              <div class="info-field">
+                <span class="text-xs text-gray-500 font-semibold uppercase tracking-wider flex items-center gap-1">
+                  <i class="pi pi-users opacity-70"></i>الجنس
+                </span>
+                <span class="text-gray-900 font-medium">
+                  {{ profile.demographics.gender === 'Male' ? 'ذكر' : 'أنثى' }}
+                </span>
+              </div>
+              <!-- Phone Number -->
+              <div class="info-field">
+                <span class="text-xs text-gray-500 font-semibold uppercase tracking-wider flex items-center gap-1">
+                  <i class="pi pi-phone opacity-70"></i>رقم الهاتف
+                </span>
+                <span class="text-gray-900 font-medium" dir="ltr">
+                  {{ profile.demographics.phoneNumber || '' }}
+                  <span class="text-gray-400 italic text-sm" *ngIf="!profile.demographics.phoneNumber">غير مسجل</span>
+                </span>
+              </div>
+              <!-- Email -->
+              <div class="info-field">
+                <span class="text-xs text-gray-500 font-semibold uppercase tracking-wider flex items-center gap-1">
+                  <i class="pi pi-envelope opacity-70"></i>البريد الإلكتروني
+                </span>
+                <span class="text-gray-900 font-medium" dir="ltr">
+                  {{ profile.demographics.email || '' }}
+                  <span class="text-gray-400 italic text-sm" *ngIf="!profile.demographics.email">غير مسجل</span>
+                </span>
+              </div>
+              <!-- National ID -->
+              <div class="info-field">
+                <span class="text-xs text-gray-500 font-semibold uppercase tracking-wider flex items-center gap-1">
+                  <i class="pi pi-id-card opacity-70"></i>الرقم القومي
+                </span>
+                <span class="text-gray-900 font-medium" dir="ltr">
+                  {{ profile.demographics.nationalId || '' }}
+                  <span class="text-gray-400 italic text-sm" *ngIf="!profile.demographics.nationalId">غير مسجل</span>
+                </span>
+              </div>
+              <!-- Address -->
+              <div class="info-field info-field-wide">
+                <span class="text-xs text-gray-500 font-semibold uppercase tracking-wider flex items-center gap-1">
+                  <i class="pi pi-map-marker opacity-70"></i>العنوان
+                </span>
+                <span class="text-gray-900 font-medium">
+                  {{ profile.demographics.address || '' }}
+                  <span class="text-gray-400 italic text-sm" *ngIf="!profile.demographics.address">غير مسجل</span>
+                </span>
+              </div>
+              <!-- Record Date -->
+              <div class="info-field">
+                <span class="text-xs text-gray-500 font-semibold uppercase tracking-wider flex items-center gap-1">
+                  <i class="pi pi-calendar-plus opacity-70"></i>تاريخ التسجيل
+                </span>
+                <span class="text-gray-900 font-medium" dir="ltr">
+                  {{ profile.demographics.createdAt | date:'yyyy/MM/dd' }}
+                </span>
+              </div>
+            </div>
+
+            <!-- Medical Notes Section -->
+            <div *ngIf="profile.demographics.medicalNotes" class="bg-orange-50 border border-orange-200 border-r-4 border-r-orange-500 rounded-lg p-4 mt-2">
+              <div class="flex items-center gap-2 font-bold text-orange-700 mb-2 text-sm">
+                <i class="pi pi-info-circle"></i>ملاحظات طبية
+              </div>
+              <p class="m-0 text-gray-900 leading-relaxed text-sm">
+                {{ profile.demographics.medicalNotes }}
+              </p>
+            </div>
+
+          </div>
+        </p-tabpanel>
+
+        <!-- ══ TAB 2: Appointments ══ -->
+        <p-tabpanel value="1">
+          <div class="p-6">
+            
+            <p-table
+              [value]="appointmentsState.items"
+              [lazy]="true"
+              (onLazyLoad)="loadAppointmentsLazy($event)"
+              [loading]="appointmentsState.loading"
+              [paginator]="true"
+              [rows]="10"
+              [totalRecords]="appointmentsState.totalCount"
+              styleClass="p-datatable-sm p-datatable-striped custom-datatable"
+              [showCurrentPageReport]="true"
+              currentPageReportTemplate="عرض {first} إلى {last} من أصل {totalRecords} موعد">
+
+              <ng-template #header>
+                <tr>
+                  <th style="min-width:180px" class="px-6 py-4 text-center">التاريخ والوقت</th>
+                  <th style="min-width:250px" class="px-6 py-4">الطبيب</th>
+                  <th style="min-width:140px" class="px-6 py-4 text-center">الحالة</th>
+                  <th style="min-width:200px" class="px-6 py-4">سبب الزيارة</th>
+                </tr>
+              </ng-template>
+
+              <ng-template #body let-appt>
+                <tr>
+                  <td class="px-6 py-4 text-center">
+                    <div class="font-semibold whitespace-nowrap text-center" dir="ltr">{{ appt.scheduledStart | date:'yyyy/MM/dd' }}</div>
+                    <div class="text-sm text-gray-500 mt-1 whitespace-nowrap text-center" dir="ltr">{{ appt.scheduledStart | date:'hh:mm a' }}</div>
+                  </td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-2">
+                      <div class="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-sm">
+                        <i class="pi pi-user-md"></i>
+                      </div>
+                      <span>{{ appt.doctorName }}</span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-center">
+                    <span [ngClass]="getStatusSeverity(appt.status) === 'success' ? 'bg-green-100 text-green-800' : (getStatusSeverity(appt.status) === 'warn' ? 'bg-yellow-100 text-yellow-800' : 'bg-gray-100 text-gray-800')" class="px-2.5 py-0.5 rounded-full text-xs font-medium">
+                      {{ getStatusLabel(appt.status) }}
+                    </span>
+                  </td>
+                  <td class="px-6 py-4">{{ appt.reason || '—' }}</td>
+                </tr>
+              </ng-template>
+
+              <ng-template #empty>
+                <tr>
+                  <td colspan="5" class="text-center p-8">
+                    <i class="pi pi-calendar text-4xl text-gray-400 mb-3 block"></i>
+                    <div class="text-gray-500">لا توجد مواعيد سابقة لهذا المريض</div>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </p-tabpanel>
+
+        <!-- ══ TAB 3: Documents ══ -->
+        <p-tabpanel value="2">
+          <div class="p-6">
+            <div class="flex justify-end mb-4">
+              <input type="file" #fileInput hidden (change)="onUploadDocument($event)" accept="image/*,application/pdf">
+              <p-button
+                *appHasPermission="'Patients.Edit'"
+                icon="pi pi-upload"
+                label="رفع ملف جديد"
+                styleClass="p-button-outlined"
+                (onClick)="fileInput.click()">
+              </p-button>
+            </div>
+
+            <p-table
+              [value]="documentsState.items"
+              [lazy]="true"
+              (onLazyLoad)="loadDocumentsLazy($event)"
+              [loading]="documentsState.loading"
+              [paginator]="true"
+              [rows]="10"
+              [totalRecords]="documentsState.totalCount"
+              styleClass="p-datatable-sm p-datatable-striped custom-datatable"
+              [showCurrentPageReport]="true"
+              currentPageReportTemplate="عرض {first} إلى {last} من أصل {totalRecords} ملف">
+
+              <ng-template #header>
+                <tr>
+                  <th style="min-width:250px" class="px-6 py-4">اسم الملف</th>
+                  <th style="min-width:140px" class="px-6 py-4">التصنيف</th>
+                  <th style="min-width:140px" class="px-6 py-4 text-center">تاريخ الرفع</th>
+                  <th style="min-width:140px" class="px-6 py-4 text-center">إجراءات</th>
+                </tr>
+              </ng-template>
+
+              <ng-template #body let-doc>
+                <tr>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-2">
+                      <i class="pi" [ngClass]="doc.fileType === 'PDF' ? 'pi-file-pdf text-red-500' : 'pi-image text-blue-400'"></i>
+                      <span>{{ doc.originalFileName }}</span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4">
+                    <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded-full">{{ doc.documentType }}</span>
+                  </td>
+                  <td class="px-6 py-4 text-center text-sm" dir="ltr">{{ doc.createdAt | date:'yyyy/MM/dd' }}</td>
+                  <td class="px-6 py-4 text-center">
+                    <div class="actions-cell">
+                      <p-button icon="pi pi-download" styleClass="p-button-text p-button-sm" (onClick)="downloadDocument(doc)" pTooltip="تحميل"></p-button>
+                      <p-button
+                        *appHasPermission="'Patients.Edit'"
+                        icon="pi pi-trash" styleClass="p-button-text p-button-sm p-button-danger"
+                        (onClick)="confirmDeleteDocument(doc)" pTooltip="حذف">
+                      </p-button>
+                    </div>
+                  </td>
+                </tr>
+              </ng-template>
+
+              <ng-template #empty>
+                <tr>
+                  <td colspan="4" class="text-center p-8">
+                    <i class="pi pi-folder-open text-4xl text-gray-400 mb-3 block"></i>
+                    <div class="text-gray-500">لا توجد ملفات مرفوعة لهذا المريض</div>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </p-tabpanel>
+
+      </p-tabpanels>
+    </p-tabs>
+  </div>
+
+</div>
+
+<!-- ─── EDIT DIALOG ─── -->
+<p-dialog
+  [(visible)]="showEditDialog"
+  header="تعديل بيانات المريض"
+  [modal]="true"
+  [style]="{width: '680px'}"
+  [draggable]="false"
+  styleClass="edit-patient-dialog">
+
+  <form [formGroup]="editForm" class="edit-form" *ngIf="profile">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+      <div class="flex flex-col gap-1">
+        <label class="text-sm font-semibold">الاسم الكامل</label>
+        <input pInputText formControlName="fullName" class="w-full" />
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label class="text-sm font-semibold">رقم الهاتف</label>
+        <input pInputText formControlName="phoneNumber" dir="ltr" class="w-full" />
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label class="text-sm font-semibold">البريد الإلكتروني</label>
+        <input pInputText formControlName="email" dir="ltr" class="w-full" />
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label class="text-sm font-semibold">الجنس</label>
+        <p-select
+          [options]="genderOptions"
+          formControlName="gender"
+          optionLabel="label"
+          optionValue="value"
+          placeholder="اختر الجنس"
+          styleClass="w-full"
+          appendTo="body">
+        </p-select>
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label class="text-sm font-semibold">تاريخ الميلاد</label>
+        <p-datepicker
+          formControlName="dateOfBirth"
+          [showIcon]="true"
+          placeholder="اختر التاريخ"
+          styleClass="w-full"
+          inputStyleClass="w-full"
+          appendTo="body">
+        </p-datepicker>
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label class="text-sm font-semibold">الرقم القومي</label>
+        <input pInputText formControlName="nationalId" dir="ltr" class="w-full" />
+      </div>
+
+      <div class="flex flex-col gap-1 md:col-span-2">
+        <label class="text-sm font-semibold">العنوان</label>
+        <input pInputText formControlName="address" class="w-full" />
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label class="text-sm font-semibold">جهة الطوارئ</label>
+        <input pInputText formControlName="emergencyContactName" class="w-full" />
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label class="text-sm font-semibold">هاتف الطوارئ</label>
+        <input pInputText formControlName="emergencyContactPhone" dir="ltr" class="w-full" />
+      </div>
+
+      <div class="flex flex-col gap-1 md:col-span-2">
+        <label class="text-sm font-semibold">ملاحظات طبية</label>
+        <textarea pTextarea formControlName="medicalNotes" rows="3" class="w-full" autoResize="true"></textarea>
+      </div>
+
+    </div>
+  </form>
+
+  <ng-template #footer>
+    <div class="flex justify-end gap-2">
+      <p-button label="إلغاء" styleClass="p-button-text p-button-secondary" (onClick)="showEditDialog = false"></p-button>
+      <p-button label="حفظ التعديلات" icon="pi pi-check" [loading]="isSaving" (onClick)="saveEdit()"></p-button>
+    </div>
+  </ng-template>
+</p-dialog>

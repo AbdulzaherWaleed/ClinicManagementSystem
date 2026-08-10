@@ -25,8 +25,8 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           break;
 
         case 403:
-          // Toast notification (will be wired to PrimeNG MessageService)
-          console.error('403 Forbidden — ليس لديك صلاحية للوصول لهذا المورد');
+          // Authenticated, but lacks required permissions
+          router.navigate(['/unauthorized']);
           break;
 
         case 400:

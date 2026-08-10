@@ -23,6 +23,10 @@ export class DoctorService {
       .pipe(map((response) => response.id));
   }
 
+  updateDoctor(id: string, command: Partial<CreateDoctorCommand> & { isActive?: boolean }): Observable<void> {
+    return this.http.patch<void>(`${this.apiUrl}/${id}`, command);
+  }
+
   toggleStatus(id: string): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/${id}/toggle-status`, {});
   }

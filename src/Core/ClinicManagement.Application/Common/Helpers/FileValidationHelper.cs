@@ -12,17 +12,30 @@ public static class FileValidationHelper
 
     public static bool IsValidPdfOrImage(Stream fileStream)
     {
-        if (fileStream == null || fileStream.Length < 8) return false;
+        return GetFileType(fileStream) != "Unknown";
+    }
+
+    public static string GetFileType(Stream fileStream)
+    {
+        if (fileStream == null || fileStream.Length < 8) return "Unknown";
 
         var headerBytes = new byte[8];
         long originalPosition = fileStream.Position;
         
         fileStream.Position = 0;
-        fileStream.Read(headerBytes, 0, 8);
+        int bytesRead = fileStream.Read(headerBytes, 0, 8);
         fileStream.Position = originalPosition;
 
-        return PdfMagicBytes.Any(sig => headerBytes.Take(sig.Length).SequenceEqual(sig)) ||
-               JpegMagicBytes.Any(sig => headerBytes.Take(sig.Length).SequenceEqual(sig)) ||
-               PngMagicBytes.Any(sig => headerBytes.Take(sig.Length).SequenceEqual(sig));
+        if (bytesRead < 4) return "Unknown";
+
+        if (PdfMagicBytes.Any(sig => headerBytes.Take(sig.Length).SequenceEqual(sig)))
+            return "PDF";
+            
+        if (JpegMagicBytes.Any(sig => headerBytes.Take(sig.Length).SequenceEqual(sig)) ||
+            PngMagicBytes.Any(sig => headerBytes.Take(sig.Length).SequenceEqual(sig)))
+            return "Image";
+
+        return "Unknown";
     }
 }
+

@@ -27,6 +27,13 @@ public class GetAllPatientsQueryHandler : IRequestHandler<GetAllPatientsQuery, P
             queryable = queryable.Where(p => p.Appointments.Any(a => !a.IsDeleted && request.RestrictToDoctorIds.Contains(a.DoctorId)));
         }
 
+        // v3.0 — Search support
+        if (!string.IsNullOrWhiteSpace(request.SearchTerm))
+        {
+            var term = request.SearchTerm.Trim();
+            queryable = queryable.Where(p => p.FullName.Contains(term) || (p.PhoneNumber != null && p.PhoneNumber.Contains(term)));
+        }
+
         var patientsQuery = queryable
             .OrderByDescending(p => p.CreatedAt)
             .Select(p => new PatientDto

@@ -60,7 +60,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, AuthRespo
 
         await _userManager.AddToRoleAsync(user, roleNameValue);
 
-        var (token, expiresAt) = _jwtTokenGenerator.GenerateToken(user, new List<string> { roleNameValue });
+        var (token, expiresAt) = _jwtTokenGenerator.GenerateToken(user, new List<string> { roleNameValue }, new List<System.Security.Claims.Claim>());
         var refreshToken = _jwtTokenGenerator.GenerateRefreshToken();
 
         return new AuthResponseDto

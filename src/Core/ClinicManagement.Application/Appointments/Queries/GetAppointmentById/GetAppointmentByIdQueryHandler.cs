@@ -19,6 +19,7 @@ public class GetAppointmentByIdQueryHandler : IRequestHandler<GetAppointmentById
     public async Task<AppointmentDto?> Handle(GetAppointmentByIdQuery request, CancellationToken cancellationToken)
     {
         var appointment = await _context.Appointments
+            .IgnoreQueryFilters()
             .AsNoTracking()
             .Where(a => a.Id == request.Id && !a.IsDeleted)
             .Select(a => new AppointmentDto

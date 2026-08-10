@@ -17,3 +17,11 @@ export interface RegisterEmployeeCommand {
   jobTitle?: string;
   assignedDoctorIds: string[];
 }
+
+export interface EmployeePermissionsDto {
+  permissions: string[];
+}
+
+export interface UpdateEmployeePermissionsCommand {
+  permissions: string[];
+}

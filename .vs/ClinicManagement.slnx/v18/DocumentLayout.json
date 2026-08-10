@@ -3,8 +3,32 @@
   "WorkspaceRootPath": "E:\\.net\\Medical\\ClinicManagementSystem\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{AC288EBE-1997-4CC7-7A34-73E4EEAD53FA}|src\\Presentation\\ClinicManagement.WebApi\\ClinicManagement.WebApi.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\presentation\\clinicmanagement.webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AC288EBE-1997-4CC7-7A34-73E4EEAD53FA}|src\\Presentation\\ClinicManagement.WebApi\\ClinicManagement.WebApi.csproj|solutionrelative:src\\presentation\\clinicmanagement.webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\interceptors\\auditableentitysavechangesinterceptor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\interceptors\\auditableentitysavechangesinterceptor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\patientvisitconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\patientvisitconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE8CC00-6B1E-2EED-8389-458C4E7DB2B6}|src\\Core\\ClinicManagement.Domain\\ClinicManagement.Domain.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\core\\clinicmanagement.domain\\entities\\patients\\patientvisit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1DE8CC00-6B1E-2EED-8389-458C4E7DB2B6}|src\\Core\\ClinicManagement.Domain\\ClinicManagement.Domain.csproj|solutionrelative:src\\core\\clinicmanagement.domain\\entities\\patients\\patientvisit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\identity\\permissionauthorizationhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\identity\\permissionauthorizationhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\identity\\permissionrequirement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\identity\\permissionrequirement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\databaseseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\databaseseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\patientconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -13,10 +37,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\identity\\jwtsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\identity\\jwtsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\databaseseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\databaseseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -93,10 +113,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{5121AE50-4156-2082-6EEF-63015202FBB5}|src\\Core\\ClinicManagement.Application\\ClinicManagement.Application.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\core\\clinicmanagement.application\\patients\\commands\\createpatient\\createpatientcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5121AE50-4156-2082-6EEF-63015202FBB5}|src\\Core\\ClinicManagement.Application\\ClinicManagement.Application.csproj|solutionrelative:src\\core\\clinicmanagement.application\\patients\\commands\\createpatient\\createpatientcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AC288EBE-1997-4CC7-7A34-73E4EEAD53FA}|src\\Presentation\\ClinicManagement.WebApi\\ClinicManagement.WebApi.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\presentation\\clinicmanagement.webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AC288EBE-1997-4CC7-7A34-73E4EEAD53FA}|src\\Presentation\\ClinicManagement.WebApi\\ClinicManagement.WebApi.csproj|solutionrelative:src\\presentation\\clinicmanagement.webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AC288EBE-1997-4CC7-7A34-73E4EEAD53FA}|src\\Presentation\\ClinicManagement.WebApi\\ClinicManagement.WebApi.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\presentation\\clinicmanagement.webapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -189,10 +205,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\identity\\currentuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\identity\\currentuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\interceptors\\auditableentitysavechangesinterceptor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\interceptors\\auditableentitysavechangesinterceptor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6E150FAB-8A99-D738-3D7C-7B6FF2BBBDDA}|src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj|e:\\.net\\medical\\clinicmanagementsystem\\src\\infrastructure\\clinicmanagement.infrastructure\\persistence\\configurations\\userrefreshtokenconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -307,6 +319,42 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "PatientVisit.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Domain\\Entities\\Patients\\PatientVisit.cs",
+              "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Domain\\Entities\\Patients\\PatientVisit.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Domain\\Entities\\Patients\\PatientVisit.cs",
+              "RelativeToolTip": "src\\Core\\ClinicManagement.Domain\\Entities\\Patients\\PatientVisit.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-05T11:40:08.959Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PermissionAuthorizationHandler.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Identity\\PermissionAuthorizationHandler.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Identity\\PermissionAuthorizationHandler.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Identity\\PermissionAuthorizationHandler.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Identity\\PermissionAuthorizationHandler.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-05T11:40:00.028Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PermissionRequirement.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Identity\\PermissionRequirement.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Identity\\PermissionRequirement.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Identity\\PermissionRequirement.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Identity\\PermissionRequirement.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-05T11:39:58.047Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "DatabaseSeeder.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\DatabaseSeeder.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\DatabaseSeeder.cs",
@@ -314,12 +362,49 @@
               "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\DatabaseSeeder.cs",
               "ViewState": "AgIAABkAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-03T16:11:23.895Z",
+              "WhenOpened": "2026-08-03T16:11:23.895Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AuditableEntitySaveChangesInterceptor.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Interceptors\\AuditableEntitySaveChangesInterceptor.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Interceptors\\AuditableEntitySaveChangesInterceptor.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Interceptors\\AuditableEntitySaveChangesInterceptor.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Interceptors\\AuditableEntitySaveChangesInterceptor.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAQwD4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T02:33:41.233Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Presentation\\ClinicManagement.WebApi\\Program.cs",
+              "RelativeDocumentMoniker": "src\\Presentation\\ClinicManagement.WebApi\\Program.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Presentation\\ClinicManagement.WebApi\\Program.cs",
+              "RelativeToolTip": "src\\Presentation\\ClinicManagement.WebApi\\Program.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-31T03:28:00.77Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PatientVisitConfiguration.cs",
+              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\PatientVisitConfiguration.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\PatientVisitConfiguration.cs",
+              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\PatientVisitConfiguration.cs",
+              "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\PatientVisitConfiguration.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-05T11:40:23.742Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "PatientsController.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Presentation\\ClinicManagement.WebApi\\Controllers\\PatientsController.cs",
               "RelativeDocumentMoniker": "src\\Presentation\\ClinicManagement.WebApi\\Controllers\\PatientsController.cs",
@@ -327,12 +412,11 @@
               "RelativeToolTip": "src\\Presentation\\ClinicManagement.WebApi\\Controllers\\PatientsController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-31T12:47:41.516Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-31T12:47:41.516Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 9,
               "Title": "DependencyInjection.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\DependencyInjection.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\DependencyInjection.cs",
@@ -340,12 +424,11 @@
               "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\DependencyInjection.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAEcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-31T02:38:19.631Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-31T02:38:19.631Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 8,
               "Title": "JwtSettings.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Identity\\JwtSettings.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Identity\\JwtSettings.cs",
@@ -353,12 +436,11 @@
               "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Identity\\JwtSettings.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-31T12:11:56.482Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-31T12:11:56.482Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "PatientConfiguration.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\PatientConfiguration.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\PatientConfiguration.cs",
@@ -366,25 +448,11 @@
               "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\PatientConfiguration.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAABYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-31T02:25:59.401Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-31T02:25:59.401Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "PatientVisitConfiguration.cs",
-              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\PatientVisitConfiguration.cs",
-              "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\PatientVisitConfiguration.cs",
-              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\PatientVisitConfiguration.cs",
-              "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\PatientVisitConfiguration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-31T02:26:38.698Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 11,
               "Title": "ApplicationDbContextFactory.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\ApplicationDbContextFactory.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\ApplicationDbContextFactory.cs",
@@ -392,12 +460,11 @@
               "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\ApplicationDbContextFactory.cs",
               "ViewState": "AgIAAAcAAAAAAAAAAAAzwCQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-31T03:18:24.039Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-31T03:18:24.039Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 12,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\ApplicationDbContext.cs",
@@ -405,12 +472,11 @@
               "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\ApplicationDbContext.cs",
               "ViewState": "AgIAACcAAAAAAAAAAAA4wC0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-31T02:34:13.585Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-31T02:34:13.585Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 13,
               "Title": "PatientDto.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Patients\\DTOs\\PatientDto.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Patients\\DTOs\\PatientDto.cs",
@@ -418,12 +484,11 @@
               "RelativeToolTip": "src\\Core\\ClinicManagement.Application\\Patients\\DTOs\\PatientDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-31T12:37:55.989Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-31T12:37:55.989Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 14,
               "Title": "Patient.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Domain\\Entities\\Patients\\Patient.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Domain\\Entities\\Patients\\Patient.cs",
@@ -431,12 +496,11 @@
               "RelativeToolTip": "src\\Core\\ClinicManagement.Domain\\Entities\\Patients\\Patient.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAA5wBYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-31T01:25:01.193Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-31T01:25:01.193Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 15,
               "Title": "appsettings.json",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Presentation\\ClinicManagement.WebApi\\appsettings.json",
               "RelativeDocumentMoniker": "src\\Presentation\\ClinicManagement.WebApi\\appsettings.json",
@@ -448,7 +512,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 20,
               "Title": "DeletePatientCommand.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Patients\\Commands\\DeletePatient\\DeletePatientCommand.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Patients\\Commands\\DeletePatient\\DeletePatientCommand.cs",
@@ -460,7 +524,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 19,
               "Title": "DeletePatientCommandHandler.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Patients\\Commands\\DeletePatient\\DeletePatientCommandHandler.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Patients\\Commands\\DeletePatient\\DeletePatientCommandHandler.cs",
@@ -472,7 +536,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 17,
               "Title": "appsettings.Production.json",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Presentation\\ClinicManagement.WebApi\\appsettings.Production.json",
               "RelativeDocumentMoniker": "src\\Presentation\\ClinicManagement.WebApi\\appsettings.Production.json",
@@ -484,7 +548,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 16,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Presentation\\ClinicManagement.WebApi\\appsettings.Development.json",
               "RelativeDocumentMoniker": "src\\Presentation\\ClinicManagement.WebApi\\appsettings.Development.json",
@@ -496,7 +560,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 21,
               "Title": "GetPatientByIdQueryHandler.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Patients\\Queries\\GetPatientById\\GetPatientByIdQueryHandler.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Patients\\Queries\\GetPatientById\\GetPatientByIdQueryHandler.cs",
@@ -508,7 +572,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 18,
               "Title": "ClinicManagement.Infrastructure.csproj",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\ClinicManagement.Infrastructure.csproj",
@@ -520,7 +584,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 22,
               "Title": "GetPatientByIdQuery.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Patients\\Queries\\GetPatientById\\GetPatientByIdQuery.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Patients\\Queries\\GetPatientById\\GetPatientByIdQuery.cs",
@@ -532,7 +596,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 23,
               "Title": "GetAllPatientsQueryHandler.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Patients\\Queries\\GetAllPatients\\GetAllPatientsQueryHandler.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Patients\\Queries\\GetAllPatients\\GetAllPatientsQueryHandler.cs",
@@ -544,7 +608,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 24,
               "Title": "GetAllPatientsQuery.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Patients\\Queries\\GetAllPatients\\GetAllPatientsQuery.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Patients\\Queries\\GetAllPatients\\GetAllPatientsQuery.cs",
@@ -556,7 +620,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 25,
               "Title": "CreatePatientCommandHandler.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Patients\\Commands\\CreatePatient\\CreatePatientCommandHandler.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Patients\\Commands\\CreatePatient\\CreatePatientCommandHandler.cs",
@@ -568,7 +632,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 26,
               "Title": "CreatePatientCommandValidator.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Patients\\Commands\\CreatePatient\\CreatePatientCommandValidator.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Patients\\Commands\\CreatePatient\\CreatePatientCommandValidator.cs",
@@ -580,7 +644,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 27,
               "Title": "CreatePatientCommand.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Patients\\Commands\\CreatePatient\\CreatePatientCommand.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Patients\\Commands\\CreatePatient\\CreatePatientCommand.cs",
@@ -592,7 +656,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 28,
               "Title": "AuthController.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Presentation\\ClinicManagement.WebApi\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "src\\Presentation\\ClinicManagement.WebApi\\Controllers\\AuthController.cs",
@@ -604,7 +668,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 29,
               "Title": "JwtTokenGenerator.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Identity\\JwtTokenGenerator.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Identity\\JwtTokenGenerator.cs",
@@ -616,7 +680,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 30,
               "Title": "LoginCommandHandler.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Auth\\Commands\\Login\\LoginCommandHandler.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Auth\\Commands\\Login\\LoginCommandHandler.cs",
@@ -628,7 +692,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 31,
               "Title": "LoginCommandValidator.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Auth\\Commands\\Login\\LoginCommandValidator.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Auth\\Commands\\Login\\LoginCommandValidator.cs",
@@ -640,19 +704,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "Program.cs",
-              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Presentation\\ClinicManagement.WebApi\\Program.cs",
-              "RelativeDocumentMoniker": "src\\Presentation\\ClinicManagement.WebApi\\Program.cs",
-              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Presentation\\ClinicManagement.WebApi\\Program.cs",
-              "RelativeToolTip": "src\\Presentation\\ClinicManagement.WebApi\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-31T03:28:00.77Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 32,
               "Title": "LoginCommand.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Auth\\Commands\\Login\\LoginCommand.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Auth\\Commands\\Login\\LoginCommand.cs",
@@ -664,7 +716,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 33,
               "Title": "RegisterCommandHandler.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Auth\\Commands\\Register\\RegisterCommandHandler.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Auth\\Commands\\Register\\RegisterCommandHandler.cs",
@@ -676,7 +728,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 34,
               "Title": "RegisterCommandValidator.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Auth\\Commands\\Register\\RegisterCommandValidator.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Auth\\Commands\\Register\\RegisterCommandValidator.cs",
@@ -688,7 +740,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 35,
               "Title": "RegisterCommand.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Auth\\Commands\\Register\\RegisterCommand.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Auth\\Commands\\Register\\RegisterCommand.cs",
@@ -700,7 +752,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 36,
               "Title": "AuthResponseDto.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Auth\\DTOs\\AuthResponseDto.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Auth\\DTOs\\AuthResponseDto.cs",
@@ -712,7 +764,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 37,
               "Title": "ClinicManagement.Application.csproj",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\ClinicManagement.Application.csproj",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\ClinicManagement.Application.csproj",
@@ -724,7 +776,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 38,
               "Title": "IJwtTokenGenerator.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Interfaces\\IJwtTokenGenerator.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Common\\Interfaces\\IJwtTokenGenerator.cs",
@@ -736,7 +788,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 39,
               "Title": "DoctorsController.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Presentation\\ClinicManagement.WebApi\\Controllers\\DoctorsController.cs",
               "RelativeDocumentMoniker": "src\\Presentation\\ClinicManagement.WebApi\\Controllers\\DoctorsController.cs",
@@ -748,7 +800,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 40,
               "Title": "GetAllDoctorsQueryHandler.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Doctors\\Queries\\GetAllDoctors\\GetAllDoctorsQueryHandler.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Doctors\\Queries\\GetAllDoctors\\GetAllDoctorsQueryHandler.cs",
@@ -760,7 +812,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 41,
               "Title": "GetAllDoctorsQuery.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Doctors\\Queries\\GetAllDoctors\\GetAllDoctorsQuery.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Doctors\\Queries\\GetAllDoctors\\GetAllDoctorsQuery.cs",
@@ -772,7 +824,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 42,
               "Title": "GetDoctorByIdQueryHandler.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Doctors\\Queries\\GetDoctorById\\GetDoctorByIdQueryHandler.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Doctors\\Queries\\GetDoctorById\\GetDoctorByIdQueryHandler.cs",
@@ -784,7 +836,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 43,
               "Title": "GetDoctorByIdQuery.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Doctors\\Queries\\GetDoctorById\\GetDoctorByIdQuery.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Doctors\\Queries\\GetDoctorById\\GetDoctorByIdQuery.cs",
@@ -796,7 +848,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 44,
               "Title": "CreateDoctorCommandHandler.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Doctors\\Commands\\CreateDoctor\\CreateDoctorCommandHandler.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Doctors\\Commands\\CreateDoctor\\CreateDoctorCommandHandler.cs",
@@ -808,7 +860,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 45,
               "Title": "CreateDoctorCommandValidator.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Doctors\\Commands\\CreateDoctor\\CreateDoctorCommandValidator.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Doctors\\Commands\\CreateDoctor\\CreateDoctorCommandValidator.cs",
@@ -820,7 +872,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 46,
               "Title": "CreateDoctorCommand.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Doctors\\Commands\\CreateDoctor\\CreateDoctorCommand.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Doctors\\Commands\\CreateDoctor\\CreateDoctorCommand.cs",
@@ -832,7 +884,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 47,
               "Title": "DoctorDto.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Doctors\\DTOs\\DoctorDto.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Doctors\\DTOs\\DoctorDto.cs",
@@ -844,7 +896,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 48,
               "Title": "LocalFileStorageService.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\FileStorage\\LocalFileStorageService.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\FileStorage\\LocalFileStorageService.cs",
@@ -856,7 +908,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 49,
               "Title": "DateTimeService.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Common\\DateTimeService.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Common\\DateTimeService.cs",
@@ -868,7 +920,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 50,
               "Title": "CurrentUserService.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Identity\\CurrentUserService.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Identity\\CurrentUserService.cs",
@@ -880,19 +932,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
-              "Title": "AuditableEntitySaveChangesInterceptor.cs",
-              "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Interceptors\\AuditableEntitySaveChangesInterceptor.cs",
-              "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Interceptors\\AuditableEntitySaveChangesInterceptor.cs",
-              "ToolTip": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Interceptors\\AuditableEntitySaveChangesInterceptor.cs",
-              "RelativeToolTip": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Interceptors\\AuditableEntitySaveChangesInterceptor.cs",
-              "ViewState": "AgIAACgAAAAAAAAAAAAQwD4AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-31T02:33:41.233Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 51,
               "Title": "UserRefreshTokenConfiguration.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\UserRefreshTokenConfiguration.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\UserRefreshTokenConfiguration.cs",
@@ -904,7 +944,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 52,
               "Title": "ApplicationUserConfiguration.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\ApplicationUserConfiguration.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\ApplicationUserConfiguration.cs",
@@ -916,7 +956,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 53,
               "Title": "StockTransactionConfiguration.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\StockTransactionConfiguration.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\StockTransactionConfiguration.cs",
@@ -928,7 +968,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 54,
               "Title": "InventoryItemConfiguration.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\InventoryItemConfiguration.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\InventoryItemConfiguration.cs",
@@ -940,7 +980,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 55,
               "Title": "InventoryCategoryConfiguration.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\InventoryCategoryConfiguration.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\InventoryCategoryConfiguration.cs",
@@ -952,7 +992,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 56,
               "Title": "DoctorCustomizationConfiguration.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\DoctorCustomizationConfiguration.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\DoctorCustomizationConfiguration.cs",
@@ -964,7 +1004,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
+              "DocumentIndex": 57,
               "Title": "ClinicSettingConfiguration.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\ClinicSettingConfiguration.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\ClinicSettingConfiguration.cs",
@@ -976,7 +1016,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 58,
               "Title": "AppointmentConfiguration.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\AppointmentConfiguration.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\AppointmentConfiguration.cs",
@@ -988,7 +1028,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 59,
               "Title": "EmployeeConfiguration.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\EmployeeConfiguration.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\EmployeeConfiguration.cs",
@@ -1000,7 +1040,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 60,
               "Title": "DoctorDocumentConfiguration.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\DoctorDocumentConfiguration.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\DoctorDocumentConfiguration.cs",
@@ -1012,7 +1052,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
+              "DocumentIndex": 61,
               "Title": "DoctorSpecialtyConfiguration.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\DoctorSpecialtyConfiguration.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\DoctorSpecialtyConfiguration.cs",
@@ -1024,7 +1064,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 59,
+              "DocumentIndex": 62,
               "Title": "DoctorConfiguration.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\DoctorConfiguration.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\ClinicManagement.Infrastructure\\Persistence\\Configurations\\DoctorConfiguration.cs",
@@ -1036,7 +1076,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 64,
+              "DocumentIndex": 67,
               "Title": "DependencyInjection.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\DependencyInjection.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\DependencyInjection.cs",
@@ -1048,7 +1088,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 60,
+              "DocumentIndex": 63,
               "Title": "ValidationBehavior.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Behaviors\\ValidationBehavior.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Common\\Behaviors\\ValidationBehavior.cs",
@@ -1060,7 +1100,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 65,
+              "DocumentIndex": 68,
               "Title": "UnhandledExceptionBehavior.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Behaviors\\UnhandledExceptionBehavior.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Common\\Behaviors\\UnhandledExceptionBehavior.cs",
@@ -1072,7 +1112,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 61,
+              "DocumentIndex": 64,
               "Title": "LoggingBehavior.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Behaviors\\LoggingBehavior.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Common\\Behaviors\\LoggingBehavior.cs",
@@ -1084,7 +1124,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 63,
+              "DocumentIndex": 66,
               "Title": "ValidationException.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Exceptions\\ValidationException.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Common\\Exceptions\\ValidationException.cs",
@@ -1096,7 +1136,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 62,
+              "DocumentIndex": 65,
               "Title": "NotFoundException.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Exceptions\\NotFoundException.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Common\\Exceptions\\NotFoundException.cs",
@@ -1108,7 +1148,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 66,
+              "DocumentIndex": 69,
               "Title": "ForbiddenAccessException.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Exceptions\\ForbiddenAccessException.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Common\\Exceptions\\ForbiddenAccessException.cs",
@@ -1120,7 +1160,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 67,
+              "DocumentIndex": 70,
               "Title": "PaginatedList.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Models\\PaginatedList.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Common\\Models\\PaginatedList.cs",
@@ -1132,7 +1172,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 68,
+              "DocumentIndex": 71,
               "Title": "Result.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Models\\Result.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Common\\Models\\Result.cs",
@@ -1144,7 +1184,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 69,
+              "DocumentIndex": 72,
               "Title": "IFileStorageService.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Interfaces\\IFileStorageService.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Common\\Interfaces\\IFileStorageService.cs",
@@ -1156,7 +1196,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 70,
+              "DocumentIndex": 73,
               "Title": "IDateTimeService.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Interfaces\\IDateTimeService.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Common\\Interfaces\\IDateTimeService.cs",
@@ -1168,7 +1208,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 71,
+              "DocumentIndex": 74,
               "Title": "ICurrentUserService.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Interfaces\\ICurrentUserService.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Common\\Interfaces\\ICurrentUserService.cs",
@@ -1180,7 +1220,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 72,
+              "DocumentIndex": 75,
               "Title": "IApplicationDbContext.cs",
               "DocumentMoniker": "E:\\.net\\Medical\\ClinicManagementSystem\\src\\Core\\ClinicManagement.Application\\Common\\Interfaces\\IApplicationDbContext.cs",
               "RelativeDocumentMoniker": "src\\Core\\ClinicManagement.Application\\Common\\Interfaces\\IApplicationDbContext.cs",

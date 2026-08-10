@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClinicManagement.Application.Common.Models;
 
@@ -23,6 +23,10 @@ public class PaginatedList<T>
     public static async Task<PaginatedList<T>> CreateAsync(
         IQueryable<T> source, int pageNumber, int pageSize, CancellationToken cancellationToken = default)
     {
+        // Guard: floor at 1, cap at 50 — prevents zero/negative page sizes and excessively large requests
+        pageSize   = Math.Clamp(pageSize, 1, 50);
+        pageNumber = Math.Max(pageNumber, 1);
+
         var count = await source.CountAsync(cancellationToken);
         var items = await source
             .Skip((pageNumber - 1) * pageSize)

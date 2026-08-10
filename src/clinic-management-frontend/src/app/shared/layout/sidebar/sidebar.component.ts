@@ -2,6 +2,7 @@ import { Component, signal, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../../core/auth/services/auth.service';
+import { PermissionService } from '../../../core/auth/services/permission.service';
 
 export interface NavGroup {
   label: string;
@@ -12,7 +13,8 @@ export interface NavItem {
   label: string;
   icon: string;
   route: string;
-  roles?: string[];         // undefined = all roles
+  permission?: string | string[]; // undefined = all
+  roles?: string[];         // for backward compatibility or Admin-only routes
   badge?: string;
 }
 
@@ -25,6 +27,7 @@ export interface NavItem {
 })
 export class SidebarComponent {
   private readonly authService = inject(AuthService);
+  private readonly permissionService = inject(PermissionService);
 
   readonly isCollapsed = signal<boolean>(false);
   readonly userRole    = this.authService.userRole;
@@ -38,7 +41,7 @@ export class SidebarComponent {
           label: 'لوحة التحكم',
           icon: 'pi pi-home',
           route: '/dashboard',
-          roles: ['Admin']
+          roles: ['Admin'] // Dashboard stays admin for now, or just undefined
         }
       ]
     },
@@ -48,15 +51,24 @@ export class SidebarComponent {
         {
           label: 'حجز جديد',
           icon: 'pi pi-plus-circle',
-          route: '/appointments/new'
+          route: '/appointments/new',
+          permission: 'Bookings.Create'
         },
         {
           label: 'البحث في الحجوزات',
           icon: 'pi pi-search',
-          route: '/appointments/search'
+          route: '/appointments/search',
+          permission: ['Bookings.List', 'Bookings.Create', 'Bookings.Edit', 'Bookings.Delete']
+        },
+        {
+          label: 'ملفات المرضى',
+          icon: 'pi pi-folder-open',
+          route: '/patients',
+          permission: ['Patients.List', 'Bookings.List']
         }
       ]
     },
+
     {
       label: 'الإدارة',
       items: [
@@ -64,13 +76,13 @@ export class SidebarComponent {
           label: 'الأطباء',
           icon: 'pi pi-user',
           route: '/doctors',
-          roles: ['Admin']
+          permission: ['Doctors.List', 'Doctors.Create', 'Doctors.Edit', 'Doctors.Delete']
         },
         {
           label: 'الموظفون',
           icon: 'pi pi-users',
           route: '/employees',
-          roles: ['Admin']
+          permission: ['Employees.List', 'Employees.Create', 'Employees.Edit', 'Employees.Delete']
         }
       ]
     },
@@ -81,13 +93,13 @@ export class SidebarComponent {
           label: 'تقرير الأطباء',
           icon: 'pi pi-chart-bar',
           route: '/reports/doctors',
-          roles: ['Admin']
+          permission: 'Reports.List'
         },
         {
           label: 'تقرير الموظفين',
           icon: 'pi pi-chart-line',
           route: '/reports/employees',
-          roles: ['Admin']
+          permission: 'Reports.List'
         }
       ]
     },
@@ -110,9 +122,25 @@ export class SidebarComponent {
     return this.navGroups
       .map(group => ({
         ...group,
-        items: group.items.filter(item =>
-          !item.roles || (role && item.roles.includes(role))
-        )
+        items: group.items.filter(item => {
+          // If neither is specified, allow access
+          if (!item.roles && !item.permission) return true;
+          
+          // Role check
+          const hasRole = item.roles ? (role && item.roles.includes(role)) : true;
+          
+          // Permission check
+          let hasPerm = true;
+          if (item.permission) {
+            if (Array.isArray(item.permission)) {
+              hasPerm = item.permission.some(p => this.permissionService.hasPermission(p));
+            } else {
+              hasPerm = this.permissionService.hasPermission(item.permission);
+            }
+          }
+          
+          return hasRole && hasPerm;
+        })
       }))
       .filter(group => group.items.length > 0);
   });

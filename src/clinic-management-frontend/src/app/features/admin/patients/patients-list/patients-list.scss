@@ -1,0 +1,22 @@
+.page-container {
+  padding: 24px;
+}
+
+.header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  
+  h1 { margin: 0; font-size: 24px; color: #333; }
+}
+
+table {
+  width: 100%;
+}
+
+.loading-state, .empty-state {
+  padding: 48px;
+  text-align: center;
+  color: #666;
+}

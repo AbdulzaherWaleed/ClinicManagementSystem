@@ -27,3 +27,19 @@ export interface CreatePatientCommand {
 export interface CreatedEntityResponse {
   id: string;
 }
+
+export interface PatientDocumentDto {
+  id: string;
+  documentType: string;
+  originalFileName: string;
+  fileType: string;
+  notes?: string;
+  createdAt: string;
+}
+
+export interface PatientProfileDto {
+  demographics: PatientDto;
+  totalVisits: number;
+  lastVisitDate?: string;
+  nextAppointmentDate?: string;
+}

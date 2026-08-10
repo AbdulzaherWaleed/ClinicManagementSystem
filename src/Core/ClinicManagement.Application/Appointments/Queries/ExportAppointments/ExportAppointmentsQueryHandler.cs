@@ -19,6 +19,7 @@ public class ExportAppointmentsQueryHandler : IRequestHandler<ExportAppointments
     public async Task<byte[]> Handle(ExportAppointmentsQuery request, CancellationToken cancellationToken)
     {
         var query = _context.Appointments
+            .IgnoreQueryFilters()
             .AsNoTracking()
             .Where(a => !a.IsDeleted)
             .AsQueryable();

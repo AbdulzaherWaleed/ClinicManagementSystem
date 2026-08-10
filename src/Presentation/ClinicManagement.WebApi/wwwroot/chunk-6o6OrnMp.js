@@ -1,0 +1,1 @@
+function t(o){let n={};return Object.keys(o.controls).forEach(r=>{o.controls[r].dirty&&(n[r]=o.controls[r].value)}),n}export{t};

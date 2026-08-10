@@ -78,7 +78,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       next: () => {
         let finalUrl = this.returnUrl;
         if (finalUrl === '/dashboard' && this.authService.userRole() !== 'Admin') {
-          finalUrl = '/appointments/search';
+          finalUrl = '/';
         }
         this.router.navigateByUrl(finalUrl);
       },

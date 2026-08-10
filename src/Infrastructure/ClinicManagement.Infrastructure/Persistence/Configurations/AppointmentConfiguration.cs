@@ -24,6 +24,7 @@ public class AppointmentConfiguration : IEntityTypeConfiguration<Appointment>
             .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasIndex(a => new { a.DoctorId, a.ScheduledStart });
+        builder.HasIndex(a => new { a.PatientId, a.ScheduledStart }); // Added for pagination
         builder.HasIndex(a => a.ScheduledStart);
         builder.HasIndex(a => a.Status);
         builder.HasIndex(a => a.CreatedByEmployeeId);

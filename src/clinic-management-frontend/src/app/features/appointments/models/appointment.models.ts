@@ -45,13 +45,12 @@ export interface CreateAppointmentCommand {
 }
 
 export interface UpdateAppointmentCommand {
-  id: string;
-  scheduledStart: string; // ISO DateTime
-  scheduledEnd: string;   // ISO DateTime
-  status: string;
-  visitStage: string;
-  visitType?: string;
-  reason?: string;
+  scheduledStart?: string | null; // ISO DateTime — omit to leave unchanged
+  scheduledEnd?: string | null;   // ISO DateTime — omit to leave unchanged
+  status?: string | null;
+  visitStage?: string | null;
+  visitType?: string | null;
+  reason?: string | null;
 }
 
 export interface CancelAppointmentCommand {

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule, FormBuilder, FormGroup } from '@angular/forms';
 import { AppointmentService } from '../services/appointment.service';
@@ -10,7 +10,7 @@ import { DoctorService } from '../../admin/doctors/services/doctor.service';
 import { DoctorDto } from '../../admin/doctors/models/doctor.models';
 
 // PrimeNG Modules
-import { TableModule, TableLazyLoadEvent } from 'primeng/table';
+import { TableModule, TableLazyLoadEvent, Table } from 'primeng/table';
 import { SelectModule } from 'primeng/select';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
@@ -21,8 +21,12 @@ import { MenuItem, SharedModule } from 'primeng/api';
 import { Menu } from 'primeng/menu';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { ViewChild } from '@angular/core';
 import { TooltipModule } from 'primeng/tooltip';
+import { HasPermissionDirective } from '../../../shared/directives/has-permission.directive';
+import { PermissionService } from '../../../core/auth/services/permission.service';
+
+// نوع حالة الحجز، مأخوذ مباشرة من الـ DTO نفسها عشان نضمن التطابق
+type AppointmentStatus = AppointmentDto['status'];
 
 @Component({
   selector: 'app-appointment-search',
@@ -41,7 +45,8 @@ import { TooltipModule } from 'primeng/tooltip';
     MenuModule,
     SharedModule,
     ToastModule,
-    TooltipModule
+    TooltipModule,
+    HasPermissionDirective
   ],
   providers: [MessageService],
   templateUrl: './appointment-search.component.html',
@@ -51,10 +56,13 @@ export class AppointmentSearchComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly appointmentService = inject(AppointmentService);
   private readonly authService = inject(AuthService);
+  readonly permissionService = inject(PermissionService);
   private readonly messageService = inject(MessageService);
   private readonly doctorService = inject(DoctorService);
 
   readonly isAdmin = this.authService.isAdmin;
+
+  @ViewChild('dt') table!: Table;
 
   searchForm!: FormGroup;
   appointments = signal<AppointmentDto[]>([]);
@@ -147,18 +155,10 @@ export class AppointmentSearchComponent implements OnInit {
 
   reset(): void {
     this.searchForm.reset();
-    this.search();
-  }
-
-  getSeverity(status: string): 'success' | 'info' | 'warn' | 'danger' | 'secondary' {
-    switch (status) {
-      case 'Scheduled': return 'info';
-      case 'Completed': return 'success';
-      case 'NoShow': return 'secondary';
-      case 'Postponed': return 'warn';
-      case 'Cancelled': return 'danger';
-      default: return 'info';
+    if (this.table) {
+      this.table.first.set(0);
     }
+    this.search();
   }
 
   getStatusLabel(status: string): string {
@@ -171,6 +171,15 @@ export class AppointmentSearchComponent implements OnInit {
     return s ? s.label : stage;
   }
 
+  getStageSeverity(stage: string): 'info' | 'warn' | 'secondary' {
+    switch (stage) {
+      case 'Checkup': return 'info';
+      case 'Consultation': return 'warn';
+      case 'Procedure': return 'secondary';
+      default: return 'secondary';
+    }
+  }
+
   viewDetails(appt: AppointmentDto): void {
     this.messageService.add({
       severity: 'info',
@@ -180,14 +189,14 @@ export class AppointmentSearchComponent implements OnInit {
   }
 
   onStatusChange(appt: AppointmentDto, newStatus: string): void {
+    const previousStatus: AppointmentStatus = appt.status;
+
     if (newStatus === 'Cancelled') {
-      // Revert the model temporarily until cancel finishes successfully
-      appt.status = 'Scheduled'; // or we could keep the old status before the change, but let's just use Scheduled as placeholder, the server will update it.
-      // A better way is to reload if cancelled, but cancelAppointment will call search().
-      this.cancelAppointment(appt);
+      appt.status = previousStatus; // نرجعها لحد ما نتأكد من الإلغاء
+      this.cancelAppointment(appt, previousStatus);
       return;
     }
-    
+
     this.changeStatus(appt, newStatus);
   }
 
@@ -231,10 +240,16 @@ export class AppointmentSearchComponent implements OnInit {
     });
   }
 
+  cancelAppointment(appt: AppointmentDto, previousStatus?: AppointmentStatus): void {
+    const reason = window.prompt('سبب الإلغاء (اختياري):');
 
-  cancelAppointment(appt: AppointmentDto): void {
-    const reason = window.prompt('سبب الإلغاء (اختياري):') ?? undefined;
-    if (reason === null) return;
+    // لو ضغط Cancel في الـ prompt (مش OK)
+    if (reason === null) {
+      if (previousStatus) {
+        appt.status = previousStatus;
+      }
+      return;
+    }
 
     const command: CancelAppointmentCommand = {
       id: appt.id,
@@ -247,6 +262,9 @@ export class AppointmentSearchComponent implements OnInit {
         this.search();
       },
       error: () => {
+        if (previousStatus) {
+          appt.status = previousStatus;
+        }
         this.messageService.add({ severity: 'error', summary: 'خطأ', detail: 'تعذر إلغاء الحجز' });
       }
     });

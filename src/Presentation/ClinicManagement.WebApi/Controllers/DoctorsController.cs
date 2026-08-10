@@ -29,6 +29,7 @@ public class DoctorsController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Policy = ClinicManagement.Domain.Constants.AppPermissions.Doctors_List)]
     public async Task<IActionResult> GetAll([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
     {
         List<Guid>? restrictToDoctorIds = null;
@@ -52,6 +53,7 @@ public class DoctorsController : ControllerBase
     }
 
     [HttpGet("{id:guid}")]
+    [Authorize(Policy = ClinicManagement.Domain.Constants.AppPermissions.Doctors_List)]
     public async Task<IActionResult> GetById(Guid id)
     {
         var result = await _mediator.Send(new GetDoctorByIdQuery { Id = id });
@@ -60,15 +62,24 @@ public class DoctorsController : ControllerBase
     }
 
     [HttpPost]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Policy = ClinicManagement.Domain.Constants.AppPermissions.Doctors_Create)]
     public async Task<IActionResult> Create([FromBody] CreateDoctorCommand command)
     {
         var id = await _mediator.Send(command);
         return CreatedAtAction(nameof(GetById), new { id }, new { id });
     }
 
+    [HttpPatch("{id:guid}")]
+    [Authorize(Policy = ClinicManagement.Domain.Constants.AppPermissions.Doctors_Edit)]
+    public async Task<IActionResult> Update(Guid id, [FromBody] ClinicManagement.Application.Doctors.Commands.UpdateDoctor.UpdateDoctorCommand command)
+    {
+        command.Id = id;
+        await _mediator.Send(command);
+        return NoContent();
+    }
+
     [HttpPost("{id:guid}/toggle-status")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Policy = ClinicManagement.Domain.Constants.AppPermissions.Doctors_Edit)]
     public async Task<IActionResult> ToggleStatus(Guid id)
     {
         await _mediator.Send(new ToggleDoctorStatusCommand { Id = id });
@@ -76,7 +87,7 @@ public class DoctorsController : ControllerBase
     }
 
     [HttpDelete("{id:guid}")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Policy = ClinicManagement.Domain.Constants.AppPermissions.Doctors_Delete)]
     public async Task<IActionResult> Delete(Guid id)
     {
         await _mediator.Send(new DeleteDoctorCommand { Id = id });
@@ -84,7 +95,7 @@ public class DoctorsController : ControllerBase
     }
 
     [HttpGet("{id:guid}/licenses")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Policy = ClinicManagement.Domain.Constants.AppPermissions.Licenses_List)]
     public async Task<IActionResult> GetLicenses(Guid id)
     {
         if (!IsDoctorLicensesEnabled()) return NotFound("Feature is disabled.");
@@ -93,7 +104,7 @@ public class DoctorsController : ControllerBase
     }
 
     [HttpPost("{id:guid}/licenses")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Policy = ClinicManagement.Domain.Constants.AppPermissions.Licenses_Create)]
     public async Task<IActionResult> UploadLicense(Guid id, [FromForm] string? licenseNumber, [FromForm] DateTime expiryDate, [FromForm] IFormFile file)
     {
         if (!IsDoctorLicensesEnabled()) return NotFound("Feature is disabled.");
@@ -108,7 +119,7 @@ public class DoctorsController : ControllerBase
     }
 
     [HttpGet("{id:guid}/licenses/{licenseId:guid}/download")]
-    [Authorize(Roles = "Admin,Employee")]
+    [Authorize(Policy = ClinicManagement.Domain.Constants.AppPermissions.Licenses_List)]
     public async Task<IActionResult> DownloadLicense(Guid id, Guid licenseId)
     {
         if (!IsDoctorLicensesEnabled()) return NotFound("Feature is disabled.");
@@ -117,7 +128,7 @@ public class DoctorsController : ControllerBase
     }
 
     [HttpGet("licenses/expiring")]
-    [Authorize(Roles = "Admin,Employee")]
+    [Authorize(Policy = ClinicManagement.Domain.Constants.AppPermissions.Licenses_List)]
     public async Task<ActionResult<List<ClinicManagement.Application.Doctors.Queries.GetExpiringLicenses.ExpiringLicenseDto>>> GetExpiringLicenses([FromQuery] int days = 30)
     {
         if (!IsDoctorLicensesEnabled()) return NotFound("Feature is disabled.");

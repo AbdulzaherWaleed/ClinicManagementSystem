@@ -73,7 +73,8 @@ public class RefreshTokenCommandHandler : IRequestHandler<RefreshTokenCommand, A
         await _context.SaveChangesAsync(cancellationToken);
 
         var roles = await _userManager.GetRolesAsync(user);
-        var (token, expiresAt) = _jwtTokenGenerator.GenerateToken(user, roles);
+        var userClaims = await _userManager.GetClaimsAsync(user);
+        var (token, expiresAt) = _jwtTokenGenerator.GenerateToken(user, roles, userClaims);
 
         return new AuthResponseDto
         {

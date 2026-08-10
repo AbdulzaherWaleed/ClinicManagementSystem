@@ -1,0 +1,41 @@
+<div class="page-container">
+  <div class="header-actions">
+    <h1>ملفات المرضى</h1>
+  </div>
+
+  <p-card styleClass="mb-4">
+    <div class="flex gap-2">
+      <input pInputText type="text" [(ngModel)]="searchTerm" placeholder="بحث بالاسم أو رقم الهاتف..." class="flex-grow-1" (keyup.enter)="onSearch()" />
+      <p-button label="بحث" icon="pi pi-search" (onClick)="onSearch()"></p-button>
+    </div>
+  </p-card>
+
+  <p-card *ngIf="hasSearched">
+    <p-table [value]="patients" [lazy]="true" (onLazyLoad)="loadPatients($event)"
+             [loading]="isLoading" [paginator]="true" [rows]="10" [totalRecords]="totalRecords" styleClass="p-datatable-sm">
+      <ng-template #header>
+        <tr>
+          <th>اسم المريض</th>
+          <th>رقم الهاتف</th>
+          <th>الرقم القومي</th>
+          <th>إجراءات</th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-patient>
+        <tr>
+          <td>{{ patient.fullName }}</td>
+          <td>{{ patient.phoneNumber || '-' }}</td>
+          <td>{{ patient.nationalId || '-' }}</td>
+          <td>
+            <p-button icon="pi pi-user" label="عرض الملف" (onClick)="goToProfile(patient)" size="small"></p-button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template #empty>
+        <tr>
+          <td colspan="4" class="text-center p-4 text-gray-500">لا يوجد مرضى مسجلين حتى الآن.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
+</div>

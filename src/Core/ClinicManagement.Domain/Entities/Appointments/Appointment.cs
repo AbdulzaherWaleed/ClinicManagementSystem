@@ -27,4 +27,7 @@ public class Appointment : BaseAuditableEntity
 
     // v2.1 — Visit Type / Specialty: the service category (Botox, ENT, Ophthalmology, etc.)
     public string? VisitType { get; set; }
-}
+    
+    public ICollection<AppointmentStatusHistory> StatusHistories { get; set; } = new List<AppointmentStatusHistory>();
+}
+

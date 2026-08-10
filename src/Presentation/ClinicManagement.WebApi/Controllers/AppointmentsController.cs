@@ -26,6 +26,7 @@ public class AppointmentsController : ControllerBase
     /// Query params: patientName, phone, doctorId, visitType, visitStage, dateFrom, dateTo, status
     /// </summary>
     [HttpGet]
+    [Authorize(Policy = ClinicManagement.Domain.Constants.AppPermissions.Bookings_List)]
     public async Task<IActionResult> GetAll(
         [FromQuery] string? patientName,
         [FromQuery] string? phone,
@@ -76,8 +77,10 @@ public class AppointmentsController : ControllerBase
     /// GET /api/appointments/{id}
     /// </summary>
     [HttpGet("{id:guid}")]
+    [Authorize(Policy = ClinicManagement.Domain.Constants.AppPermissions.Bookings_List)]
     public async Task<IActionResult> GetById(Guid id)
     {
+        // Employee scoping is enforced inside GetAppointmentByIdQueryHandler via ICurrentUserService
         var result = await _mediator.Send(new GetAppointmentByIdQuery { Id = id });
         if (result == null) return NotFound();
         return Ok(result);
@@ -87,7 +90,7 @@ public class AppointmentsController : ControllerBase
     /// POST /api/appointments
     /// </summary>
     [HttpPost]
-    [Authorize(Roles = "Admin,Employee")]
+    [Authorize(Policy = ClinicManagement.Domain.Constants.AppPermissions.Bookings_Create)]
     public async Task<IActionResult> Create([FromBody] ClinicManagement.Application.Appointments.Commands.CreateAppointment.CreateAppointmentCommand command)
     {
         // Extract the user ID from JWT if it's an employee
@@ -102,13 +105,14 @@ public class AppointmentsController : ControllerBase
     }
 
     /// <summary>
-    /// PUT /api/appointments/{id}
+    /// PATCH /api/appointments/{id} — Partial update. Only provided fields are applied.
     /// </summary>
-    [HttpPut("{id:guid}")]
-    [Authorize(Roles = "Admin,Employee")]
+    [HttpPatch("{id:guid}")]
+    [Authorize(Policy = ClinicManagement.Domain.Constants.AppPermissions.Bookings_Edit)]
     public async Task<IActionResult> Update(Guid id, [FromBody] ClinicManagement.Application.Appointments.Commands.UpdateAppointment.UpdateAppointmentCommand command)
     {
-        if (id != command.Id) return BadRequest();
+        command.Id = id; // Bind ID from route to prevent client spoofing
+        // Note: Employee scope check is enforced in UpdateAppointmentCommandHandler via ICurrentUserService
         await _mediator.Send(command);
         return NoContent();
     }
@@ -117,7 +121,7 @@ public class AppointmentsController : ControllerBase
     /// PATCH /api/appointments/{id}/cancel
     /// </summary>
     [HttpPatch("{id:guid}/cancel")]
-    [Authorize(Roles = "Admin,Employee")]
+    [Authorize(Policy = ClinicManagement.Domain.Constants.AppPermissions.Bookings_Edit)]
     public async Task<IActionResult> Cancel(Guid id, [FromBody] ClinicManagement.Application.Appointments.Commands.CancelAppointment.CancelAppointmentCommand command)
     {
         if (id != command.Id) return BadRequest();
@@ -129,7 +133,7 @@ public class AppointmentsController : ControllerBase
     /// POST /api/appointments/{id}/status
     /// </summary>
     [HttpPost("{id:guid}/status")]
-    [Authorize(Roles = "Admin,Employee")]
+    [Authorize(Policy = ClinicManagement.Domain.Constants.AppPermissions.Bookings_Edit)]
     public async Task<IActionResult> ChangeStatus(Guid id, [FromBody] ClinicManagement.Domain.Enums.AppointmentStatus newStatus)
     {
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -153,7 +157,7 @@ public class AppointmentsController : ControllerBase
     /// GET /api/appointments/export
     /// </summary>
     [HttpGet("export")]
-    [Authorize(Roles = "Admin,Employee")]
+    [Authorize(Policy = ClinicManagement.Domain.Constants.AppPermissions.Bookings_List)]
     public async Task<IActionResult> Export(
         [FromQuery] string? patientName,
         [FromQuery] string? phone,

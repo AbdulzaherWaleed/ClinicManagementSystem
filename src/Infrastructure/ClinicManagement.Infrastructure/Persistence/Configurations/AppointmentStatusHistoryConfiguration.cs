@@ -10,6 +10,8 @@ public class AppointmentStatusHistoryConfiguration : IEntityTypeConfiguration<Ap
     {
         builder.HasKey(t => t.Id);
 
+        builder.HasIndex(t => new { t.AppointmentId, t.ChangedAt });
+
         builder.HasOne(t => t.Appointment)
             .WithMany()
             .HasForeignKey(t => t.AppointmentId)

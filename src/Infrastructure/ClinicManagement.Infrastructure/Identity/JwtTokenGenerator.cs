@@ -18,7 +18,7 @@ public class JwtTokenGenerator : IJwtTokenGenerator
         _jwtSettings = jwtSettings.Value;
     }
 
-    public (string Token, DateTime ExpiresAt) GenerateToken(ApplicationUser user, IList<string> roles)
+    public (string Token, DateTime ExpiresAt) GenerateToken(ApplicationUser user, IList<string> roles, IList<Claim> additionalClaims)
     {
         var claims = new List<Claim>
         {
@@ -35,6 +35,11 @@ public class JwtTokenGenerator : IJwtTokenGenerator
         // On the Angular side, collect all "doctorId" claims into a string[].
         foreach (var doctorId in user.AssignedDoctorIds)
             claims.Add(new Claim("doctorId", doctorId.ToString()));
+
+        if (additionalClaims != null)
+        {
+            claims.AddRange(additionalClaims);
+        }
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Secret));
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

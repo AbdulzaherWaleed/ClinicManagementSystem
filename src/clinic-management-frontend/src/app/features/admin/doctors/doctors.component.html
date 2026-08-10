@@ -4,83 +4,134 @@
   
   <div class="flex justify-between items-center mb-6">
     <h2 class="text-2xl font-semibold text-primary">إدارة الأطباء</h2>
-    <p-button label="إضافة طبيب" icon="pi pi-plus" (onClick)="showAddDialog()"></p-button>
+    <p-button *appHasPermission="'Doctors.Create'" label="إضافة طبيب" icon="pi pi-plus" (onClick)="showAddDialog()"></p-button>
   </div>
 
-  <p-table 
-    [value]="doctors()" 
-    [loading]="isLoading()" 
-    [paginator]="true" 
-    [lazy]="true" 
-    (onLazyLoad)="onLazyLoad($event)"
-    [totalRecords]="totalRecords()"
-    [rows]="10">
-    <ng-template #header>
-      <tr>
-        <th>الاسم</th>
-        <th>المسمى الوظيفي</th>
-        <th>التخصص</th>
-        <th>رقم الهاتف</th>
-        <th>تاريخ الإضافة</th>
-        <th>الحالة</th>
-        <th style="min-width: 300px" class="text-center">الإجراءات</th>
-      </tr>
-    </ng-template>
-    <ng-template #body let-doctor>
-      <tr>
-        <td class="font-medium">{{ doctor.fullName }}</td>
-        <td>{{ doctor.title || '-' }}</td>
-        <td>{{ doctor.primarySpecialtyName || '-' }}</td>
-        <td>{{ doctor.phoneNumber || '-' }}</td>
-        <td>{{ doctor.createdAt | date:'shortDate' }}</td>
-        <td>
-          <p-tag [severity]="doctor.isActive ? 'success' : 'danger'" [value]="doctor.isActive ? 'نشط' : 'غير نشط'"></p-tag>
-        </td>
-        <td>
-          <div class="flex gap-2 justify-center w-full flex-wrap">
-            <p-button 
-              [icon]="doctor.isActive ? 'pi pi-ban' : 'pi pi-check'" 
-              [severity]="doctor.isActive ? 'danger' : 'success'"
-              [label]="doctor.isActive ? 'تعطيل' : 'تفعيل'"
-              size="small" 
-              [outlined]="true"
-              (onClick)="toggleStatus(doctor)">
-            </p-button>
-            <p-button 
-              *ngIf="configService.doctorLicensesEnabled()"
-              icon="pi pi-file-arrow-up" 
-              label="رفع"
-              severity="info"
-              size="small" 
-              [outlined]="true"
-              (onClick)="showUploadLicense(doctor)">
-            </p-button>
-            <p-button 
-              *ngIf="configService.doctorLicensesEnabled()"
-              icon="pi pi-id-card" 
-              label="التراخيص"
-              severity="help"
-              size="small" 
-              [outlined]="true"
-              (onClick)="showLicenses(doctor)">
-            </p-button>
-            <p-button 
-              icon="pi pi-trash" 
-              severity="danger"
-              label="حذف"
-              size="small" 
-              (onClick)="deleteDoctor(doctor)">
-            </p-button>
-          </div>
-        </td>
-      </tr>
-    </ng-template>
-    <ng-template #empty>
-      <tr>
-        <td colspan="7" class="text-center py-6 text-gray-500">لا يوجد أطباء مضافين بعد</td>
-      </tr>
-    </ng-template>
-  </p-table>
+  <div *appHasPermission="'Doctors.List'">
+    <p-table 
+      [value]="doctors()" 
+      [loading]="isLoading()" 
+      [paginator]="true" 
+      [lazy]="true" 
+      (onLazyLoad)="onLazyLoad($event)"
+      [totalRecords]="totalRecords()"
+      [rows]="10">
+      <ng-template #header>
+        <tr>
+          <th>الاسم</th>
+          <th>المسمى الوظيفي</th>
+          <th>التخصص</th>
+          <th>رقم الهاتف</th>
+          <th>تاريخ الإضافة</th>
+          <th>الحالة</th>
+          <th style="min-width: 300px" class="text-center">الإجراءات</th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-doctor>
+        <tr>
+          <td class="font-medium">{{ doctor.fullName }}</td>
+          <td>{{ doctor.title || '-' }}</td>
+          <td>{{ doctor.primarySpecialtyName || '-' }}</td>
+          <td>{{ doctor.phoneNumber || '-' }}</td>
+          <td>{{ doctor.createdAt | date:'shortDate' }}</td>
+          <td>
+            <p-tag [severity]="doctor.isActive ? 'success' : 'danger'" [value]="doctor.isActive ? 'نشط' : 'غير نشط'"></p-tag>
+          </td>
+          <td>
+            <div class="flex gap-2 justify-center w-full flex-wrap">
+              <p-button *appHasPermission="'Doctors.Edit'"
+                severity="secondary"
+                size="small"
+                (onClick)="showEditDialog(doctor)">
+                <i class="pi pi-pencil me-1"></i>
+                تعديل
+              </p-button>
+              <p-button *appHasPermission="'Doctors.Edit'"
+                [severity]="doctor.isActive ? 'danger' : 'success'"
+                size="small" 
+                (onClick)="toggleStatus(doctor)">
+                <i [class]="doctor.isActive ? 'pi pi-ban me-1' : 'pi pi-check me-1'"></i>
+                {{ doctor.isActive ? 'تعطيل' : 'تفعيل' }}
+              </p-button>
+              <ng-container *ngIf="configService.doctorLicensesEnabled()">
+                <p-button 
+                  *appHasPermission="'Licenses.Create'"
+                  severity="info"
+                  size="small" 
+                  (onClick)="showUploadLicense(doctor)">
+                  <i class="pi pi-file-arrow-up me-1"></i>
+                  رفع
+                </p-button>
+                <p-button 
+                  *appHasPermission="'Licenses.List'"
+                  severity="help"
+                  size="small" 
+                  (onClick)="showLicenses(doctor)">
+                  <i class="pi pi-id-card me-1"></i>
+                  التراخيص
+                </p-button>
+              </ng-container>
+              <p-button *appHasPermission="'Doctors.Delete'"
+                severity="danger"
+                size="small" 
+                (onClick)="deleteDoctor(doctor)">
+                <i class="pi pi-trash me-1"></i>
+                حذف
+              </p-button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template #empty>
+        <tr>
+          <td colspan="7" class="text-center py-6 text-gray-500">لا يوجد أطباء مضافين بعد</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <div *ngIf="!permissionService.hasPermission('Doctors.List')" class="card p-6 text-center text-gray-500">
+    <i class="pi pi-lock text-4xl mb-3 text-gray-400 block mx-auto"></i>
+    <p class="text-lg font-medium text-color-secondary">ليس لديك صلاحية لعرض قائمة الأطباء.</p>
+  </div>
+
+  <!-- Edit Doctor Dialog -->
+  <p-dialog
+    [header]="'تعديل بيانات الطبيب: ' + (editingDoctor()?.fullName || '')"
+    [visible]="displayEditDialog()"
+    (visibleChange)="displayEditDialog.set($event)"
+    [modal]="true"
+    [style]="{width: '480px'}"
+    [draggable]="false"
+    [resizable]="false">
+    <form *ngIf="editForm" [formGroup]="editForm" class="flex flex-col gap-4 mt-4" (ngSubmit)="saveEditDoctor()">
+      <div class="flex flex-col gap-2">
+        <label>الاسم الكامل <span class="text-red-500">*</span></label>
+        <input pInputText formControlName="fullName" class="w-full" />
+        <small class="text-red-500" *ngIf="editForm.get('fullName')?.invalid && editForm.get('fullName')?.touched">الاسم مطلوب</small>
+      </div>
+      <div class="flex flex-col gap-2">
+        <label>اللقب (Dr. / Prof.)</label>
+        <input pInputText formControlName="title" class="w-full" />
+      </div>
+      <div class="flex flex-col gap-2">
+        <label>رقم الهاتف</label>
+        <input pInputText formControlName="phoneNumber" class="w-full" />
+      </div>
+      <div class="flex flex-col gap-2">
+        <label>البريد الإلكتروني</label>
+        <input pInputText formControlName="email" type="email" class="w-full" />
+        <small class="text-red-500" *ngIf="editForm.get('email')?.invalid && editForm.get('email')?.touched">بريد إلكتروني غير صالح</small>
+      </div>
+      <div class="flex flex-col gap-2">
+        <label>نبذة تعريفية</label>
+        <textarea pTextarea formControlName="bio" rows="3" class="w-full"></textarea>
+      </div>
+      <div class="flex justify-end gap-2">
+        <p-button type="button" label="إلغاء" severity="secondary" [outlined]="true" (onClick)="displayEditDialog.set(false)"></p-button>
+        <p-button type="submit" label="حفظ التعديلات" icon="pi pi-save" [loading]="isUpdating()"></p-button>
+      </div>
+    </form>
+  </p-dialog>
 
   <!-- Licenses List Dialog -->
   <p-dialog [header]="'تراخيص الطبيب: ' + (selectedDoctorForLicense()?.fullName || '')" [visible]="displayLicensesDialog()" (visibleChange)="displayLicensesDialog.set($event)" [modal]="true" [style]="{width: '600px'}" [draggable]="false" [resizable]="false">

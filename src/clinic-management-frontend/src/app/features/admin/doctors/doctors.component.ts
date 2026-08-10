@@ -2,6 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { finalize } from 'rxjs';
+import { getDirtyValues } from '../../../shared/utils/form-utils';
 
 import { DoctorService } from './services/doctor.service';
 import { DoctorDto } from './models/doctor.models';
@@ -18,6 +19,8 @@ import { ToastModule } from 'primeng/toast';
 import { SharedModule } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TooltipModule } from 'primeng/tooltip';
+import { HasPermissionDirective } from '../../../shared/directives/has-permission.directive';
+import { PermissionService } from '../../../core/auth/services/permission.service';
 
 @Component({
   selector: 'app-doctors',
@@ -33,7 +36,8 @@ import { TooltipModule } from 'primeng/tooltip';
     ToastModule,
     SharedModule,
     ConfirmDialogModule,
-    TooltipModule
+    TooltipModule,
+    HasPermissionDirective
   ],
   providers: [MessageService, ConfirmationService],
   templateUrl: './doctors.component.html',
@@ -45,15 +49,21 @@ export class DoctorsComponent implements OnInit {
   private readonly messageService = inject(MessageService);
   private readonly confirmationService = inject(ConfirmationService);
   readonly configService = inject(ConfigService);
+  readonly permissionService = inject(PermissionService);
 
   doctors = signal<DoctorDto[]>([]);
   totalRecords = signal<number>(0);
   isLoading = signal<boolean>(false);
 
-  
   displayAddDialog = signal<boolean>(false);
   isSubmitting = signal<boolean>(false);
   addForm!: FormGroup;
+
+  // Edit dialog state
+  displayEditDialog = signal<boolean>(false);
+  isUpdating = signal<boolean>(false);
+  editForm!: FormGroup;
+  editingDoctor = signal<DoctorDto | null>(null);
 
   ngOnInit(): void {
     this.initForm();
@@ -63,6 +73,14 @@ export class DoctorsComponent implements OnInit {
 
   private initForm(): void {
     this.addForm = this.fb.group({
+      fullName: [null, Validators.required],
+      title: [null],
+      bio: [null],
+      phoneNumber: [null],
+      email: [null, Validators.email]
+    });
+
+    this.editForm = this.fb.group({
       fullName: [null, Validators.required],
       title: [null],
       bio: [null],
@@ -108,9 +126,49 @@ export class DoctorsComponent implements OnInit {
         next: () => {
           this.displayAddDialog.set(false);
           this.showSuccess('تمت إضافة الطبيب بنجاح');
-          this.loadDoctors(); // load page 1 after adding
+          this.loadDoctors();
         },
         error: () => this.showError('حدث خطأ أثناء حفظ بيانات الطبيب')
+      });
+  }
+
+  showEditDialog(doctor: DoctorDto): void {
+    this.editingDoctor.set(doctor);
+    this.editForm.reset();
+    this.editForm.patchValue({
+      fullName: doctor.fullName,
+      title: doctor.title,
+      bio: doctor.bio,
+      phoneNumber: doctor.phoneNumber,
+      email: doctor.email
+    });
+    this.displayEditDialog.set(true);
+  }
+
+  saveEditDoctor(): void {
+    if (this.editForm.invalid) {
+      this.editForm.markAllAsTouched();
+      return;
+    }
+    const doctor = this.editingDoctor();
+    if (!doctor) return;
+
+    const patch = getDirtyValues(this.editForm);
+    if (Object.keys(patch).length === 0) {
+      this.displayEditDialog.set(false);
+      return;
+    }
+
+    this.isUpdating.set(true);
+    this.doctorService.updateDoctor(doctor.id, patch)
+      .pipe(finalize(() => this.isUpdating.set(false)))
+      .subscribe({
+        next: () => {
+          this.displayEditDialog.set(false);
+          this.showSuccess('تم تحديث بيانات الطبيب بنجاح');
+          this.loadDoctors();
+        },
+        error: () => this.showError('حدث خطأ أثناء تحديث بيانات الطبيب')
       });
   }
 

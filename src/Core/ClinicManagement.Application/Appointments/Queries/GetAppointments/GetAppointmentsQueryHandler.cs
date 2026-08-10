@@ -21,7 +21,11 @@ public class GetAppointmentsQueryHandler : IRequestHandler<GetAppointmentsQuery,
 
     public async Task<PaginatedList<AppointmentDto>> Handle(GetAppointmentsQuery request, CancellationToken cancellationToken)
     {
+        // IgnoreQueryFilters: bypasses the global HasQueryFilter(!IsDeleted) on both Appointment AND Patient.
+        // We manually filter !a.IsDeleted so soft-deleted appointments are still hidden,
+        // but soft-deleted patients' names remain visible in historical appointment records.
         var query = _context.Appointments
+            .IgnoreQueryFilters()
             .AsNoTracking()
             .Where(a => !a.IsDeleted)
             .AsQueryable();

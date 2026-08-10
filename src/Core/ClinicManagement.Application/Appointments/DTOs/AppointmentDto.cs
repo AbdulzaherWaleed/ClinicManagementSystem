@@ -30,4 +30,7 @@ public class AppointmentDto
     public string? VisitType { get; set; }              // Botox | ENT | Ophthalmology | etc.
 
     public DateTime CreatedAt { get; set; }
+
+    public List<AppointmentStatusHistoryDto> StatusHistories { get; set; } = new();
 }
+

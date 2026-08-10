@@ -22,7 +22,11 @@ public class LocalFileStorageService : IFileStorageService
         var folder = Path.Combine(_rootPath, subFolder);
         Directory.CreateDirectory(folder);
 
-        var uniqueName = $"{Guid.NewGuid()}_{fileName}";
+        var safeFileName = Path.GetFileName(fileName)?.Trim();
+        if (string.IsNullOrWhiteSpace(safeFileName))
+            throw new InvalidOperationException("Invalid file name");
+
+        var uniqueName = $"{Guid.NewGuid()}_{safeFileName}";
         var fullPath = Path.Combine(folder, uniqueName);
 
         await using var output = File.Create(fullPath);
