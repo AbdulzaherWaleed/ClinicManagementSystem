@@ -341,7 +341,7 @@
                   </td>
                   <td class="px-6 py-4 text-center text-sm" dir="ltr">{{ doc.createdAt | date:'yyyy/MM/dd' }}</td>
                   <td class="px-6 py-4 text-center">
-                    <div class="actions-cell">
+                    <div class="flex justify-center items-center gap-3">
                       <p-button icon="pi pi-download" styleClass="p-button-text p-button-sm" (onClick)="downloadDocument(doc)" pTooltip="تحميل"></p-button>
                       <p-button
                         *appHasPermission="'Patients.Edit'"
